@@ -43,6 +43,9 @@ const getConfig = (target) => ({
 				test: /\.(ts|js)x?$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
+				options: {
+					caller: { target },
+				},
 			},
 
 			{
@@ -54,12 +57,12 @@ const getConfig = (target) => ({
 					{
 						loader: 'css-loader',
 					},
-					{
-						loader: 'resolve-url-loader',
-					},
-					{
-						loader: 'postcss-loader',
-					},
+					//	{
+					//		loader: 'resolve-url-loader',
+					//	},
+					//	{
+					//		loader: 'postcss-loader',
+					//	},
 				],
 			},
 

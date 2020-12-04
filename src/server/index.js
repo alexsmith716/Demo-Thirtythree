@@ -1,5 +1,5 @@
-import 'css-modules-require-hook/preset';
-// above only for GraphiQLExample "import 'graphiql/graphiql.css'" -comment out otherwise
+//  import 'css-modules-require-hook/preset';
+//  above only for GraphiQLExample "import 'graphiql/graphiql.css'" -comment out otherwise
 import cluster from 'cluster';
 import { cpus } from 'os';
 import { startServer } from './server';
