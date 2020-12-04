@@ -7,7 +7,6 @@ import 'graphiql/graphiql.css';
 
 
 const GraphiQLExample = () => {
-	require('graphiql/graphiql.css');
 	return (
 		<Styles.GraphiQLExample>
 			<GraphiQL

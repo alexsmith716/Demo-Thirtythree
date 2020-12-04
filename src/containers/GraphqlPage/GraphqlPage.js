@@ -1,9 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-//  import GraphiQLExample from '../../components/GraphiQLExample/GraphiQLExample';
-import GraphiQLExample from '../../components/GraphiQLExample/Loadable';
+import GraphiQLExample from '../../components/GraphiQLExample/GraphiQLExample';
+//  import GraphiQLExample from '../../components/GraphiQLExample/Loadable';
 import { LinkTest } from '../../components/jestTest/LinkTest';
+
+import './fooo.css';
 
 const GraphqlPage = () => {
 	return (
@@ -11,7 +13,7 @@ const GraphqlPage = () => {
 			<Helmet title="GraphiQL Page" />
 
 			<div className="container">
-				<h1 className="mt-4 mb-3">GraphiQL Page And More!!!</h1>
+				<h1 className="mt-4 mb-3">GraphiQL Page And More!</h1>
 
 				<div className="mb-5">
 					<LinkTest page="https:\/\/github.com">Github</LinkTest>

@@ -91,8 +91,8 @@ export async function get(req, res) {
 	});
 
 	// =====================================================
-	// const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
-	// const { default: App } = nodeExtractor.requireEntrypoint('main');
+	const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
+	const { default: AppX } = nodeExtractor.requireEntrypoint('main');
 	// const extractor = new ChunkExtractor({ statsFile: webStats });
 	//  // =====================================================
 
@@ -134,16 +134,19 @@ export async function get(req, res) {
 
 		console.log('>>>> SERVER > InMemoryCache > CACHE > cache.extract() 2: ', cache.extract());
 
+		const AppY = () => React.createElement(AppX);
+
 		const helmetContext = {};
 		const context = {};
 
+		// {renderRoutes(routes)}
 		const App = (
 			<HelmetProvider context={helmetContext}>
 				<ApolloProvider client={clientApollo}>
 					<Provider store={store}>
 						<Router history={history}>
 							<StaticRouter location={req.originalUrl} context={context}>
-								{renderRoutes(routes)}
+								{ AppY }
 							</StaticRouter>
 						</Router>
 					</Provider>
