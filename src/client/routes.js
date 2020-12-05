@@ -1,6 +1,6 @@
 import Root from '../containers/Root/Root';
 import App from '../containers/App/App';
-import Home from '../containers/Home';
+import Home from '../containers/Home/Home';
 import NotFound from '../containers/NotFound';
 
 //  import About from '../containers/About/About';
@@ -19,7 +19,7 @@ const routes = [
 			{
 				path: '/',
 				component: App,
-				//  loadData: preloadDataApp,
+				loadData: preloadDataApp,
 				routes: [
 					{
 						path: '/',

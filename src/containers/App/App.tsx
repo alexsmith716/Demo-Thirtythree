@@ -15,17 +15,17 @@ type AppProps = {
 const App: React.FC<AppProps> = ({ route }) => {
 	return (
 		<>
-      {/* ------------- Navbar ------------- */}
-      <NavBar />
-      {/* ------------- Main Content ------------- */}
-      {renderRoutes(route.routes)}
-      {/* --------------- InfoBar ---------------- */}
-      <InfoBar />
-      {/* ------------- Device State ----------- */}
-      <DeviceState />
-      {/* --------------- Footer ----------------- */}
-      <Footer />
-      {/* --------------- Modals ----------------- */}
+			{/* ------------- Navbar ------------- */}
+			<NavBar />
+			{/* ------------- Main Content ------------- */}
+			{renderRoutes(route.routes)}
+			{/* --------------- InfoBar ---------------- */}
+			<InfoBar />
+			{/* ------------- Device State ----------- */}
+			<DeviceState />
+			{/* --------------- Footer ----------------- */}
+			<Footer />
+			{/* --------------- Modals ----------------- */}
 		</>
 	);
 };

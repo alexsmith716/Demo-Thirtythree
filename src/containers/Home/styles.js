@@ -1,13 +1,16 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../../components/Button';
 
+//  import splashImage from './splashImage-2048x719.jpg';
+//  background: url(${splashImage});
+
 export const Masthead = styled.div`
-  padding-bottom: 78px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-x: 32%;
-  background-size: cover;
-  text-align: center;
+	padding-bottom: 78px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-position-x: 32%;
+	background-size: cover;
+	text-align: center;
 
 	color: #dc143c;
 	font-family: 'Phosphate', 'Desdemona', 'Noteworthy', 'Helvetica Neue', Helvetica, Arial, sans-serif;

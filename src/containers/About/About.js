@@ -7,10 +7,10 @@ const About = () => {
 	const [toggleCustomerState, setToggleCustomerState] = useState(true);
 
 	useEffect(() => {
-		//	componentDidMount
+		//  componentDidMount
 		console.log('>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentDidMount');
 
-		//	componentDidUpdate
+		//  componentDidUpdate
 		if (toggleCustomerState) {
 			console.log(
 				'>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentDidUpdate > toggleCustomerState: ',
@@ -18,9 +18,9 @@ const About = () => {
 			);
 		}
 
-		//	componentWillUnmount
+		//  componentWillUnmount
 		return () => {
-			//	some effects might require cleanup
+			//  some effects might require cleanup
 			console.log(
 				'>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentWillUnmount > cleanup phase',
 			);

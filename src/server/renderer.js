@@ -136,6 +136,8 @@ export async function get(req, res) {
 
 		const AppY = () => React.createElement(AppX);
 
+		const AppZ = JSON.stringify(AppY);
+
 		const helmetContext = {};
 		const context = {};
 
@@ -146,7 +148,7 @@ export async function get(req, res) {
 					<Provider store={store}>
 						<Router history={history}>
 							<StaticRouter location={req.originalUrl} context={context}>
-								{ AppY }
+								{ AppZ }
 							</StaticRouter>
 						</Router>
 					</Provider>

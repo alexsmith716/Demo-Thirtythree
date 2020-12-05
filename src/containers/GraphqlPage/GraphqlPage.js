@@ -5,8 +5,6 @@ import GraphiQLExample from '../../components/GraphiQLExample/GraphiQLExample';
 //  import GraphiQLExample from '../../components/GraphiQLExample/Loadable';
 import { LinkTest } from '../../components/jestTest/LinkTest';
 
-import './fooo.css';
-
 const GraphqlPage = () => {
 	return (
 		<>
