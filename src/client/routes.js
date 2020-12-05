@@ -1,7 +1,7 @@
 import Root from '../containers/Root/Root';
 import App from '../containers/App/App';
 import Home from '../containers/Home/Home';
-import NotFound from '../containers/NotFound';
+import NotFound from '../containers/NotFound/Loadable';
 
 //  import About from '../containers/About/About';
 import About from '../containers/About/Loadable';
