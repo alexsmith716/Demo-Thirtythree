@@ -1,11 +1,9 @@
 import styled, { css } from 'styled-components';
 import { Button } from '../../components/Button';
 
-//  import splashImage from './splashImage-2048x719.jpg';
-//  background: url(${splashImage});
-
 export const Masthead = styled.div`
 	padding-bottom: 78px;
+  background: url('/dist/splashImage.jpg');
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-position-x: 32%;
