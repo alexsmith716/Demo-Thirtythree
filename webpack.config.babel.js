@@ -57,12 +57,12 @@ const getConfig = (target) => ({
 					{
 						loader: 'css-loader',
 					},
-					//	{
-					//		loader: 'resolve-url-loader',
-					//	},
-					//	{
-					//		loader: 'postcss-loader',
-					//	},
+					{
+						loader: 'resolve-url-loader',
+					},
+					{
+						loader: 'postcss-loader',
+					},
 				],
 			},
 
@@ -108,7 +108,7 @@ const getConfig = (target) => ({
 						loader: 'url-loader',
 						options: {
 							name: '[contenthash:8].[ext]',
-							// esModule: false,
+							esModule: false,
 						},
 					},
 				],
