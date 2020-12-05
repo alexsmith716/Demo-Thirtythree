@@ -42,7 +42,7 @@ const About = () => {
 
 				<div className="row-grid grid-six bg-lightskyblue-1 mb-5">
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid">
@@ -80,35 +80,35 @@ const About = () => {
 
 				<div className="row-grid grid-two bg-color-cadetblue mb-5">
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 				</div>
 
@@ -116,7 +116,7 @@ const About = () => {
 
 				<div className="row-grid grid-two bg-color-cadetblue mb-5">
 					<div className="col-grid mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-grid">
@@ -209,31 +209,31 @@ const About = () => {
 
 				<div className="row-flex bg-color-banana mb-5">
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 				</div>
 
@@ -241,7 +241,7 @@ const About = () => {
 
 				<div className="row-flex bg-color-banana mb-5">
 					<div className="col-two mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-two">
@@ -334,7 +334,7 @@ const About = () => {
 
 				<div className="row-flex bg-color-plum mb-5">
 					<div className="col-four mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-four">
@@ -387,7 +387,7 @@ const About = () => {
 
 				<div className="row-flex bg-color-olivedrab-2 mb-5">
 					<div className="col-six mb-4">
-						<Styles.AboutImageMain className="img-fluid rounded" src={'/about-750-450.png'} alt={""} />
+						<Styles.AboutImageMain className="img-fluid rounded" src={'/dist/about-750-450.png'} alt={""} />
 					</div>
 
 					<div className="col-six">
@@ -497,31 +497,31 @@ const About = () => {
 				{toggleCustomerState && (
 					<div className="row-flex mb-5">
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 
 						<div className="col-two mb-4">
-							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/about-500-300.png'} alt={""} />
+							<Styles.AboutImageOurCustomers className="img-fluid rounded" src={'/dist/about-500-300.png'} alt={""} />
 						</div>
 					</div>
 				)}

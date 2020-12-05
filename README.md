@@ -25,6 +25,6 @@ https://github.com/developit/unfetch
 
 ### TODO:
 
-* add back images
+* fix whats up with: `'../containers/About/preloadData'`
 * whole bunch of other stuff
 * test on heroku
