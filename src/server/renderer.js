@@ -19,7 +19,7 @@ import { getUserAgent, isBot } from '../utils/device';
 import Html from '../helpers/Html';
 import { apiClient } from '../helpers/apiClient';
 // -------------------------------------------------------------------
-//	import { GetReviews, GetADroid, GetCharacter } from '../graphql/queries/queries.graphql';
+import { GetReviews, GetADroid, GetCharacter } from '../graphql/queries/queries.graphql';
 import * as graphqlQueries from '../graphql/queries/queries.js';
 import { resolvers } from '../graphql/resolvers/resolvers.js';
 import { onError } from '@apollo/client/link/error';

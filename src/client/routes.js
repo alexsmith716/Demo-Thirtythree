@@ -27,16 +27,16 @@ const routes = [
 						exact: true,
 						component: Home,
 					},
-          {
-          	path: '/aboutA',
-          	exact: true,
-          	component: AboutA,
-          },
-          {
-            path: '/aboutB',
-            exact: true,
-            component: AboutB,
-          },
+					{
+						path: '/aboutA',
+						exact: true,
+						component: AboutA,
+					},
+					{
+						path: '/aboutB',
+						exact: true,
+						component: AboutB,
+					},
 					{
 						path: '/graphqlpage',
 						exact: true,
