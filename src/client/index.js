@@ -10,8 +10,8 @@ import { loadableReady } from '@loadable/component';
 import localForage from 'localforage';
 import { getStoredState } from 'redux-persist';
 import { Provider } from 'react-redux';
-//  import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
-//  import { onError } from '@apollo/client/link/error';
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 
 import asyncGetPromises from '../utils/asyncGetPromises';
 import { RouterTrigger } from '../components/RouterTrigger/RouterTrigger';
@@ -67,6 +67,42 @@ const render = async () => {
 		helpers: providers,
 		persistConfig,
 	});
+
+	// =====================================================
+
+	//	const httpLink = createHttpLink({
+	//		uri: 'http://localhost:4000/graphql',
+	//	});
+
+	//	const restLink = new RestLink({ 
+	//		uri: 'https://rickandmortyapi.com/api/',
+	//	});
+
+	//	const errorLink = onError(({ graphQLErrors, networkError }) => {
+	//		if (graphQLErrors) {
+	//			graphQLErrors.map(({ message, locations, path }) =>
+	//				console.log(`>>>> CLIENT > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),
+	//			);
+	//		}
+
+	//		if (networkError) {
+	//			console.log(`>>>> CLIENT > [Network error]: ${networkError}`);
+	//		}
+	//	});
+
+	//	const link = ApolloLink.from([
+	//		// restLink,
+	//		errorLink,
+	//		httpLink,
+	//	]);
+
+	//	const clientApollo = new ApolloClient({
+	//		ssrMode: false,
+	//		cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+	//		link,
+	//	});
+
+	// =====================================================
 
 	const triggerHooks = async (hydrateRoutes, pathname) => {
 		spinnerContainer.classList.add('spinner');

@@ -4,28 +4,28 @@ import { Button } from '../../components/Button';
 import * as Styles from './styles';
 
 const About = () => {
-	const [toggleCustomerState, setToggleCustomerState] = useState(true);
+  const [toggleCustomerState, setToggleCustomerState] = useState(true);
 
-	useEffect(() => {
-		//  componentDidMount
-		console.log('>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentDidMount');
+  useEffect(() => {
+  	//  componentDidMount
+  	console.log('>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentDidMount');
 
-		//  componentDidUpdate
-		if (toggleCustomerState) {
-			console.log(
-				'>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentDidUpdate > toggleCustomerState: ',
-				toggleCustomerState,
-			);
-		}
+  	//  componentDidUpdate
+  	if (toggleCustomerState) {
+  		console.log(
+  			'>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentDidUpdate > toggleCustomerState: ',
+  			toggleCustomerState,
+  		);
+  	}
 
-		//  componentWillUnmount
-		return () => {
-			//  some effects might require cleanup
-			console.log(
-				'>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentWillUnmount > cleanup phase',
-			);
-		};
-	}, [toggleCustomerState]);
+  	//  componentWillUnmount
+  	return () => {
+  		//  some effects might require cleanup
+  		console.log(
+  			'>>>>>>>>>>>>>>>>>>>>>>>> About > useEffect() > componentWillUnmount > cleanup phase',
+  		);
+  	};
+  }, [toggleCustomerState]);
 
 	return (
 		<>
