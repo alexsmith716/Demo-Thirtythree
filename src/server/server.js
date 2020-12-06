@@ -10,12 +10,12 @@ export function startServer() {
 	const app = express();
 
 	app.use((req, res, next) => {
-		console.log(`>>>>>>>>>>>>>>>>> START > REQUEST IN <<<<<<<<<<<<<<<<<<<<<<<`);
-		console.log(`>>>>>>>>>>>>>>>>> START > REQ.method +++++++++++++++: ${req.method}`);
-		console.log(`>>>>>>>>>>>>>>>>> START > REQ.url ++++++++++++++++++: ${req.url}`);
-		console.log(`>>>>>>>>>>>>>>>>> START > REQ.path ++++++++++++++++++: ${req.path}`);
-		console.log(`>>>>>>>>>>>>>>>>> START > REQ.originalUrl ++++: ${req.originalUrl}`);
-		console.log(`>>>>>>>>>>>>>>>>> START > REQUEST OUT <<<<<<<<<<<<<<<<<<<<<<<`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQUEST IN <<<<<<<<<<<<<<<<<<<<<<<`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.method +++++++++++++++: ${req.method}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.url ++++++++++++++++++: ${req.url}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.path ++++++++++++++++++: ${req.path}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.originalUrl ++++: ${req.originalUrl}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQUEST OUT <<<<<<<<<<<<<<<<<<<<<<<`);
 		next();
 	});
 
