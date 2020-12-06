@@ -1,9 +1,14 @@
 export const NavLinks = [
 	{
-		title: 'About',
-		url: '/about',
+		title: 'AboutA',
+		url: '/aboutA',
 		linkType: 'navLink',
 	},
+  {
+    title: 'AboutB',
+    url: '/aboutB',
+    linkType: 'navLink',
+  },
 	{
 		title: 'Graphql Page',
 		url: '/graphqlpage',

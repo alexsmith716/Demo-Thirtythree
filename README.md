@@ -26,7 +26,8 @@ https://github.com/developit/unfetch
 ### TODO:
 
 * address import of: `'../graphql/queries/queries.graphql'`
-* fix whats up with: `'../containers/About'`
-* fix whats up with: `'../containers/About/preloadData'`
+* fix: "Warning: Can't perform a React state update on an unmounted component" from `'./component/GraphiQLExample'`
+* for above: https://github.com/graphql/graphiql/issues/1515
+* for above: (nothing in `issues/1515` fixed my 'Warning' but just a warning so moving on. will check it out after a little Apollo progress)
 * whole bunch of other stuff
 * test on heroku
