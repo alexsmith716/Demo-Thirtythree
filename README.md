@@ -25,6 +25,8 @@ https://github.com/developit/unfetch
 
 ### TODO:
 
+* address import of: `'../graphql/queries/queries.graphql'`
+* fix whats up with: `'../containers/About'`
 * fix whats up with: `'../containers/About/preloadData'`
 * whole bunch of other stuff
 * test on heroku

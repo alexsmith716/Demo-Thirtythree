@@ -4,7 +4,7 @@ import Home from '../containers/Home/Home';
 import NotFound from '../containers/NotFound/Loadable';
 
 //  import About from '../containers/About/About';
-import About from '../containers/About/Loadable';
+//  import About from '../containers/About/Loadable';
 //  import GraphqlPage from '../containers/GraphqlPage/GraphqlPage';
 import GraphqlPage from '../containers/GraphqlPage/Loadable';
 
@@ -26,12 +26,12 @@ const routes = [
 						exact: true,
 						component: Home,
 					},
-					{
-						path: '/about',
-						exact: true,
-						component: About,
-						//loadData: preloadDataAboutThree,
-					},
+          //  {
+          //  	path: '/about',
+          //  	exact: true,
+          //  	component: About,
+          //  	//loadData: preloadDataAboutThree,
+          //  },
 					{
 						path: '/graphqlpage',
 						exact: true,
