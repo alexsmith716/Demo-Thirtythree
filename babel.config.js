@@ -28,13 +28,13 @@ module.exports = (api) => {
 			'@babel/preset-react',
 		],
 		plugins: [
+			'@babel/plugin-transform-runtime',
 			'@babel/plugin-syntax-dynamic-import',
-			['@babel/plugin-proposal-decorators', { legacy: true }],
-			'@loadable/babel-plugin',
 			'@babel/plugin-proposal-class-properties',
 			'@babel/plugin-proposal-object-rest-spread',
 			'@babel/plugin-proposal-export-default-from',
-			'@babel/plugin-transform-runtime',
+			['@babel/plugin-proposal-decorators', { legacy: true }],
+			'@loadable/babel-plugin',
 			[
 				'babel-plugin-styled-components',
 				{
@@ -42,6 +42,7 @@ module.exports = (api) => {
 					displayName: true
 				}
 			],
+			'macros',
 		],
 	};
 };
