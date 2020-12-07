@@ -11,7 +11,7 @@ module.exports = (api) => {
 	const web = api.caller(isWebTarget)
 	const webpack = api.caller(isWebpack)
 
-	// api.cache(false);
+	api.cache(true);
 
 	return {
 		presets: [
@@ -42,7 +42,8 @@ module.exports = (api) => {
 					displayName: true
 				}
 			],
-			'macros',
+			'babel-plugin-import-graphql',
+			'babel-plugin-macros',
 		],
 	};
 };
