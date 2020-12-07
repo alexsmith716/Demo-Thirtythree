@@ -22,12 +22,9 @@ https://github.com/developit/unfetch
 
 ### UPDATE:
 
-https://github.com/kentcdodds/babel-plugin-macros
-
 
 ### TODO:
 
-* address import of: `'../graphql/queries/queries.graphql'`
 * fix: "Warning: Can't perform a React state update on an unmounted component" from `'./component/GraphiQLExample'`
 * for above: https://github.com/graphql/graphiql/issues/1515
 * for above: (nothing in `issues/1515` fixed my 'Warning' but just a warning so moving on. will check it out after a little Apollo progress)
