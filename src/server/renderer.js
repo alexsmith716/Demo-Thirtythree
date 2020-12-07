@@ -51,8 +51,6 @@ export async function get(req, res) {
 	console.log('>>>> RENDERER > req.userAgent: ', req.userAgent)
 	console.log('>>>> RENDERER > req.isBot: ', req.isBot)
 
-	console.log('>>>> RENDERER > GetCharacterGetCharacterGetCharacterGetCharacter: ', GetCharacter)
-
 	const providers = {
 		client: apiClient(req),
 	};
