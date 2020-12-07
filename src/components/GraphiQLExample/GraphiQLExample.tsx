@@ -5,6 +5,8 @@ import 'graphiql/graphiql.css';
 //  import { gql, useQuery, useMutation, useApolloClient } from '@apollo/client';
 //  import { fragmentTypeDroid } from '../../graphql/fragments/fragments';
 
+import { GetCharacter } from '../../graphql/queries/queries.graphql';
+
 const GraphiQLExample = () => {
 	return (
 		<Styles.GraphiQLExample>
