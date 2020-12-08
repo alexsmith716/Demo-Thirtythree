@@ -90,7 +90,7 @@ export function loadInfo(): LoadActions {
 	return {
 		types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
 		promise: () =>
-			postRequestConcatExportASYNC('resolve', true, 10, null).then((result: any) => {
+			postRequestConcatExportASYNC('resolve', true, 250, null).then((result: any) => {
 				console.log('>>>>>>>>>>>>>>>> INFO > loadInfo() > THEN > RESULT: ', result);
 				return result;
 			}),
