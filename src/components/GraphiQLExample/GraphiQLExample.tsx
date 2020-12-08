@@ -12,7 +12,7 @@ const GraphiQLExample = () => {
 		<Styles.GraphiQLExample>
 			<GraphiQL
 				fetcher={async (graphQLParams) => {
-					const data = await fetch('https://rickandmortyapi.com/graphql', {
+					const data = await fetch('http://localhost:4000/graphql', {
 						method: 'POST',
 						headers: {
 							Accept: 'application/json',
