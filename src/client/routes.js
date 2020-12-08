@@ -4,13 +4,14 @@ import Home from '../containers/Home/Home';
 import NotFound from '../containers/NotFound/Loadable';
 
 import AboutA from '../containers/AboutAAA/AboutA';
-import AboutB from '../containers/AboutBBB/AboutB';
-//  import About from '../containers/About/Loadable';
+//  import AboutA from '../containers/AboutAAA/Loadable';
+import AboutB from '../containers/AboutBBB/Loadable';
+import About from '../containers/About/Loadable';
 //  import GraphqlPage from '../containers/GraphqlPage/GraphqlPage';
 import GraphqlPage from '../containers/GraphqlPage/Loadable';
 
-//import { preloadData as preloadDataApp } from '../containers/App/preloadData';
-//import { preloadData as preloadDataAboutThree } from '../containers/About/preloadData';
+import { preloadData as preloadDataApp } from '../containers/App/preloadData';
+import { preloadData as preloadDataAbout } from '../containers/About/preloadData';
 
 const routes = [
 	{
@@ -20,12 +21,18 @@ const routes = [
 			{
 				path: '/',
 				component: App,
-				//  loadData: preloadDataApp,
+				loadData: preloadDataApp,
 				routes: [
 					{
 						path: '/',
 						exact: true,
 						component: Home,
+					},
+					{
+						path: '/about',
+						exact: true,
+						component: About,
+						loadData: preloadDataAbout,
 					},
 					{
 						path: '/aboutA',

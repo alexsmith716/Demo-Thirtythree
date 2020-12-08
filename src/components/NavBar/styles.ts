@@ -50,7 +50,7 @@ export const Toggler = styled.div`
 export const NavBarNav = styled.ul<Props>`
 	margin-left: auto;
 	display: grid;
-	grid-template-columns: repeat(5, auto);
+	grid-template-columns: repeat(6, auto);
 	grid-gap: 15px;
 	list-style: none;
 	text-align: center;

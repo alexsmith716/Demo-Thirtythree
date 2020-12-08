@@ -22,11 +22,6 @@ export const initialState: State = {
   data: null,
 };
 
-type LoadApiClientActions = {
-  types: string[];
-  promise: ({ client }: any) => any;
-};
-
 type LoadActions = {
   types: string[];
   promise: () => Promise<{ time: any; delay: any; message: any; status: any }>;
@@ -69,28 +64,18 @@ export const reducer = (state: State = initialState, action: Actions): State => 
   }
 };
 
-export function isInfoLoaded(storeState: State): boolean {
+export function isInfoAlertThreeLoaded(storeState: State): boolean {
   return storeState && storeState.loaded;
 }
 
-export function loadInfoApiClient(): LoadApiClientActions {
-  console.log('>>>>>>>>>>>>>>>> INFOALERTTHREE > loadInfoApiClient() +++++++++++++++++++++++++++');
-  const location = 'https://api.github.com/feeds';
-  // const location = 'https://www.metaweather.com/api/location/2459115/';
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: ({ client }: any) => client.get(location),
-  };
-}
-
-export function loadInfo(): LoadActions {
+export function loadInfoAlertThree(): LoadActions {
   console.log('>>>>>>>>>>>>>>>> INFOALERTTHREE > loadInfo() +++++++++++++++++++++++++++');
   // const location = 'https://api.github.com/feeds';
   // const location = 'https://www.metaweather.com/api/location/2459115/';
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: () =>
-      postRequestConcatExportASYNC('resolve', true, 10, null).then((result: any) => {
+      postRequestConcatExportASYNC('resolve', true, 110, null).then((result: any) => {
         console.log('>>>>>>>>>>>>>>>> INFOALERTTHREE > loadInfo() > THEN > RESULT: ', result);
         return result;
       }),
