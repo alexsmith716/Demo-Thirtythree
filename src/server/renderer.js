@@ -83,9 +83,10 @@ export async function get(req, res) {
 	//  https://github.com/afuh/rick-and-morty-api
 	//  REST:     https://rickandmortyapi.com/api/
 	//  GRAPHQL:  https://rickandmortyapi.com/graphql/
+  //            http://localhost:4000/graphql
 
 	const httpLink = createHttpLink({
-		uri: 'http://localhost:4000/graphql',
+		uri: 'https://rickandmortyapi.com/graphql/',
 		// fetch: customFetch,
 		fetch: fetch,
 	});
@@ -201,35 +202,35 @@ export async function get(req, res) {
 		//  https://rickandmortyapi.com/api/character/?name=rick&status=alive
 		//  https://rickandmortyapi.com/api/location/3,21
 
-		//  const queryCharacter = await clientApollo.query({query: gql`
-		//    query Character($id: ID) {
-		//      character(id: "1") @rest(type: "Post", path: "character/1") {
-		//        id
-		//        name
-		//        status
-		//        species
-		//        type
-		//        gender
-		//        origin {
-		//          name
-		//          type
-		//          dimension
-		//        }
-		//        location {
-		//          name
-		//          type
-		//          dimension
-		//        }
-		//        image
-		//        episode {
-		//          name
-		//          episode
-		//        }
-		//      }
-		//    }
-		//  `});
+    //  const queryCharacter = await clientApollo.query({query: gql`
+    //    query Character($id: ID) {
+    //      character(id: "1") @rest(type: "Post", path: "character/1") {
+    //        id
+    //        name
+    //        status
+    //        species
+    //        type
+    //        gender
+    //        origin {
+    //          name
+    //          type
+    //          dimension
+    //        }
+    //        location {
+    //          name
+    //          type
+    //          dimension
+    //        }
+    //        image
+    //        episode {
+    //          name
+    //          episode
+    //        }
+    //      }
+    //    }
+    //  `});
 
-		//  console.log('>>>> SERVER > clientApollo.query > REST: ', queryCharacter);
+    //  console.log('>>>> RENDERER > clientApollo.query > REST: ', queryCharacter);
 
 		clientApollo.writeQuery({
 			query: gql`
@@ -256,18 +257,21 @@ export async function get(req, res) {
 		//  prefetch data (load data into cache): "client.query"
 		//  set "initialState" of data
 		// -------------------------------------------------------------------
-		// const qq = await clientApollo.query({ query: GetCharacter });
-		// const qq = await clientApollo.query({ query: GetReviews, variables: { episode: "EMPIRE" } });
-		// const qq = await clientApollo.query({ query: GetADroid, variables: { droidID: 2001 } });
-		// const qq = await clientApollo.query({ query: graphqlQueries.GET_HERO, });
-		// await clientApollo.query({ query: graphqlQueries.GET_THE_SCHEMA, });
+    const qqa = await clientApollo.query({ query: GetCharacter });
+    //  const qqb = await clientApollo.query({ query: GetReviews, variables: { episode: "EMPIRE" } });
+    //  const qqc = await clientApollo.query({ query: GetADroid, variables: { droidID: 2001 } });
+    //  const qqd = await clientApollo.query({ query: graphqlQueries.GET_HERO, });
+		//  await clientApollo.query({ query: graphqlQueries.GET_THE_SCHEMA, });
 		// -------------------------------------------------------------------
 
-		// console.log('>>>> SERVER > clientApollo.query: ', JSON.stringify(qq));
+		console.log('>>>> RENDERER > clientApollo.query > GetCharacter: ', qqa);
+    //  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
+    //  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
+    //  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
 
 		//  Object.keys(q).forEach(key => {
 		//    const k = q[key];
-		//    console.log('>>>> SERVER > clientApollo.query > Object.keys().forEach(): ', k);
+		//    console.log('>>>> RENDERER > clientApollo.query > Object.keys().forEach(): ', k);
 		//  });
 
 		// ==========================================================================
