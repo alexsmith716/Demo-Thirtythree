@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const GraphiQLExample = styled.div`
+export const GraphiQLPage = styled.div`
   height: 100vh;
 `;

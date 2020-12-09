@@ -1,6 +1,6 @@
 import path from 'path';
 import React from 'react';
-import { renderToNodeStream, renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { renderToNodeStream, renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { Router, StaticRouter } from 'react-router';
 import { createMemoryHistory } from 'history';
@@ -10,6 +10,8 @@ import { ChunkExtractor } from '@loadable/server';
 import { ServerStyleSheet } from 'styled-components';
 import fetch from 'node-fetch';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink, gql } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { getDataFromTree } from '@apollo/client/react/ssr';
 // -------------------------------------------------------------------
 import asyncGetPromises from '../utils/asyncGetPromises';
 import routes from '../client/routes';
@@ -22,8 +24,7 @@ import { apiClient } from '../helpers/apiClient';
 import { GetReviews, GetADroid, GetCharacter } from '../graphql/queries/queries.graphql';
 import * as graphqlQueries from '../graphql/queries/queries.js';
 import { resolvers } from '../graphql/resolvers/resolvers.js';
-import { onError } from '@apollo/client/link/error';
-import { getDataFromTree, getMarkupFromTree } from '@apollo/client/react/ssr';
+// -------------------------------------------------------------------
 
 //  provide for client ("to avoid network calls and mocking data"):
 //  https://github.com/apollographql/apollo-client/blob/master/docs/source/api/link/apollo-link-schema.md

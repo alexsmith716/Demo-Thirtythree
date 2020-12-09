@@ -1,11 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-import GraphiQLExample from '../../components/GraphiQLExample/GraphiQLExample';
-//  import GraphiQLExample from '../../components/GraphiQLExample/Loadable';
+import GraphiQLPage from '../../components/GraphiQLPage/Loadable';
 import { LinkTest } from '../../components/jestTest/LinkTest';
 
-const GraphqlPage = () => {
+const GraphiQLExample = () => {
 	return (
 		<>
 			<Helmet title="GraphiQL Page" />
@@ -18,11 +17,11 @@ const GraphqlPage = () => {
 				</div>
 
 				<div className="mb-5">
-					<GraphiQLExample />
+					<GraphiQLPage />
 				</div>
 			</div>
 		</>
 	);
 };
 
-export default GraphqlPage;
+export default GraphiQLExample;

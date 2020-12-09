@@ -14,14 +14,19 @@ export const NavLinks = [
 		url: '/aboutB',
 		linkType: 'navLink',
 	},
+	//	{
+	//		title: 'RESTfulPage',
+	//		url: '#',
+	//		linkType: 'navLink',
+	//	},
 	{
-		title: 'Graphql Page',
-		url: '/graphqlpage',
+		title: 'GraphQLExample',
+		url: '/graphqlexample',
 		linkType: 'navLink',
 	},
-  //  {
-  //  	title: 'RESTful Page',
-  //  	url: '#',
-  //  	linkType: 'navLink',
-  //  },
+	{
+		title: 'GraphiQLExample',
+		url: '/graphiqlexample',
+		linkType: 'navLink',
+	},
 ];
