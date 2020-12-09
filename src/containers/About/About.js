@@ -46,7 +46,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <h4>This component utilizes the CSS Grid Layout module.</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
@@ -120,7 +120,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <h4>This component utilizes the CSS Grid Layout module.</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
@@ -150,7 +150,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -164,7 +164,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -178,7 +178,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -187,7 +187,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -196,7 +196,7 @@ const About = () => {
           </div>
 
           <div className="col-grid">
-            <h2>About Election App 2020xX</h2>
+            <h2>About Election App 2022xX</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -245,7 +245,7 @@ const About = () => {
           </div>
 
           <div className="col-two">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <h4>This component utilizes the CSS Flexible Box Layout module.</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
@@ -275,7 +275,7 @@ const About = () => {
           </div>
 
           <div className="col-two">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -289,7 +289,7 @@ const About = () => {
           </div>
 
           <div className="col-two">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -303,7 +303,7 @@ const About = () => {
           </div>
 
           <div className="col-two">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -312,7 +312,7 @@ const About = () => {
           </div>
 
           <div className="col-two">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -321,7 +321,7 @@ const About = () => {
           </div>
 
           <div className="col-two">
-            <h2>About Election App 2020yY</h2>
+            <h2>About Election App 2022yY</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
               vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem
@@ -338,7 +338,7 @@ const About = () => {
           </div>
 
           <div className="col-four">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <h4>This component utilizes the CSS Flexible Box Layout module.</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
@@ -368,7 +368,7 @@ const About = () => {
           </div>
 
           <div className="col-four">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <h4>This component utilizes the CSS Flexible Box Layout module.</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
@@ -391,7 +391,7 @@ const About = () => {
           </div>
 
           <div className="col-six">
-            <h2>About Election App 2020</h2>
+            <h2>About Election App 2022</h2>
             <h4>This component utilizes the CSS Flexible Box Layout module.</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
