@@ -24,7 +24,7 @@ const AboutA = () => {
 					</div>
 
 					<div className="col-grid">
-						<h2>About Election App 2020</h2>
+						<h2>About Election App 2022</h2>
 						<h4>This component utilizes the CSS Grid Layout module.</h4>
 						<p>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam
