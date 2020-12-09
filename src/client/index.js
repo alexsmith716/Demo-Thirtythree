@@ -70,37 +70,37 @@ const render = async () => {
 
 	// =====================================================
 
-	//	const httpLink = createHttpLink({
-	//		uri: 'http://localhost:4000/graphql',
-	//	});
+	const httpLink = createHttpLink({
+		uri: 'http://localhost:4000/graphql',
+	});
 
 	//	const restLink = new RestLink({ 
 	//		uri: 'https://rickandmortyapi.com/api/',
 	//	});
 
-	//	const errorLink = onError(({ graphQLErrors, networkError }) => {
-	//		if (graphQLErrors) {
-	//			graphQLErrors.map(({ message, locations, path }) =>
-	//				console.log(`>>>> CLIENT > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),
-	//			);
-	//		}
+	const errorLink = onError(({ graphQLErrors, networkError }) => {
+		if (graphQLErrors) {
+			graphQLErrors.map(({ message, locations, path }) =>
+				console.log(`>>>> CLIENT > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),
+			);
+		}
 
-	//		if (networkError) {
-	//			console.log(`>>>> CLIENT > [Network error]: ${networkError}`);
-	//		}
-	//	});
+		if (networkError) {
+			console.log(`>>>> CLIENT > [Network error]: ${networkError}`);
+		}
+	});
 
-	//	const link = ApolloLink.from([
-	//		// restLink,
-	//		errorLink,
-	//		httpLink,
-	//	]);
+	const link = ApolloLink.from([
+		// restLink,
+		errorLink,
+		httpLink,
+	]);
 
-	//	const clientApollo = new ApolloClient({
-	//		ssrMode: false,
-	//		cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
-	//		link,
-	//	});
+	const clientApollo = new ApolloClient({
+		ssrMode: false,
+		cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+		link,
+	});
 
 	// =====================================================
 
@@ -117,15 +117,17 @@ const render = async () => {
 	const hydrate = (hydrateRoutes) => {
 		const element = (
 			<HelmetProvider>
-				<Provider store={store}>
-					<Router history={history}>
-						<ThemeContext>
-							<RouterTrigger triggerProp={(pathname) => triggerHooks(hydrateRoutes, pathname)}>
-								{renderRoutes(hydrateRoutes)}
-							</RouterTrigger>
-						</ThemeContext>
-					</Router>
-				</Provider>
+				<ApolloProvider client={clientApollo}>
+					<Provider store={store}>
+						<Router history={history}>
+							<ThemeContext>
+								<RouterTrigger triggerProp={(pathname) => triggerHooks(hydrateRoutes, pathname)}>
+									{renderRoutes(hydrateRoutes)}
+								</RouterTrigger>
+							</ThemeContext>
+						</Router>
+					</Provider>
+				</ApolloProvider>
 			</HelmetProvider>
 		);
 
