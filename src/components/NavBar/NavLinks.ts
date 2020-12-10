@@ -15,17 +15,17 @@ export const NavLinks = [
 		linkType: 'navLink',
 	},
 	//	{
-	//		title: 'RESTfulPage',
+	//		title: 'REST',
 	//		url: '#',
 	//		linkType: 'navLink',
 	//	},
 	{
-		title: 'GraphQLExample',
+		title: 'GraphQL',
 		url: '/graphqlexample',
 		linkType: 'navLink',
 	},
 	{
-		title: 'GraphiQLExample',
+		title: 'GraphiQL',
 		url: '/graphiqlexample',
 		linkType: 'navLink',
 	},

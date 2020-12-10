@@ -285,7 +285,6 @@ export async function get(req, res) {
 		const helmetContext = {};
 		const context = {};
 
-		// {renderRoutes(routes)}
 		const App = (
 			<HelmetProvider context={helmetContext}>
 				<ApolloProvider client={clientApollo}>

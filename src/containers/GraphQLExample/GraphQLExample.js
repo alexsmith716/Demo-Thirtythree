@@ -15,7 +15,31 @@ import * as graphqlQueries from '../../graphql/queries/queries';
 
 //  <Styles.GraphQLExample></Styles.GraphQLExample>
 
-//	<div className="bg-color-ivory container-padding-border-radius-1 text-break">
+//	update local data in the cache with either 'direct cache writes' or 'client resolvers'
+//	two ways to perform local state mutations:
+//		1) directly write to the cache by calling "cache.writeQuery"
+//		2) leveraging the useMutation hook with a GraphQL mutation that calls a local client-side resolver
+
+//	@client directive: tells Apollo Client to fetch the field data locally (either from the cache or using a local resolver), 
+//		instead of sending it to GraphQL server
+
+//	=========================================================================================================
+//	ApolloClient functions:
+
+//		query():     resolves a single query and returns a Promise which is either resolved with data or an error
+//		readQuery(): read data from the store in shape of provided GraphQL query
+//									does not make network request
+//									method starts at the root query
+
+//		writeQuery(): write data in the shape of the provided GraphQL query directly to store
+//									method starts at the root query
+//	=========================================================================================================
+
+//	useMutation hook accepts some options:
+//		update: function used to update cache after a mutation occurs
+//		refetchQueries: array or function that specifies which queries to refetch after mutation has occurred. array values either queries or query strings
+//		onCompleted: callback executed once mutation successfully completes
+//		client: 'ApolloClient' instance. By default the client passed down via context, but a different client can be passed in
 
 
 const GraphQLExample = () => {
@@ -42,6 +66,11 @@ const GraphQLExample = () => {
 		},
 	);
 
+	//	If a mutation updates a single existing entity, 
+	//		Apollo Client can automatically update that entity's value in its cache when the mutation returns
+
+	//	If a mutation modifies multiple entities, or if it creates or deletes entities, 
+	//		the Apollo Client cache is not automatically updated to reflect the result of the mutation
 	const [addReview, { loading: mutationLoading, error: mutationError, data: mutationData }] = useMutation(
 		graphqlQueries.ADD_REVIEW,
 		{
@@ -49,6 +78,18 @@ const GraphQLExample = () => {
 				episode: "EMPIRE",
 				review: {stars: 5, commentary: "Wow, how about EMPIRE!" }
 			},
+			// refetchQueries: () => [{ query: GET_REVIEWS, variables: { episode: "EMPIRE" }}],
+			//	update(cache, { data: { createReview } }) {
+
+			//		const { reviews } = cache.readQuery({ query: JUST_GET_REVIEWS, variables: { episode: "EMPIRE" } });
+
+			//		cache.writeQuery({
+			//			query: JUST_GET_REVIEWS,
+			//			data: { reviews: reviews.concat([createReview]) },
+			//		});
+
+			//		// console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphiQLExample > cache.extract(): ', cache.extract());
+			//	}
 		}
 	);
 
@@ -121,7 +162,7 @@ const GraphQLExample = () => {
 			<div className="container">
 				{/* ---------------------------------------------- */}
 
-				<h1 className="mt-4 mb-3">GraphQL Example!</h1>
+				<h1 className="mt-4 mb-3">GraphQL Example</h1>
 
 				{/* ---------------------------------------------- */}
 
@@ -136,7 +177,7 @@ const GraphQLExample = () => {
 
 						{queryError && (
 							<p>
-								Error queryError:(
+								Error queryError!
 							</p>
 						)}
 
@@ -148,7 +189,7 @@ const GraphQLExample = () => {
 						
 						{mutationError && (
 							<p>
-								Error mutationError:(
+								Error mutationError!
 							</p>
 						)}
 
@@ -182,7 +223,6 @@ const GraphQLExample = () => {
 					</div>
 
 					<div className="mb-3">
-
 						<Button
 							type="button"
 							className="btn-success"
@@ -190,10 +230,9 @@ const GraphQLExample = () => {
 						>
 							View Apollo Cache
 						</Button>
-
 					</div>
-					<div className="mb-3">
 
+					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success"
@@ -201,10 +240,9 @@ const GraphQLExample = () => {
 						>
 							refetch
 						</Button>
-
 					</div>
-					<div className="mb-3">
 
+					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success"
@@ -215,10 +253,9 @@ const GraphQLExample = () => {
 						>
 							writeQuery
 						</Button>
-
 					</div>
-					<div className="mb-3">
 
+					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success"
@@ -226,7 +263,6 @@ const GraphQLExample = () => {
 						>
 							useMutation
 						</Button>
-
 					</div>
 				</div>
 			</div>

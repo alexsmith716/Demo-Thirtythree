@@ -46,7 +46,7 @@ export const NavBar: React.FC = () => {
 					<Styles.NavBarNav clicked={clicked} className={clicked ? 'clicked' : ''}>
 						<li>
 							<Styles.NavBarNavA onClick={doThemeToggle}>
-								use {themeMode.mode === 'dark' ? `default` : `dark`} theme
+								use{themeMode.mode === 'dark' ? `Default` : `Dark`}Theme
 							</Styles.NavBarNavA>
 						</li>
 
