@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.4.0-beta.2":
-  version "3.4.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.0-beta.2.tgz#48513dde9717b7542f2a4628d68a407da0c12f17"
-  integrity sha512-RktegA5FLFsJk54fAxFD1kNmzzchsXVeIsuQJYASI5LbvrpGXgSRpTkGUi13dynKe7lO11ICtC8o35H2hFgPqw==
+"@apollo/client@^3.3.5":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.3.5.tgz#aecc864aa3a307bf5145fd0cde737b233a393fdc"
+  integrity sha512-0jKCwBMVJBfdDo3YdkALcw5F8t7rcKuR+cliqcFn+K3JxGFrYAtItdNbxq4CsGgaAQkzpwhVXYZZRSXTmtJqtA==
   dependencies:
     "@graphql-typed-document-node/core" "^3.0.0"
     "@types/zen-observable" "^0.8.0"
@@ -2394,6 +2394,11 @@ anymatch@^3.0.3, anymatch@~3.1.1:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+apollo-link-rest@^0.8.0-beta.0:
+  version "0.8.0-beta.0"
+  resolved "https://registry.yarnpkg.com/apollo-link-rest/-/apollo-link-rest-0.8.0-beta.0.tgz#435055d4bee82182c17974df5a9a606c4edf62a1"
+  integrity sha512-+/cHVXz0jF4SOg3bIVPxCArnpp7ojwhLarT9MLzbAuoaI+Uq+pU9Ob8Xmq4BS3Z+mIdVmnrIyw8EvqEzP7RL0w==
 
 aproba@^1.0.3:
   version "1.2.0"
