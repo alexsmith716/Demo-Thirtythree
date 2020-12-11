@@ -91,12 +91,6 @@ export async function get(req, res) {
 		fetch: fetch,
 	});
 
-	//  const restLink = new RestLink({ 
-	//    uri: 'https://rickandmortyapi.com/api/',
-	//    // endpoints: '/api',
-	//    customFetch: fetch,
-	//  });
-
 	const cache = new InMemoryCache();
 
 	const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -121,7 +115,6 @@ export async function get(req, res) {
 	//  one of "uri" or "link" is required; if both are specified, "link" will take precedence
 	const link = ApolloLink.from([
 		//  authLink,
-		// restLink,
 		errorLink,
 		//  retryLink,
 		httpLink,

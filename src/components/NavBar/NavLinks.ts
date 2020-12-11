@@ -14,11 +14,11 @@ export const NavLinks = [
 		url: '/aboutB',
 		linkType: 'navLink',
 	},
-	//	{
-	//		title: 'REST',
-	//		url: '#',
-	//		linkType: 'navLink',
-	//	},
+  {
+  	title: 'REST',
+  	url: 'restfulexample',
+  	linkType: 'navLink',
+  },
 	{
 		title: 'GraphQL',
 		url: '/graphqlexample',

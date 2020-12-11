@@ -7,6 +7,7 @@ import About from '../containers/About/Loadable';
 import AboutA from '../containers/AboutAAA/AboutA';
 //  import AboutA from '../containers/AboutAAA/Loadable';
 import AboutB from '../containers/AboutBBB/Loadable';
+import RESTfulExample from '../containers/RESTfulExample/Loadable';
 import GraphQLExample from '../containers/GraphQLExample/Loadable';
 import GraphiQLExample from '../containers/GraphiQLExample/Loadable';
 
@@ -44,6 +45,11 @@ const routes = [
 						exact: true,
 						component: AboutB,
 					},
+          {
+            path: '/restfulexample',
+            exact: true,
+            component: RESTfulExample,
+          },
 					{
 						path: '/graphqlexample',
 						exact: true,
