@@ -86,7 +86,7 @@ export async function get(req, res) {
 	//            http://localhost:4000/graphql
 
 	const httpLink = createHttpLink({
-		uri: 'http://localhost:4000/graphql',
+		uri: 'https://rickandmortyapi.com/graphql/',
 		// fetch: customFetch,
 		fetch: fetch,
 	});
