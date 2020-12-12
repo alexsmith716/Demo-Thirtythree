@@ -86,7 +86,7 @@ export async function get(req, res) {
 	//            http://localhost:4000/graphql
 
 	const httpLink = createHttpLink({
-		uri: 'https://rickandmortyapi.com/graphql/',
+		uri: 'http://localhost:8080/graphql',
 		// fetch: customFetch,
 		fetch: fetch,
 	});
@@ -223,6 +223,12 @@ export async function get(req, res) {
 		//    }
 		//  `});
 
+		const GET_HELLO = gql`
+			{
+				hello
+			}
+		`;
+
 		//  console.log('>>>> RENDERER > clientApollo.query > REST: ', queryCharacter);
 
 		clientApollo.writeQuery({
@@ -250,14 +256,16 @@ export async function get(req, res) {
 		//  prefetch data (load data into cache): "client.query"
 		//  set "initialState" of data
 		// -------------------------------------------------------------------
-		//	const qqa = await clientApollo.query({ query: GetCharacter });
+		//  const qqa = await clientApollo.query({ query: GetCharacter });
 		//  const qqb = await clientApollo.query({ query: GetReviews, variables: { episode: "EMPIRE" } });
 		//  const qqc = await clientApollo.query({ query: GetADroid, variables: { droidID: 2001 } });
 		//  const qqd = await clientApollo.query({ query: graphqlQueries.GET_HERO, });
 		//  await clientApollo.query({ query: graphqlQueries.GET_THE_SCHEMA, });
+		const h = await clientApollo.query({ query: GET_HELLO, });
 		// -------------------------------------------------------------------
 
-		//	console.log('>>>> RENDERER > clientApollo.query > GetCharacter: ', qqa);
+		console.log('>>>> RENDERER > clientApollo.query > GET_HELLO: ', h);
+		//  console.log('>>>> RENDERER > clientApollo.query > GetCharacter: ', qqa);
 		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
 		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
 		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));

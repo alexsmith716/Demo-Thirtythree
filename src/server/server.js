@@ -1,6 +1,7 @@
 import path from 'path';
 import express from 'express';
 import { createServer } from 'http';
+import { apolloServer } from './apolloServer';
 import * as renderer from './renderer';
 import { getUserAgent } from '../utils/device';
 import { isBot } from '../utils/device';
@@ -29,6 +30,8 @@ export function startServer() {
 		req.isBot = isBot(req.headers['user-agent']);
 		next();
 	});
+
+	apolloServer(app);
 
 	app.get('*', (req, res, next) => { 
 			console.log('>>>> SERVER > RENDERER !!!! ===========================');
