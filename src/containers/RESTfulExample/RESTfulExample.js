@@ -51,7 +51,6 @@ const RESTfulExample = () => {
 	);
 
 	const [clientExtract, setClientExtract] = useState(null);
-	const [toggleCustomerState, setToggleCustomerState] = useState(true);
 
 	useEffect(() => {
 			// componentDidMount
