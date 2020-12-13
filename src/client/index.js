@@ -11,7 +11,6 @@ import localForage from 'localforage';
 import { getStoredState } from 'redux-persist';
 import { Provider } from 'react-redux';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
-import { RestLink } from 'apollo-link-rest';
 import { onError } from '@apollo/client/link/error';
 
 import asyncGetPromises from '../utils/asyncGetPromises';
@@ -75,10 +74,6 @@ const render = async () => {
 		uri: 'http://localhost:8080/graphql/',
 	});
 
-	const restLink = new RestLink({ 
-		uri: 'https://rickandmortyapi.com/api/',
-	});
-
 	const errorLink = onError(({ graphQLErrors, networkError }) => {
 		if (graphQLErrors) {
 			graphQLErrors.map(({ message, locations, path }) =>
@@ -92,7 +87,6 @@ const render = async () => {
 	});
 
 	const link = ApolloLink.from([
-		restLink,
 		errorLink,
 		httpLink,
 	]);

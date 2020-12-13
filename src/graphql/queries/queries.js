@@ -1,6 +1,25 @@
 import { gql } from '@apollo/client';
 import { fragmentTypeDroid } from '../fragments/fragments';
 
+export const GET_HELLO = gql`
+	{
+		hello
+	}
+`;
+
+export const GET_CHARACTER_REST = gql`
+	query Character($id: ID) {
+		character(id: $id) {
+			id
+			name
+			status
+			species
+			type
+			gender
+		}
+	}
+`;
+
 export const GET_REVIEWS = gql`
 	query GetReviews($episode: Episode!) {
 		reviews(episode: $episode) {
