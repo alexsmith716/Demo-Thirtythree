@@ -1,9 +1,11 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 
+const baseUrl = 'https://rickandmortyapi.com/api';
+
 class RickAndMortyAPI extends RESTDataSource {
 	constructor() {
 		super();
-		this.baseURL = 'https://rickandmortyapi.com/api/character';
+		this.baseURL = `${baseUrl}/character`
 	}
 
 	async character({ id }) {
