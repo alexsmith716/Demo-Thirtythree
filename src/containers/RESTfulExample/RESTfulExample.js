@@ -8,33 +8,7 @@ import {
 } from '@apollo/client';
 import { Button } from '../../components/Button';
 
-export const GET_CHARACTER = gql`
-	query Character($id: ID){
-		character(id: $id) @rest(type: "Post", path: "character/{args.id}/") {
-			id
-			name
-			status
-			species
-			type
-			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
-		}
-	}
-`;
+import { GET_CHARACTER_REST } from '../../graphql/queries/queries.js';
 
 
 const RESTfulExample = () => {
@@ -42,10 +16,10 @@ const RESTfulExample = () => {
 	const client = useApolloClient();
 
 	const [getCharacter, { loading: queryLoading, error: queryError, data: queryData }] = useLazyQuery(
-		GET_CHARACTER,
+		GET_CHARACTER_REST,
 		{
 			variables: {
-				id: 2,
+				id: 5,
 			},
 		}
 	);

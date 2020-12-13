@@ -83,7 +83,7 @@ const resolvers = {
 // ===============================================
 
 const dataSources = () => ({
-	//ktpBooksAPI: new KtpBooksAPI(),
+	// ktpBooksAPI: new KtpBooksAPI(),
 	rickAndMortyAPI: new RickAndMortyAPI(),
 });
 
