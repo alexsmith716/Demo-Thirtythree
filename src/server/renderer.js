@@ -21,9 +21,9 @@ import { getUserAgent, isBot } from '../utils/device';
 import Html from '../helpers/Html';
 import { apiClient } from '../helpers/apiClient';
 // -------------------------------------------------------------------
-import { GetReviews, GetADroid, GetCharacter } from '../graphql/queries/queries.graphql';
-import * as graphqlQueries from '../graphql/queries/queries.js';
-import { resolvers } from '../graphql/resolvers/resolvers.js';
+//import { GetReviews, GetADroid, GetCharacter } from '../graphql/queries/queries.graphql';
+//import * as graphqlQueries from '../graphql/queries/queries.js';
+//import { resolvers } from '../graphql/resolvers/resolvers.js';
 // -------------------------------------------------------------------
 
 //  provide for client ("to avoid network calls and mocking data"):
@@ -86,7 +86,7 @@ export async function get(req, res) {
 	//            http://localhost:4000/graphql
 
 	const httpLink = createHttpLink({
-		uri: 'http://localhost:8080/graphql',
+		uri: 'http://localhost:8080/graphql/',
 		// fetch: customFetch,
 		fetch: fetch,
 	});
@@ -124,7 +124,7 @@ export async function get(req, res) {
 		ssrMode: true,
 		cache,
 		link,
-		resolvers,
+		//	resolvers,
 	});
 
 	// =====================================================
@@ -229,6 +229,34 @@ export async function get(req, res) {
 			}
 		`;
 
+		const GET_CHARACTERx = gql`
+			query Character($id: ID) {
+				character(id: $id) {
+					id
+					name
+					status
+					species
+					type
+					gender
+					origin {
+						name
+						type
+						dimension
+					}
+					location {
+						name
+						type
+						dimension
+					}
+					image
+					episode {
+						name
+						episode
+					}
+				}
+			}
+		`;
+
 		//  console.log('>>>> RENDERER > clientApollo.query > REST: ', queryCharacter);
 
 		clientApollo.writeQuery({
@@ -262,9 +290,11 @@ export async function get(req, res) {
 		//  const qqd = await clientApollo.query({ query: graphqlQueries.GET_HERO, });
 		//  await clientApollo.query({ query: graphqlQueries.GET_THE_SCHEMA, });
 		const h = await clientApollo.query({ query: GET_HELLO, });
+		const j = await clientApollo.query({ query: GET_CHARACTERx, variables: { id: 3 }});
 		// -------------------------------------------------------------------
 
-		console.log('>>>> RENDERER > clientApollo.query > GET_HELLO: ', h);
+		console.log('>>>> RENDERER > clientApollo.query > apolloServer > GET_HELLO: ', h);
+		console.log('>>>> RENDERER > clientApollo.query > apolloServer > GET_CHARACTER: ', j);
 		//  console.log('>>>> RENDERER > clientApollo.query > GetCharacter: ', qqa);
 		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
 		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
