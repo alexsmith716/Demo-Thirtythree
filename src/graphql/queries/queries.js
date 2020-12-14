@@ -7,6 +7,17 @@ export const GET_HELLO = gql`
 	}
 `;
 
+export const GET_KTP_BOOKS_REST = gql`
+	query getBookList($search: String!) {
+		search(searchString: $search) {
+			books {
+				id
+				title
+			}
+		}
+	}
+`;
+
 export const GET_CHARACTER_REST = gql`
 	query Character($id: ID) {
 		character(id: $id) {
