@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { Button } from '../../components/Button';
 
-import { GET_CHARACTER_REST } from '../../graphql/queries/queries.js';
+import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/queries.js';
 
 
 const RESTfulExample = () => {
@@ -20,6 +20,15 @@ const RESTfulExample = () => {
 		{
 			variables: {
 				id: 5,
+			},
+		}
+	);
+
+	const [getKTPBooks, { loading: queryLoadingX, error: queryErrorX, data: queryDataX }] = useLazyQuery(
+		GET_KTP_BOOKS_REST,
+		{
+			variables: {
+				search: "kaplan test prep",
 			},
 		}
 	);
@@ -115,6 +124,16 @@ const RESTfulExample = () => {
 							onClick={() => setClientExtract(client.extract())}
 						>
 							View Apollo Cache
+						</Button>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success"
+							onClick={() => getKTPBooks()}
+						>
+							KTP Books
 						</Button>
 					</div>
 

@@ -2,17 +2,28 @@ import * as express from 'express';
 import { gql } from '@apollo/client';
 import { ApolloServer } from 'apollo-server-express';
 
-//const KtpBooksAPI = require('./datasources/ktpBooksAPI');
-const RickAndMortyAPI = require('./datasources/rickAndMortyAPI');
+const { KaplanTestPrepBooks } = require('./datasources/googleBooksAPI');
+const { RickAndMortyAPICharacter } = require('./datasources/rickAndMortyAPI');
 
 // ===============================================
 
 // schema
 const typeDefs = gql`
+	type Book {
+		id: String!
+		title: String
+	}
+
+	type SearchResult {
+		books: [Book]
+	}
+
 	type Query {
 		hello: String
 
 		character(id: ID): Character
+
+		search(searchString: String!): SearchResult
 	}
 
 	type Character {
@@ -75,16 +86,26 @@ const resolvers = {
 	Query: {
 		hello: () => 'Hello world!',
 		character: async (_, { id }, { dataSources }) => (
-			dataSources.rickAndMortyAPI.character({ id })
+			dataSources.rickAndMortyAPICharacter.character({ id })
+		),
+		search: async (_, { searchString }, { dataSources }) => (
+			dataSources.kaplanTestPrepBooks.getBooks(searchString)
 		),
 	},
+	Book: {
+		id: ({ id }) => id,
+		title: ({ volumeInfo: { title } }) => title,
+	},
+	SearchResult: {
+		books: ({ items }) => items,
+	}
 };
 
 // ===============================================
 
 const dataSources = () => ({
-	// ktpBooksAPI: new KtpBooksAPI(),
-	rickAndMortyAPI: new RickAndMortyAPI(),
+	kaplanTestPrepBooks: new KaplanTestPrepBooks(),
+	rickAndMortyAPICharacter: new RickAndMortyAPICharacter(),
 });
 
 // ===============================================

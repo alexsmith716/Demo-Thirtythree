@@ -8,7 +8,7 @@ const GraphiQLPage = () => {
 		<Styles.GraphiQLPage>
 			<GraphiQL
 				fetcher={async (graphQLParams) => {
-					const data = await fetch('http://localhost:4000/graphql', {
+					const data = await fetch('http://localhost:8080/graphql', {
 						method: 'POST',
 						headers: {
 							Accept: 'application/json',
