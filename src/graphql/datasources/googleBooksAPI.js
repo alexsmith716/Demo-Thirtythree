@@ -10,9 +10,8 @@ class KaplanTestPrepBooks extends RESTDataSource {
 
 	async getBooks(searchString) {
 		const route = `volumes?q=${searchString.split(' ').join('+')}&projection=lite&maxResults=30`;
-		console.log(`HTTP GET ${this.baseURL}${route}`);
 		const data = await this.get(route);
-		return data
+		return data;
 	}
 };
 
