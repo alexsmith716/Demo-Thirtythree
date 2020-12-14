@@ -9,8 +9,8 @@ class RickAndMortyAPICharacter extends RESTDataSource {
 	}
 
 	async character({ id }) {
-		const data = await this.get('/' + id)
-		return data
+		const data = await this.get('/' + id);
+		return data;
 	}
 };
 
@@ -21,8 +21,8 @@ class RickAndMortyAPILocation extends RESTDataSource {
 	}
 
 	async location({ id }) {
-		const data = await this.get('/' + id)
-		return data
+		const data = await this.get('/' + id);
+		return data;
 	}
 };
 
@@ -33,8 +33,8 @@ class RickAndMortyAPIEpisode extends RESTDataSource {
 	}
 
 	async episode({ id }) {
-		const data = await this.get('/' + id)
-		return data
+		const data = await this.get('/' + id);
+		return data;
 	}
 };
 
