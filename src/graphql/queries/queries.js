@@ -13,6 +13,12 @@ export const GET_KTP_BOOKS_REST = gql`
 			books {
 				id
 				title
+				authors
+				publisher
+				publishedDate
+				imageLinks {
+					small
+				}
 			}
 		}
 	}
