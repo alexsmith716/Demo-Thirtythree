@@ -12,6 +12,18 @@ export const typeDefs = gql`
 	type Book {
 		id: String!
 		title: String
+		subtitle: String
+		authors: [String]
+		publisher: String
+		publishedDate: String
+		description: String
+		previewLink: String
+		imageLinks: ImageLinks
+	}
+
+	type ImageLinks {
+		small: String
+		normal: String
 	}
 
 	type SearchResult {
