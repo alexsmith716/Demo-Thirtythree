@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { Button } from '../../components/Button';
 
-import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST, GET_KTP_BOOKS_REST_imageLinks } from '../../graphql/queries/queries.js';
+import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/queries.js';
 
 
 const RESTfulExample = () => {
@@ -86,13 +86,19 @@ const RESTfulExample = () => {
 								</div>
 								{getKTPBooksData.search.books.map(book => (
 									<div key={book.id} className="mb-3 container-padding-border-radius-2">
-										<h4>{book.title}</h4>
-										<img src={book.imageLinks.smallThumbnail} />
-										<div>Authors: {book.authors.join(', ')}</div>
-										{ book.publisher &&
-												<div>Publisher: {book.publisher}</div>
-										}
-										<div>Published Date: {book.publishedDate}</div>
+										<div className="row-flex">
+											<div className="col-six">
+												<img src={book.imageLinks.smallThumbnail} />
+											</div>
+											<div className="col-six">
+												<h4>{book.title}</h4>
+												<div>Authors: {book.authors.join(', ')}</div>
+												{ book.publisher &&
+														<div>Publisher: {book.publisher}</div>
+												}
+												<div>Published Date: {book.publishedDate}</div>
+											</div>
+										</div>
 									</div>
 								))}
 							</div>
