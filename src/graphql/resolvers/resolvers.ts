@@ -30,8 +30,8 @@ export const resolvers = {
 	},
 
 	ImageLinks: {
-		small: ({ smallThumbnail }: { smallThumbnail: string }) => smallThumbnail,
-		normal: ({ thumbnail }: { thumbnail: string }) => thumbnail,
+		smallThumbnail: ({ smallThumbnail }: { smallThumbnail: string }) => smallThumbnail,
+		thumbnail: ({ thumbnail }: { thumbnail: string }) => thumbnail,
 	},
 
 	SearchResult: {

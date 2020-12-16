@@ -22,8 +22,8 @@ export const typeDefs = gql`
 	}
 
 	type ImageLinks {
-		small: String
-		normal: String
+		smallThumbnail: String
+		thumbnail: String
 	}
 
 	type SearchResult {
