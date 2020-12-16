@@ -8,14 +8,14 @@ import {
 } from '@apollo/client';
 import { Button } from '../../components/Button';
 
-import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/queries.js';
+import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST, GET_KTP_BOOKS_REST_imageLinks } from '../../graphql/queries/queries.js';
 
 
 const RESTfulExample = () => {
 
 	const client = useApolloClient();
 
-	const [getCharacter, { loading: queryLoading, error: queryError, data: queryData }] = useLazyQuery(
+	const [getCharacter, { loading: getCharacterLoading, error: getCharacterError, data: getCharacterData }] = useLazyQuery(
 		GET_CHARACTER_REST,
 		{
 			variables: {
@@ -24,7 +24,7 @@ const RESTfulExample = () => {
 		}
 	);
 
-	const [getKTPBooks, { loading: queryLoadingX, error: queryErrorX, data: queryDataX }] = useLazyQuery(
+	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData }] = useLazyQuery(
 		GET_KTP_BOOKS_REST,
 		{
 			variables: {
@@ -35,39 +35,21 @@ const RESTfulExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
 
-	useEffect(() => {
-			// componentDidMount
-			console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample!!!! > useEffect() > componentDidMount');
-
-			// componentDidUpdate
-			if (clientExtract) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidUpdate > clientExtract: ', clientExtract);
-			}
-
-			// -------------------------------
-
-			if (queryError) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidUpdate > queryError: ', queryError);
-			}
-
-			if (queryLoading) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidUpdate > queryLoading: ', queryLoading);
-			}
-
-			if (queryData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidUpdate > queryData: ', queryData);
-			}
-
-			// -------------------------------
-
-			// componentWillUnmount
-			return () => {
-				// some effects might require cleanup
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentWillUnmount > cleanup phase');
-			};
-		},
-		[] // only re-run the effect if an array item changes
-	);
+	//	useEffect(() => {
+	//			// componentDidMount
+	//			console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample!!!! > useEffect() > componentDidMount');
+	//			// componentDidUpdate
+	//			if (componentDidUpdate) {
+	//				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidUpdate');
+	//			}
+	//			// componentWillUnmount
+	//			return () => {
+	//				// some effects might require cleanup
+	//				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentWillUnmount > cleanup phase');
+	//			};
+	//		},
+	//		[] // only re-run the effect if an array item changes
+	//	);
 
 	return (
 		<>
@@ -85,24 +67,34 @@ const RESTfulExample = () => {
 				<div className="bg-color-ivory container-padding-border-radius-1 text-break mb-5">
 					<div className="mb-3">
 
-						{queryLoading && (
+						{getKTPBooksLoading && (
 							<p>
-								Loading queryLoading...
+								Loading getKTPBooksLoading...
 							</p>
 						)}
 
-						{queryError && (
+						{getKTPBooksError && (
 							<p>
-								Error queryError!
+								Error getKTPBooksError!
 							</p>
 						)}
 
-						{queryData && (
+						{getKTPBooksData && (
 							<div>
-								<h5>queryData Data:</h5>
-								<div>----------------------------------</div>
-								<div>{JSON.stringify(queryData)}</div>
-								<div>----------------------------------</div>
+								<div className="mb-3">
+									<h5>getKTPBooksData Data:</h5>
+								</div>
+								{getKTPBooksData.search.books.map(book => (
+									<div key={book.id} className="mb-3 container-padding-border-radius-2">
+										<h4>{book.title}</h4>
+										<img src={book.imageLinks.smallThumbnail} />
+										<div>Authors: {book.authors.join(', ')}</div>
+										{ book.publisher &&
+												<div>Publisher: {book.publisher}</div>
+										}
+										<div>Published Date: {book.publishedDate}</div>
+									</div>
+								))}
 							</div>
 						)}
 

@@ -40,7 +40,7 @@ const getConfig = (target) => ({
 			},
 
 			{
-				test: /\.(ts|js)x?$/,
+				test: /\.(ts|tsx|js|jsx)?$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
 				options: {
