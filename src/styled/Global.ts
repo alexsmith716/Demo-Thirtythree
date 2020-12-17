@@ -17,11 +17,6 @@ export const GlobalStyle = createGlobalStyle`
 		padding: 0;
 	}
 
-	a-btn {
-		color: #15c;
-		text-decoration: none;
-	}
-
 	body {
 		padding-top: 56px;
 		margin: 0;
@@ -472,6 +467,13 @@ export const GlobalStyle = createGlobalStyle`
 
 	.text-break {
 		word-wrap: break-word;
+	}
+
+	.text-overflow-ellipsis {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
 	}
 
 	// ========================================
