@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-//	export type Props = {
-//		state?: string;
-//	};
+//  export type Props = {
+//    state?: string;
+//  };
 
 
 export const GoogleBooksBook = ({ book }) => {
 
-	const [toggleButtonState, setToggleButtonState] = useState(true);
+	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);
 
 	useEffect(() => {
 		console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentDidMount');
 
-		if (toggleButtonState) {
+		if (toggleBookDescriptionView) {
 			console.log(
-				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentDidUpdate > toggleButtonState: ',
-				toggleButtonState,
+				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentDidUpdate > toggleBookDescriptionView: ',
+				toggleBookDescriptionView,
 			);
 		}
 
@@ -24,29 +24,39 @@ export const GoogleBooksBook = ({ book }) => {
 				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentWillUnmount > cleanup phase',
 			);
 		};
-	}, [toggleButtonState]);
+	}, [toggleBookDescriptionView]);
+
+	function truncate( str, n, useWordBoundary ){
+		if (str.length <= n) { return str; }
+		const subString = str.substr(0, n-1); // the original check
+		return (useWordBoundary 
+			? subString.substr(0, subString.lastIndexOf(" ")) 
+			: subString) + "&hellip;";
+	};
 
 	return (
 		<div className="row-flex">
 			<div className="col-two">
 				{ book.imageLinks ?
-						<img src={book.imageLinks.smallThumbnail} alt={book.title}/>
-						:
-						<div>Image not found</div>
+					<img src={book.imageLinks.smallThumbnail} alt={book.title}/>
+					:
+					<div>Image not found</div>
 				}
 			</div>
 			<div className="col-ten">
 				<h3>{book.title}</h3>
 				<div><b>Authors:</b> {book.authors.join(', ')}</div>
 				{ book.publisher &&
-						<div><b>Publisher:</b> {book.publisher}</div>
+					<div><b>Publisher:</b> {book.publisher}</div>
 				}
 				<div><b>Published Date:</b> {book.publishedDate}</div>
-				<div>{book.description}</div>
-				<button onClick={() => setToggleButtonState(!toggleButtonState)} type="button">
-					{ toggleButtonState
-						? "More >>"
-						: "<< Less"
+				<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
+					{book.description}
+				</div>
+				<button onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)} type="button">
+					{ toggleBookDescriptionView
+						? "<< Less"
+						: "More >>"
 					}
 				</button>
 			</div>
