@@ -16,6 +16,7 @@ export const GET_KTP_BOOKS_REST = gql`
 				authors
 				publisher
 				publishedDate
+        description
 				imageLinks {
 					smallThumbnail
 				}

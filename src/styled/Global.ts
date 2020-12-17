@@ -17,6 +17,11 @@ export const GlobalStyle = createGlobalStyle`
 		padding: 0;
 	}
 
+	a-btn {
+		color: #15c;
+		text-decoration: none;
+	}
+
 	body {
 		padding-top: 56px;
 		margin: 0;

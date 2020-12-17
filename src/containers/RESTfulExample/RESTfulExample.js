@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
 	gql,
@@ -7,11 +7,14 @@ import {
 	useApolloClient,
 } from '@apollo/client';
 import { Button } from '../../components/Button';
+import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
 import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/queries.js';
 
 
 const RESTfulExample = () => {
+
+	const [toggleCustomerState, setToggleCustomerState] = useState(true);
 
 	const client = useApolloClient();
 
@@ -84,23 +87,13 @@ const RESTfulExample = () => {
 								<div className="mb-3">
 									<h5>getKTPBooksData Data:</h5>
 								</div>
-								{getKTPBooksData.search.books.map(book => (
-									<div key={book.id} className="mb-3 container-padding-border-radius-2">
-										<div className="row-flex">
-											<div className="col-six">
-												<img src={book.imageLinks.smallThumbnail} />
-											</div>
-											<div className="col-six">
-												<h4>{book.title}</h4>
-												<div>Authors: {book.authors.join(', ')}</div>
-												{ book.publisher &&
-														<div>Publisher: {book.publisher}</div>
-												}
-												<div>Published Date: {book.publishedDate}</div>
-											</div>
-										</div>
+								{/* ----------------------------------------------------------------------- */}
+								{getKTPBooksData.search.books.map((book, index) => (
+									<div key={index} className="mb-3 container-padding-border-radius-2">
+										<GoogleBooksBook book={ book } />
 									</div>
 								))}
+								{/* ----------------------------------------------------------------------- */}
 							</div>
 						)}
 
@@ -131,7 +124,7 @@ const RESTfulExample = () => {
 							className="btn-success"
 							onClick={() => getKTPBooks()}
 						>
-							KTP Books
+							Get KTP Books
 						</Button>
 					</div>
 
