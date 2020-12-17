@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 //	};
 
 
-export const GoogleBooksBook = ({book}) => {
+export const GoogleBooksBook = ({ book }) => {
 
 	const [toggleButtonState, setToggleButtonState] = useState(true);
 
