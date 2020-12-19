@@ -6,7 +6,7 @@ import { resolvers, dataSources } from '../graphql/resolvers/resolvers';
 
 // ===============================================
 
-export function apolloServer(app) {
+export function apolloServer(app: any) {
 	
 	const apollo = new ApolloServer({
 		typeDefs,

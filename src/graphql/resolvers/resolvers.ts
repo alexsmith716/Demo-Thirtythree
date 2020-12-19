@@ -12,7 +12,7 @@ export const resolvers = {
 		character: async (obj: any, { id }: { id: number }, { dataSources }: { dataSources: any }) => (
 			dataSources.rickAndMortyAPICharacter.character({ id })
 		),
-		search: async (obj: any, { searchString, startIndex, orderBy, maxResults }: { searchString: string, startIndex: any, orderBy: string, maxResults: any }, { dataSources }: { dataSources: any }) => (
+		search: async (obj: any, { searchString, startIndex, orderBy, maxResults }: { searchString: string, startIndex: number, orderBy: string, maxResults: number }, { dataSources }: { dataSources: any }) => (
 			dataSources.kaplanTestPrepBooks.getBooks(searchString, startIndex, orderBy, maxResults)
 		),
 	},
