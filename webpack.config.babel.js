@@ -4,8 +4,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-// import TerserPlugin from 'terser-webpack-plugin';
-// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import TerserPlugin from 'terser-webpack-plugin';
+//  import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import nodeExternals from 'webpack-node-externals';
 
 const DIST_PATH = path.resolve(__dirname, 'public/dist');
@@ -122,18 +122,18 @@ const getConfig = (target) => ({
 
 	optimization: {
 		minimize: true,
-		//  minimizer: [
-		//  	new TerserPlugin({
-		//  		terserOptions: {
-		//  			output: {
-		//  				comments: false,
-		//  			},
-		//  			compress: {
-		//  				drop_console: true,
-		//  			},
-		//  		},
-		//  	}),
-		//  ],
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					output: {
+						comments: true,
+					},
+					compress: {
+						drop_console: true,
+					},
+				},
+			}),
+		],
 		moduleIds: 'deterministic',
 		runtimeChunk: 'single',
 		splitChunks: {
@@ -167,12 +167,12 @@ const getConfig = (target) => ({
 	},
 
 	resolve: {
-    modules: ['node_modules'],
+		modules: ['node_modules'],
 		extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.css', '.scss', '.mjs'],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-      graphql: path.resolve('./node_modules/graphql'),
-    },
+		alias: {
+			react: path.resolve('./node_modules/react'),
+			graphql: path.resolve('./node_modules/graphql'),
+		},
 		//	fallback: {
 		//		'assert': require.resolve('assert/'),
 		//	}
@@ -191,10 +191,12 @@ const getConfig = (target) => ({
 		}),
 		//	new webpack.DefinePlugin({}),
 		new LoadablePlugin(),
-		//	new BundleAnalyzerPlugin({
-		//		analyzerMode: "static",
-		//		openAnalyzer: false,
-		//	}),
+    //  new BundleAnalyzerPlugin({
+    //  	analyzerMode: 'static',
+    //  	reportFilename: './bundleAnalyzer/webpack.config.babel.html',
+    //  	openAnalyzer: false,
+    //  	generateStatsFile: false
+    //  }),
 	],
 })
 

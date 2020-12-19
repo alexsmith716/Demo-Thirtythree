@@ -29,7 +29,7 @@ const RESTfulExample = () => {
 
 	//	https://github.com/apollographql/apollo-client/tree/main/docs/source/pagination
 	//	https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx#the-fetchmore-function
-	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData }] = useLazyQuery(
+	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData, fetchMore: fetchMoreKTPBooksData }] = useLazyQuery(
 		GET_KTP_BOOKS_REST,
 		{
 			variables: {
@@ -130,6 +130,23 @@ const RESTfulExample = () => {
 							onClick={() => getKTPBooks()}
 						>
 							Get KTP Books
+						</Button>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-primary"
+							onClick={() => {
+								fetchMoreKTPBooksData({
+									variables: {
+										startIndex: 3,
+										maxResults: 2,
+									}
+								})
+							}}
+						>
+							fetchMoreKTPBooksData
 						</Button>
 					</div>
 
