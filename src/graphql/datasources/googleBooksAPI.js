@@ -8,11 +8,14 @@ class KaplanTestPrepBooks extends RESTDataSource {
 		this.baseURL = `${baseUrl}/v1/`
 	}
 
-	async getBooks(searchString) {
-		const route = `volumes?q=${searchString.split(' ').join('+')}&projection=lite&maxResults=30`;
+	//	https://www.googleapis.com/books/v1/volumes?q=kaplan+test+prep&startIndex=0&orderBy=newest&projection=lite&maxResults=2
+
+	async getBooks(searchString, startIndex, orderBy, maxResults) {
+		const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=${startIndex}&orderBy=${orderBy}&projection=lite&maxResults=${maxResults}`;
 		const data = await this.get(route);
 		return data;
 	}
+
 };
 
 module.exports = { KaplanTestPrepBooks };

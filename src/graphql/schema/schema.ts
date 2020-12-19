@@ -6,7 +6,7 @@ export const typeDefs = gql`
 
 		character(id: ID): Character
 
-		search(searchString: String!): SearchResult
+		search(searchString: String!, startIndex: Int!, orderBy: String!, maxResults: Int!): SearchResult
 	}
 
 	type Book {

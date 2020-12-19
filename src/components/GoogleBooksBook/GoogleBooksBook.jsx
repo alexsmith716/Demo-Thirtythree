@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-//  export type Props = {
-//    state?: string;
-//  };
-
 
 export const GoogleBooksBook = ({ book }) => {
 
@@ -26,18 +22,12 @@ export const GoogleBooksBook = ({ book }) => {
 		};
 	}, [toggleBookDescriptionView]);
 
-	function truncate( str, n, useWordBoundary ){
-		if (str.length <= n) { return str; }
-		const subString = str.substr(0, n-1); // the original check
-		return (useWordBoundary 
-			? subString.substr(0, subString.lastIndexOf(" ")) 
-			: subString) + "&hellip;";
-	};
 
 	return (
 		<div className="row-flex">
 			<div className="col-two">
-				{ book.imageLinks ?
+				{ book.imageLinks
+					?
 					<img src={book.imageLinks.smallThumbnail} alt={book.title}/>
 					:
 					<div>Image not found</div>
