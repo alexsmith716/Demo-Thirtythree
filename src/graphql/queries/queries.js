@@ -8,15 +8,15 @@ export const GET_HELLO = gql`
 `;
 
 export const GET_KTP_BOOKS_REST = gql`
-	query GetKptBooksRest($search: String!) {
-		search(searchString: $search) {
+	query GetKptBooksRest($search: String!, $startIndex: Int!, $orderBy: String!, $maxResults: Int!) {
+		search(searchString: $search, startIndex: $startIndex, orderBy: $orderBy, maxResults: $maxResults) {
 			books {
 				id
 				title
 				authors
 				publisher
 				publishedDate
-        description
+				description
 				imageLinks {
 					smallThumbnail
 				}

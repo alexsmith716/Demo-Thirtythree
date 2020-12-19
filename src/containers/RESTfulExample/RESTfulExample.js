@@ -27,11 +27,16 @@ const RESTfulExample = () => {
 		}
 	);
 
+	//	https://github.com/apollographql/apollo-client/tree/main/docs/source/pagination
+	//	https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx#the-fetchmore-function
 	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData }] = useLazyQuery(
 		GET_KTP_BOOKS_REST,
 		{
 			variables: {
 				search: "kaplan test prep",
+				startIndex: 0,
+				orderBy: "newest",
+				maxResults: 2,
 			},
 		}
 	);
