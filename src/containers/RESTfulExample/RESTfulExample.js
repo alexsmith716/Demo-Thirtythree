@@ -1,20 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
 	gql,
 	useQuery,
 	useLazyQuery,
 	useApolloClient,
+	NetworkStatus,
 } from '@apollo/client';
 import { Button } from '../../components/Button';
 import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
 import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/queries.js';
 
-
 const RESTfulExample = () => {
 
-	const [toggleCustomerState, setToggleCustomerState] = useState(true);
+	const [clientExtract, setClientExtract] = useState(null);
+	const [kTPBooksOffsetIndex, setKTPBooksOffsetIndex] = useState(0);
+	const [kTPBooksMaxResults, setKTPBooksMaxResults] = useState(2);
 
 	const client = useApolloClient();
 
@@ -27,37 +29,30 @@ const RESTfulExample = () => {
 		}
 	);
 
-	//	https://github.com/apollographql/apollo-client/tree/main/docs/source/pagination
-	//	https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx#the-fetchmore-function
-	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData, fetchMore: fetchMoreKTPBooksData }] = useLazyQuery(
+	//  https://github.com/apollographql/apollo-client/tree/main/docs/source/pagination
+	//  https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx#the-fetchmore-function
+	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData, refetch: refetchKTPBooksData, fetchMore: fetchMoreKTPBooksData, networkStatus }] = useLazyQuery(
 		GET_KTP_BOOKS_REST,
 		{
 			variables: {
 				search: "kaplan test prep",
 				startIndex: 0,
 				orderBy: "newest",
-				maxResults: 2,
+				maxResults: kTPBooksMaxResults,
 			},
+			notifyOnNetworkStatusChange: true,
 		}
 	);
 
-	const [clientExtract, setClientExtract] = useState(null);
+	useEffect(() => {
+			console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidMount > kTPBooksOffsetIndex: ', kTPBooksOffsetIndex);
 
-	//	useEffect(() => {
-	//			// componentDidMount
-	//			console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample!!!! > useEffect() > componentDidMount');
-	//			// componentDidUpdate
-	//			if (componentDidUpdate) {
-	//				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidUpdate');
-	//			}
-	//			// componentWillUnmount
-	//			return () => {
-	//				// some effects might require cleanup
-	//				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentWillUnmount > cleanup phase');
-	//			};
-	//		},
-	//		[] // only re-run the effect if an array item changes
-	//	);
+			if (kTPBooksOffsetIndex) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > kTPBooksOffsetIndex: ', kTPBooksOffsetIndex);
+			}
+		},
+		[kTPBooksOffsetIndex]
+	);
 
 	return (
 		<>
@@ -74,6 +69,12 @@ const RESTfulExample = () => {
 
 				<div className="bg-color-ivory container-padding-border-radius-1 text-break mb-5">
 					<div className="mb-3">
+
+						{networkStatus === NetworkStatus.refetch && (
+							<p>
+								Refetching!
+							</p>
+						)}
 
 						{getKTPBooksLoading && (
 							<p>
@@ -127,6 +128,16 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-success"
+							onClick={() => refetchKTPBooksData()}
+						>
+							refetchKTPBooksData
+						</Button>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success"
 							onClick={() => getKTPBooks()}
 						>
 							Get KTP Books
@@ -138,12 +149,16 @@ const RESTfulExample = () => {
 							type="button"
 							className="btn-primary"
 							onClick={() => {
+								const newMaxResults = kTPBooksMaxResults+2;
 								fetchMoreKTPBooksData({
 									variables: {
-										startIndex: 3,
-										maxResults: 2,
-									}
-								})
+										maxResults: newMaxResults,
+									},
+								}).then(fetchMoreResult => {
+									const newKTPBooksOffsetIndex = kTPBooksOffsetIndex+fetchMoreResult.data.search.books.length;
+									setKTPBooksOffsetIndex(newKTPBooksOffsetIndex);
+									setKTPBooksMaxResults(newMaxResults);
+								});
 							}}
 						>
 							fetchMoreKTPBooksData
