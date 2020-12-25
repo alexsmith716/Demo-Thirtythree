@@ -26,9 +26,9 @@ export const GoogleBooksBook = ({ book }) => {
 	return (
 		<div className="row-flex">
 			<div className="col-two">
-				{ book.imageLinks
+				{ book.smallThumbnail
 					?
-					<img src={book.imageLinks.smallThumbnail} alt={book.title}/>
+					<img src={book.smallThumbnail} alt={book.title}/>
 					:
 					<div>Image not found</div>
 				}

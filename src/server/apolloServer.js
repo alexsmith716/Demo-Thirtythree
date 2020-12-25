@@ -6,12 +6,13 @@ import { resolvers, dataSources } from '../graphql/resolvers/resolvers';
 
 // ===============================================
 
-export function apolloServer(app: any) {
+export function apolloServer(app) {
 	
 	const apollo = new ApolloServer({
 		typeDefs,
 		resolvers,
 		dataSources,
+		introspection: true,
 	});
 
 	apollo.applyMiddleware({ app, path: '/graphql' });

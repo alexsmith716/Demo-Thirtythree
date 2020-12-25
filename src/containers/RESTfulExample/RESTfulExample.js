@@ -15,43 +15,22 @@ import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/qu
 const RESTfulExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
-	const [kTPBooksOffsetIndex, setKTPBooksOffsetIndex] = useState(0);
-	const [kTPBooksMaxResults, setKTPBooksMaxResults] = useState(2);
+	const [startIndex, setStartIndex] = useState(0);
+	const [maxResults, setMaxResults] = useState(2);
 
 	const client = useApolloClient();
 
-	const [getCharacter, { loading: getCharacterLoading, error: getCharacterError, data: getCharacterData }] = useLazyQuery(
-		GET_CHARACTER_REST,
-		{
-			variables: {
-				id: 5,
-			},
-		}
-	);
-
-	//  https://github.com/apollographql/apollo-client/tree/main/docs/source/pagination
-	//  https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx#the-fetchmore-function
-	const [getKTPBooks, { loading: getKTPBooksLoading, error: getKTPBooksError, data: getKTPBooksData, refetch: refetchKTPBooksData, fetchMore: fetchMoreKTPBooksData, networkStatus }] = useLazyQuery(
+	const [getKTPBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
 		GET_KTP_BOOKS_REST,
-		{
-			variables: {
-				search: "kaplan test prep",
-				startIndex: 0,
-				orderBy: "newest",
-				maxResults: kTPBooksMaxResults,
-			},
-			notifyOnNetworkStatusChange: true,
-		}
 	);
 
 	useEffect(() => {
-			console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > componentDidMount > kTPBooksOffsetIndex: ', kTPBooksOffsetIndex);
-
-			if (kTPBooksOffsetIndex) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > kTPBooksOffsetIndex: ', kTPBooksOffsetIndex);
+			if (data) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data: ', data);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.search: ', data.search);
 			}
 		},
-		[kTPBooksOffsetIndex]
+		[data]
 	);
 
 	return (
@@ -76,25 +55,25 @@ const RESTfulExample = () => {
 							</p>
 						)}
 
-						{getKTPBooksLoading && (
+						{loading && (
 							<p>
 								Loading getKTPBooksLoading...
 							</p>
 						)}
 
-						{getKTPBooksError && (
+						{error && (
 							<p>
 								Error getKTPBooksError!
 							</p>
 						)}
 
-						{getKTPBooksData && (
+						{data && (
 							<div>
 								<div className="mb-3">
 									<h5>getKTPBooksData Data:</h5>
 								</div>
 								{/* ----------------------------------------------------------------------- */}
-								{getKTPBooksData.search.books.map((book, index) => (
+								{data.search.books.map((book, index) => (
 									<div key={index} className="mb-3 container-padding-border-radius-2">
 										<GoogleBooksBook book={ book } />
 									</div>
@@ -128,7 +107,7 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-success"
-							onClick={() => refetchKTPBooksData()}
+							onClick={() => refetch()}
 						>
 							refetchKTPBooksData
 						</Button>
@@ -148,16 +127,11 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-primary"
-							onClick={() => {
-								const newMaxResults = kTPBooksMaxResults+2;
-								fetchMoreKTPBooksData({
+							onClick={async () => {
+								await fetchMore({
 									variables: {
-										maxResults: newMaxResults,
+										after: data.search.cursor,
 									},
-								}).then(fetchMoreResult => {
-									const newKTPBooksOffsetIndex = kTPBooksOffsetIndex+fetchMoreResult.data.search.books.length;
-									setKTPBooksOffsetIndex(newKTPBooksOffsetIndex);
-									setKTPBooksMaxResults(newMaxResults);
 								});
 							}}
 						>
