@@ -8,8 +8,10 @@ export const GET_HELLO = gql`
 `;
 
 export const GET_KTP_BOOKS_REST = gql`
-	query GetKptBooksRest($search: String!, $startIndex: Int!, $orderBy: String!, $maxResults: Int!) {
-		search(searchString: $search, startIndex: $startIndex, orderBy: $orderBy, maxResults: $maxResults) {
+	query GetKptBooksRest($after: String) {
+		search(after: $after) {
+			cursor
+			hasMore
 			books {
 				id
 				title
@@ -17,9 +19,7 @@ export const GET_KTP_BOOKS_REST = gql`
 				publisher
 				publishedDate
 				description
-				imageLinks {
-					smallThumbnail
-				}
+				smallThumbnail
 			}
 		}
 	}

@@ -6,11 +6,20 @@ export const typeDefs = gql`
 
 		character(id: ID): Character
 
-		search(searchString: String!, startIndex: Int!, orderBy: String!, maxResults: Int!): SearchResult
+		search(
+			pageSize: Int,
+			after: String,
+		): SearchResult
+	}
+
+	type SearchResult {
+		cursor: String!
+		hasMore: Boolean!
+		books: [Book]!
 	}
 
 	type Book {
-		id: String!
+		id: ID
 		title: String
 		subtitle: String
 		authors: [String]
@@ -18,16 +27,7 @@ export const typeDefs = gql`
 		publishedDate: String
 		description: String
 		previewLink: String
-		imageLinks: ImageLinks
-	}
-
-	type ImageLinks {
 		smallThumbnail: String
-		thumbnail: String
-	}
-
-	type SearchResult {
-		books: [Book]
 	}
 
 	type Character {

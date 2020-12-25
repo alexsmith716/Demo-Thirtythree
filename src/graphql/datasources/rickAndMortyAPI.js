@@ -2,7 +2,7 @@ const { RESTDataSource } = require('apollo-datasource-rest');
 
 const baseUrl = 'https://rickandmortyapi.com/api';
 
-class RickAndMortyAPICharacter extends RESTDataSource {
+export class RickAndMortyAPICharacter extends RESTDataSource {
 	constructor() {
 		super();
 		this.baseURL = `${baseUrl}/character`
@@ -14,7 +14,7 @@ class RickAndMortyAPICharacter extends RESTDataSource {
 	}
 };
 
-class RickAndMortyAPILocation extends RESTDataSource {
+export class RickAndMortyAPILocation extends RESTDataSource {
 	constructor() {
 		super()
 		this.baseURL = `${baseUrl}/location`
@@ -26,7 +26,7 @@ class RickAndMortyAPILocation extends RESTDataSource {
 	}
 };
 
-class RickAndMortyAPIEpisode extends RESTDataSource {
+export class RickAndMortyAPIEpisode extends RESTDataSource {
 	constructor() {
 		super()
 		this.baseURL = `${baseUrl}/episode`
@@ -37,5 +37,3 @@ class RickAndMortyAPIEpisode extends RESTDataSource {
 		return data;
 	}
 };
-
-module.exports = { RickAndMortyAPICharacter, RickAndMortyAPILocation, RickAndMortyAPIEpisode };
