@@ -43,7 +43,6 @@ module.exports = (api) => {
 				}
 			],
 			'babel-plugin-import-graphql',
-			'babel-plugin-macros',
 		],
 	};
 };
