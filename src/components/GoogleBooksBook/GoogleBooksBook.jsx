@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 export const GoogleBooksBook = ({ book }) => {
 
 	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);

@@ -22,6 +22,13 @@ const RESTfulExample = () => {
 
 	const [getKTPBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
 		GET_KTP_BOOKS_REST,
+    {
+      variables: {
+        search: "kaplan test prep",
+        orderBy: "newest",
+      },
+      notifyOnNetworkStatusChange: true,
+    }
 	);
 
 	useEffect(() => {
@@ -127,7 +134,7 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-primary"
-							onClick={async () => {
+							onClick={ async () => {
 								await fetchMore({
 									variables: {
 										after: data.search.cursor,

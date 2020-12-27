@@ -1,4 +1,3 @@
-
 module.exports.paginateResults = ({ after: cursor, pageSize = 2, results, getCursor = () => null }) => {
 
 	if (pageSize < 1) return [];
