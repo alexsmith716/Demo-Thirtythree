@@ -15,9 +15,9 @@ export const resolvers = {
 			dataSources.rickAndMortyAPICharacter.character({ id })
 		),
 
-		search: async (obj, { pageSize=2, after }, { dataSources }) => {
+		search: async (obj, { pageSize = 2, after, searchString, orderBy }, { dataSources }) => {
 			// dataSources.kaplanTestPrepBooks.getBooks(searchString, startIndex, orderBy, maxResults)
-			const allKtpBooks = await dataSources.kaplanTestPrepBooks.getBooks();
+			const allKtpBooks = await dataSources.kaplanTestPrepBooks.getBooks(searchString, orderBy);
 
 			const books = paginateResults({
 				after,

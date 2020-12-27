@@ -13,8 +13,6 @@ import { Provider } from 'react-redux';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
-import { offsetLimitPagination } from '@apollo/client/utilities';
-
 import asyncGetPromises from '../utils/asyncGetPromises';
 import { RouterTrigger } from '../components/RouterTrigger/RouterTrigger';
 import routes from './routes';
@@ -93,7 +91,7 @@ const render = async () => {
 		httpLink,
 	]);
 
-	let clientCache = new InMemoryCache({
+	const clientCache = new InMemoryCache({
 		typePolicies: {
 			Query: {
 				fields: {
