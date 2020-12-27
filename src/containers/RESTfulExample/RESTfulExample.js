@@ -122,11 +122,16 @@ const RESTfulExample = () => {
 					</div>
 
 					<div className="mb-3">
-						<input
-							type="text"
-							value={googleBookSearch}
-							onChange={e => setGoogleBookSearch(e.target.value)}
-						/>
+						<div className="row-flex">
+							<div className="col-four">
+								<input
+									type="text"
+									className="form-control"
+									value={googleBookSearch}
+									onChange={e => setGoogleBookSearch(e.target.value)}
+								/>
+							</div>
+						</div>
 					</div>
 
 					<div className="mb-3">
