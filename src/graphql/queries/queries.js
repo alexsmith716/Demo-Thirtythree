@@ -7,8 +7,8 @@ export const GET_HELLO = gql`
 	}
 `;
 
-export const GET_KTP_BOOKS_REST = gql`
-	query GetKptBooksRest($after: String, $search: String!, $orderBy: String!) {
+export const GET_GOOGLE_BOOKS_REST = gql`
+	query GetGoogleBooksRest($after: String, $search: String!, $orderBy: String!) {
 		search(after: $after, searchString: $search, orderBy: $orderBy) {
 			cursor
 			hasMore

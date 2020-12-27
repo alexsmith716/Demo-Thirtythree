@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
-	gql,
-	useQuery,
 	useLazyQuery,
 	useApolloClient,
 	NetworkStatus,
@@ -10,25 +8,25 @@ import {
 import { Button } from '../../components/Button';
 import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
-import { GET_CHARACTER_REST, GET_KTP_BOOKS_REST } from '../../graphql/queries/queries.js';
+import { GET_GOOGLE_BOOKS_REST } from '../../graphql/queries/queries.js';
 
 const RESTfulExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
-	const [startIndex, setStartIndex] = useState(0);
-	const [maxResults, setMaxResults] = useState(2);
+	const [googleBookSearch, setGoogleBookSearch] = useState('');
 
 	const client = useApolloClient();
 
-	const [getKTPBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
-		GET_KTP_BOOKS_REST,
-    {
-      variables: {
-        search: "kaplan test prep",
-        orderBy: "newest",
-      },
-      notifyOnNetworkStatusChange: true,
-    }
+	//	"kaplan test prep"
+	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
+		GET_GOOGLE_BOOKS_REST,
+		{
+			variables: {
+				search: `${googleBookSearch}`,
+				orderBy: 'newest',
+			},
+			notifyOnNetworkStatusChange: true,
+		}
 	);
 
 	useEffect(() => {
@@ -36,8 +34,11 @@ const RESTfulExample = () => {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data: ', data);
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.search: ', data.search);
 			}
+			if (googleBookSearch) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBookSearch: ', googleBookSearch);
+			}
 		},
-		[data]
+		[data, googleBookSearch]
 	);
 
 	return (
@@ -58,26 +59,26 @@ const RESTfulExample = () => {
 
 						{networkStatus === NetworkStatus.refetch && (
 							<p>
-								Refetching!
+								Refetching...
 							</p>
 						)}
 
 						{loading && (
 							<p>
-								Loading getKTPBooksLoading...
+								Loading...
 							</p>
 						)}
 
 						{error && (
 							<p>
-								Error getKTPBooksError!
+								Query Error!
 							</p>
 						)}
 
 						{data && (
 							<div>
 								<div className="mb-3">
-									<h5>getKTPBooksData Data:</h5>
+									<h5>getGoogleBooks Data:</h5>
 								</div>
 								{/* ----------------------------------------------------------------------- */}
 								{data.search.books.map((book, index) => (
@@ -116,17 +117,25 @@ const RESTfulExample = () => {
 							className="btn-success"
 							onClick={() => refetch()}
 						>
-							refetchKTPBooksData
+							refetchGoogleBooksData
 						</Button>
+					</div>
+
+					<div className="mb-3">
+						<input
+							type="text"
+							value={googleBookSearch}
+							onChange={e => setGoogleBookSearch(e.target.value)}
+						/>
 					</div>
 
 					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success"
-							onClick={() => getKTPBooks()}
+							onClick={() => getGoogleBooks()}
 						>
-							Get KTP Books
+							Get Google Books
 						</Button>
 					</div>
 
@@ -142,17 +151,7 @@ const RESTfulExample = () => {
 								});
 							}}
 						>
-							fetchMoreKTPBooksData
-						</Button>
-					</div>
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success"
-							onClick={() => getCharacter()}
-						>
-							Get Character
+							fetchMore Google Books
 						</Button>
 					</div>
 
