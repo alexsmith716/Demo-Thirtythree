@@ -9,8 +9,8 @@ export const typeDefs = gql`
 		search(
 			pageSize: Int,
 			after: String,
-      searchString: String!
-      orderBy: String!
+			searchString: String!
+			orderBy: String!
 		): SearchResult
 	}
 
