@@ -18,6 +18,17 @@ const RESTfulExample = () => {
 	const client = useApolloClient();
 
 	//	"kaplan test prep"
+	//	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
+	//		GET_GOOGLE_BOOKS_REST,
+	//		{
+	//			variables: {
+	//				search: `${googleBookSearch}`,
+	//				orderBy: 'newest',
+	//			},
+	//			notifyOnNetworkStatusChange: true,
+	//		}
+	//	);
+
 	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
 		GET_GOOGLE_BOOKS_REST,
 		{
@@ -25,6 +36,8 @@ const RESTfulExample = () => {
 				search: `${googleBookSearch}`,
 				orderBy: 'newest',
 			},
+			fetchPolicy: 'cache-and-network',
+			//	pollInterval: 500,
 			notifyOnNetworkStatusChange: true,
 		}
 	);
@@ -117,7 +130,37 @@ const RESTfulExample = () => {
 							className="btn-success"
 							onClick={() => refetch()}
 						>
-							refetchGoogleBooksData
+							RefetchQueryResults
+						</Button>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success"
+							onClick={() => setGoogleBookSearch('usmle')}
+						>
+							Search USMLE
+						</Button>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success"
+							onClick={() => setGoogleBookSearch('gmat')}
+						>
+							Search GMAT
+						</Button>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success"
+							onClick={() => setGoogleBookSearch('lsat')}
+						>
+							Search LSAT
 						</Button>
 					</div>
 
@@ -127,8 +170,10 @@ const RESTfulExample = () => {
 								<input
 									type="text"
 									className="form-control"
+									name="googleBookSearch"
 									value={googleBookSearch}
 									onChange={e => setGoogleBookSearch(e.target.value)}
+									placeholder="Search Google Books"
 								/>
 							</div>
 						</div>
