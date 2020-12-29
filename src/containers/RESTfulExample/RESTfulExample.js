@@ -18,17 +18,6 @@ const RESTfulExample = () => {
 	const client = useApolloClient();
 
 	//	"kaplan test prep"
-	//	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
-	//		GET_GOOGLE_BOOKS_REST,
-	//		{
-	//			variables: {
-	//				search: `${googleBookSearch}`,
-	//				orderBy: 'newest',
-	//			},
-	//			notifyOnNetworkStatusChange: true,
-	//		}
-	//	);
-
 	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
 		GET_GOOGLE_BOOKS_REST,
 		{
