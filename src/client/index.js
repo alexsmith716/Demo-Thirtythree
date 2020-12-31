@@ -91,14 +91,16 @@ const render = async () => {
 		httpLink,
 	]);
 
-	//	https://github.com/apollographql/apollo-client/docs/source/pagination/cursor-based.mdx
+	// https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx
 	const clientCache = new InMemoryCache({
 		typePolicies: {
 			// =====================================================
 			Query: {
 				fields: {
 					// --------------------------------------
-					//  search: relayStylePagination(),
+					// define field policy for "search"
+					// define field policy to merge the results of paginated queries into a single list
+					// search: relayStylePagination(),
 					search: {
 						keyArgs: false,
 						merge(existing, incoming) {
