@@ -26,8 +26,5 @@ https://github.com/developit/unfetch
 
 ### TODO:
 
-* fix: "Warning: Can't perform a React state update on an unmounted component" from `'./component/GraphiQLExample'`
-* for above: https://github.com/graphql/graphiql/issues/1515
-* for above: (nothing in `issues/1515` fixed my 'Warning' but just a warning so moving on. will check it out after a little Apollo progress)
-* whole bunch of other stuff
+* whole bunch of stuff
 * test on heroku

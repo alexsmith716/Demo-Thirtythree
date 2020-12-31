@@ -1,9 +1,9 @@
 import { paginateResults } from '../utils/utils';
-import { KaplanTestPrepBooks } from '../datasources/googleBooksAPI';
+import { GoogleBooks } from '../datasources/googleBooksAPI';
 import { RickAndMortyAPICharacter } from '../datasources/rickAndMortyAPI';
 
 export const dataSources = () => ({
-	kaplanTestPrepBooks: new KaplanTestPrepBooks(),
+	googleBooks: new GoogleBooks(),
 	rickAndMortyAPICharacter: new RickAndMortyAPICharacter(),
 });
 
@@ -16,21 +16,27 @@ export const resolvers = {
 		),
 
 		search: async (obj, { pageSize = 2, after, searchString, orderBy }, { dataSources }) => {
-			// dataSources.kaplanTestPrepBooks.getBooks(searchString, startIndex, orderBy, maxResults)
-			const allKtpBooks = await dataSources.kaplanTestPrepBooks.getBooks(searchString, orderBy);
+			// dataSources.googleBooks.getBooks(searchString, startIndex, orderBy, maxResults)
+
+			console.log('????????????? > after: ', after)
+			console.log('????????????? > searchString: ', searchString)
+			console.log('????????????? > orderBy: ', orderBy)
+			const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
 
 			const books = paginateResults({
 				after,
 				pageSize,
-				results: allKtpBooks,
+				results: allGoogleBooks,
 			});
+
+			console.log('?????????????XXXXXXXXXXX@@@@@@@@@@@@@ > books: ', books)
 
 			return {
 				books,
 				cursor: books.length ? books[books.length - 1].cursor : null,
 				hasMore: books.length
 					? books[books.length - 1].cursor !==
-						allKtpBooks[allKtpBooks.length - 1].cursor
+						allGoogleBooks[allGoogleBooks.length - 1].cursor
 					: false,
 			};
 		},

@@ -4,12 +4,16 @@ module.exports.paginateResults = ({ after: cursor, pageSize = 2, results, getCur
 
 	if (!cursor) return results.slice(0, pageSize);
 
+	console.log('ZZZZZZZZZZZZZZZZ > cursor: ', cursor)
+
 	const cursorIndex = results.findIndex(item => {
 		let itemCursor = item.cursor ? item.cursor : getCursor(item);
 		return itemCursor ? cursor === itemCursor : false;
 	});
 
-	return cursorIndex >= 0
+	console.log('ZZZZZZZZZZZZZZZZ > cursorIndex: ', cursorIndex)
+
+	const cursorIndexXXX = cursorIndex >= 0
 		? cursorIndex === results.length - 1
 			? []
 			: results.slice(
@@ -17,4 +21,17 @@ module.exports.paginateResults = ({ after: cursor, pageSize = 2, results, getCur
 					Math.min(results.length, cursorIndex + 1 + pageSize),
 				)
 		: results.slice(0, pageSize);
+
+	console.log('ZZZZZZZZZZZZZZZZ > cursorIndexXXX: ', cursorIndexXXX)
+
+	return cursorIndexXXX;
+
+	//  return cursorIndex >= 0
+	//  	? cursorIndex === results.length - 1
+	//  		? []
+	//  		: results.slice(
+	//  				cursorIndex + 1,
+	//  				Math.min(results.length, cursorIndex + 1 + pageSize),
+	//  			)
+	//  	: results.slice(0, pageSize);
 };

@@ -14,18 +14,21 @@ const RESTfulExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
 	const [googleBookSearch, setGoogleBookSearch] = useState('');
+	const [googleBookSearchCURSOR, setGoogleBookSearchCURSOR] = useState('');
 
 	const client = useApolloClient();
 
-	//	"kaplan test prep"
+	//  network-only
+	//  cache-and-network
 	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
 		GET_GOOGLE_BOOKS_REST,
 		{
 			variables: {
-				search: `${googleBookSearch}`,
+				// search: `${googleBookSearch}`,
+				search: '',
 				orderBy: 'newest',
 			},
-			fetchPolicy: 'cache-and-network',
+			//	fetchPolicy: 'cache-and-network',
 			//	pollInterval: 500,
 			notifyOnNetworkStatusChange: true,
 		}
@@ -33,8 +36,8 @@ const RESTfulExample = () => {
 
 	useEffect(() => {
 			if (data) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data: ', data);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.search: ', data.search);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.search.cursor: ', data.search.cursor);
+				setGoogleBookSearchCURSOR(data.search.cursor)
 			}
 			if (googleBookSearch) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBookSearch: ', googleBookSearch);
@@ -127,7 +130,8 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-success"
-							onClick={() => setGoogleBookSearch('usmle')}
+							//onClick={() => setGoogleBookSearch('usmle')}
+							onClick={() => getGoogleBooks({ variables: { search: 'usmle' }, fetchPolicy: 'network-only'})}
 						>
 							Search USMLE
 						</Button>
@@ -137,7 +141,8 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-success"
-							onClick={() => setGoogleBookSearch('gmat')}
+							//onClick={() => setGoogleBookSearch('gmat')}
+							onClick={() => getGoogleBooks({ variables: { search: 'gmat' }, fetchPolicy: 'network-only'})}
 						>
 							Search GMAT
 						</Button>
@@ -149,7 +154,7 @@ const RESTfulExample = () => {
 							className="btn-success"
 							onClick={() => setGoogleBookSearch('lsat')}
 						>
-							Search LSAT
+							Search LSAT!
 						</Button>
 					</div>
 
@@ -185,8 +190,9 @@ const RESTfulExample = () => {
 							onClick={ async () => {
 								await fetchMore({
 									variables: {
-										after: data.search.cursor,
+										cursor: data.search.cursor,
 									},
+									// fetchPolicy: 'cache-and-network',
 								});
 							}}
 						>
