@@ -21,7 +21,6 @@ export const GoogleBooksBook = ({ book }) => {
 		};
 	}, [toggleBookDescriptionView]);
 
-
 	return (
 		<div className="row-flex">
 			<div className="col-two">
@@ -33,21 +32,27 @@ export const GoogleBooksBook = ({ book }) => {
 				}
 			</div>
 			<div className="col-ten">
-				<h3>{book.title}</h3>
-				<div><b>Authors:</b> {book.authors.join(', ')}</div>
-				{ book.publisher &&
-					<div><b>Publisher:</b> {book.publisher}</div>
-				}
-				<div><b>Published Date:</b> {book.publishedDate}</div>
-				<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
-					{book.description}
-				</div>
-				<button onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)} type="button">
-					{ toggleBookDescriptionView
-						? "<< Less"
-						: "More >>"
-					}
-				</button>
+				<h3>{book.title ? book.title : "n\/a"}</h3>
+
+				<div><b>Authors:</b> {book.authors ? book.authors.join(', ') : "n\/a"}</div>
+
+				<div><b>Publisher:</b> {book.publisher ? book.publisher : "n\/a"}</div>
+
+				<div><b>Published Date:</b> {book.publishedDate ? book.publishedDate : "n\/a"}</div>
+
+				<div><b>ID:</b> {book.id ? book.id : "n\/a"}</div>
+
+				{/* {book.description &&
+					<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
+						{book.description}
+					</div>
+					<button onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)} type="button">
+						{ toggleBookDescriptionView
+							? "<< Less"
+							: "More >>"
+						}
+					</button>
+				} */}
 			</div>
 		</div>
 	);

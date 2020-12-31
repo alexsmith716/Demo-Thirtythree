@@ -91,13 +91,19 @@ const render = async () => {
 		httpLink,
 	]);
 
+	//	https://github.com/apollographql/apollo-client/docs/source/pagination/cursor-based.mdx
 	const clientCache = new InMemoryCache({
 		typePolicies: {
+			// =====================================================
 			Query: {
 				fields: {
+					// --------------------------------------
+					//  search: relayStylePagination(),
 					search: {
 						keyArgs: false,
 						merge(existing, incoming) {
+							console.log('>>>> CLIENT > InMemoryCache > existing AAAAAAAA: ', existing);
+							console.log('>>>> CLIENT > InMemoryCache > incoming BBBBBBBB: ',  incoming);
 							let books = [];
 							if (existing && existing.books) {
 								books = books.concat(existing.books);
@@ -105,6 +111,12 @@ const render = async () => {
 							if (incoming && incoming.books) {
 								books = books.concat(incoming.books);
 							}
+							const q = {...incoming}
+							const w = {books}
+							const x = {...incoming, books}
+							console.log('>>>> CLIENT > InMemoryCache > incoming CCCCCCCCCCC: ',  q);
+							console.log('>>>> CLIENT > InMemoryCache > books DDDDDDDDDDD: ',  w);
+							console.log('>>>> CLIENT > InMemoryCache > incoming EEEEEEEE: ', x);
 							return {
 								...incoming,
 								books,

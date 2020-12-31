@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import GraphiQL from 'graphiql';
 import * as Styles from './styles';
 import 'graphiql/graphiql.css';
 
 const GraphiQLPage = () => {
+
+	useEffect(() => {
+			// componentDidMount
+			console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphiQLPage > useEffect() > componentDidMount');
+			// componentWillUnmount
+			return () => {
+				// some effects might require cleanup
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphiQLPage > useEffect() > componentWillUnmount > cleanup phase');
+			};
+		},
+		[]
+	);
+
 	return (
 		<Styles.GraphiQLPage>
 			<GraphiQL
