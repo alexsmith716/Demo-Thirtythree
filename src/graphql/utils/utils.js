@@ -1,4 +1,6 @@
-module.exports.paginateResults = ({ after: cursor, pageSize = 2, results, getCursor = () => null }) => {
+export const paginateResults = ({ after: cursor, pageSize, results, getCursor = () => null }) => {
+
+	console.log('ZZZZZZZZZZZZZZZZ > cursor??????????: ', cursor)
 
 	if (pageSize < 1) return [];
 
@@ -25,13 +27,4 @@ module.exports.paginateResults = ({ after: cursor, pageSize = 2, results, getCur
 	console.log('ZZZZZZZZZZZZZZZZ > cursorIndexXXX: ', cursorIndexXXX)
 
 	return cursorIndexXXX;
-
-	//  return cursorIndex >= 0
-	//  	? cursorIndex === results.length - 1
-	//  		? []
-	//  		: results.slice(
-	//  				cursorIndex + 1,
-	//  				Math.min(results.length, cursorIndex + 1 + pageSize),
-	//  			)
-	//  	: results.slice(0, pageSize);
 };

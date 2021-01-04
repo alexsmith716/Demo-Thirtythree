@@ -1,5 +1,6 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 
+//  REST API
 const baseUrl = 'https://www.googleapis.com/books';
 
 export class GoogleBooks extends RESTDataSource {
@@ -8,6 +9,8 @@ export class GoogleBooks extends RESTDataSource {
 		this.baseURL = `${baseUrl}/v1/`
 	}
 
+	//  reflect how "googleapis.com/books" schema is used in UI (shaping schema fields)
+	//  can also be accomplished in resolver
 	bookReducer(book) {
 		return {
 			id: book.id,
@@ -22,6 +25,9 @@ export class GoogleBooks extends RESTDataSource {
 		};
 	}
 
+	// https://www.googleapis.com/books/v1/volumes?q=gmat&startIndex=0&orderBy=newest&projection=lite&maxResults=40
+
+	//  REST API endpoint search for all books
 	async getBooks(searchString, orderBy) {
 		//const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=${startIndex}&orderBy=${orderBy}&projection=lite&maxResults=${maxResults}`;
 		const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=0&orderBy=${orderBy}&projection=lite&maxResults=40`;

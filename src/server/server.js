@@ -12,10 +12,10 @@ export function startServer() {
 
 	app.use((req, res, next) => {
 		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQUEST IN <<<<<<<<<<<<<<<<<<<<<<<`);
-		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.method +++++++++++++++: ${req.method}`);
-		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.url ++++++++++++++++++: ${req.url}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.method ++++++++++++++++: ${req.method}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.url +++++++++++++++++++: ${req.url}`);
 		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.path ++++++++++++++++++: ${req.path}`);
-		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.originalUrl ++++: ${req.originalUrl}`);
+		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQ.originalUrl +++++++++++: ${req.originalUrl}`);
 		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQUEST OUT <<<<<<<<<<<<<<<<<<<<<<<`);
 		next();
 	});

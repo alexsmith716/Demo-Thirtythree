@@ -1,20 +1,23 @@
 import gql from 'graphql-tag';
 
+//  Schema-First Developement
+//  build the schema on how the GraphQL API will be used by the front-end
+//  ============================================
 export const typeDefs = gql`
 	type Query {
 		hello: String
 
 		character(id: ID): Character
 
-		search(
+		googleBooksList(
 			pageSize: Int,
 			after: String,
 			searchString: String!
 			orderBy: String!
-		): SearchResult
+		): GoogleBooksSearchResult
 	}
 
-	type SearchResult {
+	type GoogleBooksSearchResult {
 		cursor: String!
 		hasMore: Boolean!
 		books: [Book]!

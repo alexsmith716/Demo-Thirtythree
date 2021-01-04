@@ -15,7 +15,7 @@ export const resolvers = {
 			dataSources.rickAndMortyAPICharacter.character({ id })
 		),
 
-		search: async (obj, { pageSize = 2, after, searchString, orderBy }, { dataSources }) => {
+		googleBooksList: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
 			// dataSources.googleBooks.getBooks(searchString, startIndex, orderBy, maxResults)
 
 			console.log('????????????? > after: ', after)
@@ -23,13 +23,14 @@ export const resolvers = {
 			console.log('????????????? > orderBy: ', orderBy)
 			const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
 
-			const books = paginateResults({
-				after,
-				pageSize,
-				results: allGoogleBooks,
-			});
+			// destructured argument -destructure an object into individual variables ({cursor: after})
+			const books = paginateResults({ after, pageSize, results: allGoogleBooks });
 
 			console.log('?????????????XXXXXXXXXXX@@@@@@@@@@@@@ > books: ', books)
+
+			const c = books.length ? books[books.length - 1].cursor : null;
+
+			console.log('?????????????XXXXXXXXXXX@@@@@@@@@@@@@ > cursor?????: ', c)
 
 			return {
 				books,
