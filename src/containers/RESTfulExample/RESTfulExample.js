@@ -8,36 +8,35 @@ import {
 import { Button } from '../../components/Button';
 import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
-import { GET_GOOGLE_BOOKS_REST } from '../../graphql/queries/queries.js';
+import { GET_GOOGLE_BOOKS } from '../../graphql/queries/queries.js';
 
 const RESTfulExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
 	const [googleBookSearch, setGoogleBookSearch] = useState('');
-	const [googleBookSearchCURSOR, setGoogleBookSearchCURSOR] = useState('');
 
 	const client = useApolloClient();
 
 	//  network-only
 	//  cache-and-network
 	const [getGoogleBooks, { loading, error, data, refetch, fetchMore, networkStatus }] = useLazyQuery(
-		GET_GOOGLE_BOOKS_REST,
+		GET_GOOGLE_BOOKS,
 		{
 			variables: {
-				// search: `${googleBookSearch}`,
-				search: '',
+				// searchString: `${googleBookSearch}`,
+				searchString: '',
 				orderBy: 'newest',
 			},
-			//	fetchPolicy: 'cache-and-network',
-			//	pollInterval: 500,
+			//  fetchPolicy: 'cache-and-network',
+			//  pollInterval: 500,
 			notifyOnNetworkStatusChange: true,
 		}
 	);
 
 	useEffect(() => {
 			if (data) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.search.cursor: ', data.search.cursor);
-				setGoogleBookSearchCURSOR(data.search.cursor)
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.googleBooksList: ', data.googleBooksList);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > data.googleBooksList.cursor: ', data.googleBooksList.cursor);
 			}
 			if (googleBookSearch) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBookSearch: ', googleBookSearch);
@@ -86,7 +85,7 @@ const RESTfulExample = () => {
 									<h5>getGoogleBooks Data:</h5>
 								</div>
 								{/* ----------------------------------------------------------------------- */}
-								{data.search.books.map((book, index) => (
+								{data.googleBooksList.books.map((book, index) => (
 									<div key={index} className="mb-3 container-padding-border-radius-2">
 										<GoogleBooksBook book={ book } />
 									</div>
@@ -131,7 +130,7 @@ const RESTfulExample = () => {
 							type="button"
 							className="btn-success"
 							//onClick={() => setGoogleBookSearch('usmle')}
-							onClick={() => getGoogleBooks({ variables: { search: 'usmle' }, fetchPolicy: 'network-only'})}
+							onClick={() => getGoogleBooks({ variables: { searchString: 'usmle' }, fetchPolicy: 'network-only'})}
 						>
 							Search USMLE
 						</Button>
@@ -142,7 +141,7 @@ const RESTfulExample = () => {
 							type="button"
 							className="btn-success"
 							//onClick={() => setGoogleBookSearch('gmat')}
-							onClick={() => getGoogleBooks({ variables: { search: 'gmat' }, fetchPolicy: 'network-only'})}
+							onClick={() => getGoogleBooks({ variables: { searchString: 'gmat' }, fetchPolicy: 'network-only'})}
 						>
 							Search GMAT
 						</Button>
@@ -152,9 +151,10 @@ const RESTfulExample = () => {
 						<Button
 							type="button"
 							className="btn-success"
-							onClick={() => setGoogleBookSearch('lsat')}
+							//onClick={() => setGoogleBookSearch('lsat')}
+							onClick={() => getGoogleBooks({ variables: { searchString: 'lsat' }, fetchPolicy: 'network-only'})}
 						>
-							Search LSAT!
+							Search LSAT
 						</Button>
 					</div>
 
@@ -190,7 +190,7 @@ const RESTfulExample = () => {
 							onClick={ async () => {
 								await fetchMore({
 									variables: {
-										cursor: data.search.cursor,
+										after: data.googleBooksList.cursor,
 									},
 									// fetchPolicy: 'cache-and-network',
 								});

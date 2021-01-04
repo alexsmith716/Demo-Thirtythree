@@ -98,10 +98,10 @@ const render = async () => {
 			Query: {
 				fields: {
 					// --------------------------------------
-					// define field policy for "search"
+					// define field policy for "googleBooksList"
 					// define field policy to merge the results of paginated queries into a single list
-					// search: relayStylePagination(),
-					search: {
+					// googleBooksList: relayStylePagination(),
+					googleBooksList: {
 						keyArgs: false,
 						merge(existing, incoming) {
 							console.log('>>>> CLIENT > InMemoryCache > existing AAAAAAAA: ', existing);
