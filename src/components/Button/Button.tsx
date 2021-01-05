@@ -7,7 +7,7 @@ export type Props = {
 	children?: React.ReactNode;
 };
 
-export const Button: React.FC<Props> = ({ className = 'btn-primary', onClick, type, children }) => {
+export const Button: React.FC<Props> = ({ className = 'btn-primary btn-md', onClick, type, children }) => {
 	return (
 		<button className={`btn ${className}`} onClick={onClick} type={type}>
 			{children}

@@ -439,17 +439,33 @@ export const GlobalStyle = createGlobalStyle`
 	.btn {
 		display: inline-block;
 		font-weight: 400;
-		color: #212529;
 		text-align: center;
 		vertical-align: middle;
 		user-select: none;
 		background-color: transparent;
 		border: 1px solid transparent;
+		cursor: pointer;
+	}
+
+	.btn-tiny {
+		padding: 0.2rem 0.4rem;
+		font-size: .775rem;
+		line-height: 1.0;
+		border-radius: 0.2rem;
+	}
+
+	.btn-sm {
+		padding: 0.25rem 0.5rem;
+		font-size: .875rem;
+		line-height: 1.5;
+		border-radius: .2rem;
+	}
+
+	.btn-md {
 		padding: 0.375rem 0.75rem;
 		font-size: 1rem;
 		line-height: 1.5;
 		border-radius: 0.25rem;
-		cursor: pointer;
 	}
 
 	.btn-primary {
@@ -473,13 +489,19 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	.btn-warning {
-		color: #fff;
+		color: #030303;
 		background-color: #ffc107;
 	}
 
 	.btn-info {
 		color: #fff;
 		background-color: #0dcaf0;
+	}
+
+	.btn-light {
+		color: #030303;
+		background-color: #fcfcfc;
+		border-color: #dbdbdb;
 	}
 
 	// ========================================

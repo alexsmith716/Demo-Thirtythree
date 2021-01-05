@@ -108,7 +108,7 @@ const RESTfulExample = () => {
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-success"
+							className="btn-success btn-md"
 							onClick={() => setClientExtract(client.extract())}
 						>
 							View Apollo Cache
@@ -118,7 +118,7 @@ const RESTfulExample = () => {
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-success"
+							className="btn-success btn-md"
 							onClick={() => refetch()}
 						>
 							RefetchQueryResults
@@ -128,18 +128,18 @@ const RESTfulExample = () => {
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-success"
-							//onClick={() => setGoogleBookSearch('usmle')}
-							onClick={() => getGoogleBooks({ variables: { searchString: 'usmle' }, fetchPolicy: 'network-only'})}
+							className="btn-success btn-md"
+							//onClick={() => setGoogleBookSearch('mcat')}
+							onClick={() => getGoogleBooks({ variables: { searchString: 'mcat' }, fetchPolicy: 'network-only'})}
 						>
-							Search USMLE
+							Search MCAT
 						</Button>
 					</div>
 
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-success"
+							className="btn-success btn-md"
 							//onClick={() => setGoogleBookSearch('gmat')}
 							onClick={() => getGoogleBooks({ variables: { searchString: 'gmat' }, fetchPolicy: 'network-only'})}
 						>
@@ -150,7 +150,7 @@ const RESTfulExample = () => {
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-success"
+							className="btn-success btn-md"
 							//onClick={() => setGoogleBookSearch('lsat')}
 							onClick={() => getGoogleBooks({ variables: { searchString: 'lsat' }, fetchPolicy: 'network-only'})}
 						>
@@ -176,7 +176,7 @@ const RESTfulExample = () => {
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-success"
+							className="btn-success btn-md"
 							onClick={() => getGoogleBooks()}
 						>
 							Get Google Books
@@ -186,7 +186,7 @@ const RESTfulExample = () => {
 					<div className="mb-3">
 						<Button
 							type="button"
-							className="btn-primary"
+							className="btn-primary btn-md"
 							onClick={ async () => {
 								await fetchMore({
 									variables: {
