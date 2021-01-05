@@ -15,8 +15,8 @@ export const DeviceState: React.FC = () => {
 
 	return (
 		<div className="container">
-			<div className="flex-column-center mb-5">
-				<Styles.DeviceStateStyled className="flex-column-center">
+			<div className="flex-column align-items-center mb-5">
+				<Styles.DeviceStateStyled className="flex-column align-items-center">
 					<Styles.StoreStateOnline>{`'online' store state is ${online} !`}</Styles.StoreStateOnline>
 
 					<Styles.StoreStateUserAgent>{`device 'userAgent' store state is ${userAgent} !`}</Styles.StoreStateUserAgent>

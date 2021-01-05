@@ -28,8 +28,8 @@ export const InfoBar: React.FC = () => {
 
 	return (
 		<div className="container">
-			<Styles.InfoBarContainerBgColor className="flex-column-center mb-5">
-				<Styles.InfoBarContainer className="flex-column-center">
+			<Styles.InfoBarContainerBgColor className="flex-column align-items-center mb-5">
+				<Styles.InfoBarContainer className="flex-column align-items-center">
 					{/* (>>>>>>>>>>>>>>>>>>>>>> LOADING >>>>>>>>>>>>>>>>>>>>>>>>) */}
 					{loading && <Loading text="Loading" />}
 
