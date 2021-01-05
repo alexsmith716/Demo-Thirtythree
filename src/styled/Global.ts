@@ -159,17 +159,29 @@ export const GlobalStyle = createGlobalStyle`
 	}
 
 	// ========================================
+	// flex-flow: short-hand for the flex-direction and flex-wrap properties
+	// ========================================
 
-	.flex-column-center {
+	.display-flex {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
 	}
 
-	.flex-row-center {
+	.flex-wrap {
+		flex-wrap: wrap;
+	}
+	
+	.flex-nowrap {
+		flex-wrap: nowrap;
+	}
+
+	.flex-column {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.flex-row {
 		display: flex;
 		flex-direction: row;
-		align-items: center;
 	}
 
 	.container-padding-border-radius-1 {
@@ -182,6 +194,90 @@ export const GlobalStyle = createGlobalStyle`
 		padding: 10px 10px;
 		border: 2px solid #b0c4de;
 		border-radius: 3px;
+	}
+
+	// ========================================
+
+	.align-items-start {
+		align-items: flex-start;
+	}
+
+	.align-items-center {
+		align-items: center;
+	}
+
+	.align-items-end {
+		align-items: flex-end;
+	}
+
+	.align-items-stretch {
+		align-items: stretch;
+	}
+
+	.align-items-baseline {
+		align-items: baseline;
+	}
+
+	// ---------------------------
+
+	.align-self-start {
+		align-self: flex-start;
+	}
+
+	.align-self-center {
+		align-self: center;
+	}
+
+	.align-self-end {
+		align-self: flex-end;
+	}
+
+	// ---------------------------
+
+	.justify-content-start {
+		justify-content: flex-start;
+	}
+
+	.justify-content-end {
+		justify-content: flex-end;
+	}
+
+	.justify-content-center {
+		justify-content: center;
+	}
+
+	.justify-content-space-between {
+		justify-content: space-between;
+	}
+
+	.justify-content-space-around {
+		justify-content: space-around;
+	}
+
+	// ---------------------------
+
+	.align-content-start {
+		align-content: flex-start;
+	}
+
+	.align-content-end {
+		align-content: flex-end;
+	}
+
+	.align-content-center {
+		align-content: center;
+	}
+
+	.align-content-space-between {
+		align-content: space-between;
+	}
+
+	.align-content-space-around {
+		align-content: space-around;
+	}
+
+	.align-content-stretch {
+		align-content: stretch;
 	}
 
 	// ========================================
@@ -202,6 +298,8 @@ export const GlobalStyle = createGlobalStyle`
 	.rounded {
 		border-radius: 0.25rem;
 	}
+
+	// ========================================
 
 	.card {
 		position: relative;

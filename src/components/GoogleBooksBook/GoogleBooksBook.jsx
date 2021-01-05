@@ -30,23 +30,41 @@ export const GoogleBooksBook = ({ book }) => {
 	return (
 		<div className="row-flex">
 			<div className="col-two">
-				{ book.smallThumbnail
-					?
-					<img src={upgradeThumbnailURL(book.smallThumbnail)} alt={book.title}/>
-					:
-					<div>Image not found</div>
-				}
+
+				<div className="display-flex">
+
+					<div>
+						{ book.smallThumbnail
+							?
+							<>
+								<div>
+									<img src={upgradeThumbnailURL(book.smallThumbnail)} alt={book.title}/>
+								</div>
+								<div className="text-center">
+									<Button className="btn-light btn-tiny" onClick={() => false}>
+										Add to Favorites
+									</Button>
+								</div>
+							</>
+							:
+							<div><i>Image not found</i></div>
+						}
+					</div>
+
+				</div>
+
 			</div>
 			<div className="col-ten">
-				<h3>{book.title ? book.title : "n\/a"}</h3>
 
-				<div><b>Authors:&nbsp;</b>{book.authors ? book.authors.join(', ') : "n\/a"}</div>
+				<div>{book.title ? <h3>{book.title}</h3> : <i>Title not found</i>}</div>
 
-				<div><b>Publisher:&nbsp;</b>{book.publisher ? book.publisher : "n\/a"}</div>
+				<div><b>Authors:&nbsp;</b>{book.authors ? book.authors.join(', ') : <i>n/a</i>}</div>
 
-				<div><b>Published Date:&nbsp;</b>{book.publishedDate ? book.publishedDate : "n\/a"}</div>
+				<div><b>Publisher:&nbsp;</b>{book.publisher ? book.publisher : <i>n/a</i>}</div>
 
-				<div><b>ID:&nbsp;</b>{book.id ? book.id : "n\/a"}</div>
+				<div><b>Published Date:&nbsp;</b>{book.publishedDate ? book.publishedDate : <i>n/a</i>}</div>
+
+				<div><b>ID:&nbsp;</b>{book.id ? book.id : <i>n/a</i>}</div>
 
 				{book.description &&
 					<>
