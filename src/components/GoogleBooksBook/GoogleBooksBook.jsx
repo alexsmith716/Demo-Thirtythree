@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from '../Button';
 
 export const GoogleBooksBook = ({ book }) => {
 
@@ -47,17 +48,19 @@ export const GoogleBooksBook = ({ book }) => {
 
 				<div><b>ID:&nbsp;</b>{book.id ? book.id : "n\/a"}</div>
 
-				{/* {book.description &&
-					<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
-						{book.description}
-					</div>
-					<button onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)} type="button">
-						{ toggleBookDescriptionView
-							? "<< Less"
-							: "More >>"
-						}
-					</button>
-				} */}
+				{book.description &&
+					<>
+						<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
+							{book.description}
+						</div>
+						<Button className="btn-light btn-tiny" onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)}>
+							{ toggleBookDescriptionView
+								? "<< Less"
+								: "More >>"
+							}
+						</Button>
+					</>
+				}
 			</div>
 		</div>
 	);
