@@ -36,24 +36,21 @@ export const GoogleBooksBook = ({ book }) => {
 					<div>
 						{ book.smallThumbnail
 							?
-							<>
-								<div>
-									<img src={upgradeThumbnailURL(book.smallThumbnail)} alt={book.title}/>
-								</div>
-								<div className="text-center">
-									<Button className="btn-light btn-tiny" onClick={() => false}>
-										Add to Favorites
-									</Button>
-								</div>
-							</>
+							<div>
+								<img src={upgradeThumbnailURL(book.smallThumbnail)} alt={book.title}/>
+							</div>
 							:
 							<div><i>Image not found</i></div>
 						}
+						<div className="text-center">
+							<Button className="btn-light btn-tiny" onClick={() => false}>
+								Add to Favorites
+							</Button>
+						</div>
 					</div>
-
 				</div>
-
 			</div>
+
 			<div className="col-ten">
 
 				<div>{book.title ? <h3>{book.title}</h3> : <i>Title not found</i>}</div>

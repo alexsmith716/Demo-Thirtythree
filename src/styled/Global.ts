@@ -162,6 +162,12 @@ export const GlobalStyle = createGlobalStyle`
 	// flex-flow: short-hand for the flex-direction and flex-wrap properties
 	// ========================================
 
+	.sub-container {
+		width: 100%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
 	.display-flex {
 		display: flex;
 	}
@@ -555,7 +561,7 @@ export const GlobalStyle = createGlobalStyle`
 	.btn-sm {
 		padding: 0.25rem 0.5rem;
 		font-size: .875rem;
-		line-height: 1.5;
+		line-height: 1.25;
 		border-radius: .2rem;
 	}
 
