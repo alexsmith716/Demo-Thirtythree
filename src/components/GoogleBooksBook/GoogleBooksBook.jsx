@@ -1,35 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import { 
+	useMutation,
+} from '@apollo/client';
 import { Button } from '../Button';
 
-import { ADD_GOOGLE_BOOK_TO_FAVORITES } from '../../graphql/mutations/mutations.js';
+import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
+
 
 export const GoogleBooksBook = ({ book }) => {
 
 	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > book.favorite: ', book.favorite);
-
-	//  useEffect(() => {
-	//    console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentDidMount');
-
-	//    if (toggleBookDescriptionView) {
-	//      console.log(
-	//        '>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentDidUpdate > toggleBookDescriptionView: ',
-	//        toggleBookDescriptionView,
-	//      );
-	//    }
-
-	//    return () => {
-	//      console.log(
-	//        '>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentWillUnmount > cleanup phase',
-	//      );
-	//    };
-	//  }, [toggleBookDescriptionView]);
+	const [googleBookModifyFavorite, { error: googleBookModifyFavoriteERROR, data: googleBookModifyFavoriteDATA }] = useMutation(
+		GOOGLE_BOOK_MODIFY_FAVORITE,
+	);
 
 	const upgradeThumbnailURL = (url) => {
 		const upgrade = url.replace(/^http:\/\//i, 'https://');
 		return upgrade;
 	};
+
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > book.favorite: ', book.favorite);
+
+	useEffect(() => {
+
+		if (googleBookModifyFavoriteDATA) {
+			console.log(
+				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > googleBookModifyFavoriteDATA: ',
+				googleBookModifyFavoriteDATA,
+			);
+		}
+
+		return () => {
+			console.log(
+				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentWillUnmount > cleanup phase',
+			);
+		};
+	}, [googleBookModifyFavoriteDATA]);
 
 	return (
 		<div className="row-flex">
@@ -47,8 +54,11 @@ export const GoogleBooksBook = ({ book }) => {
 							<div><i>Image not found</i></div>
 						}
 						<div className="text-center">
-							<Button className="btn-light btn-tiny" onClick={() => false}>
-								Add to Favorites
+							<Button
+								className="btn-light btn-tiny"
+								onClick={() => googleBookModifyFavorite({ variables: { googleBookId: book.id, favorite: true }})}
+							>
+								{book.favorite && book.favorite ? "Remove from" : "Add to"} Favorites
 							</Button>
 						</div>
 					</div>
@@ -66,6 +76,8 @@ export const GoogleBooksBook = ({ book }) => {
 				<div><b>Published Date:&nbsp;</b>{book.publishedDate ? book.publishedDate : <i>n/a</i>}</div>
 
 				<div><b>ID:&nbsp;</b>{book.id ? book.id : <i>n/a</i>}</div>
+
+				<div><b>Favorite:&nbsp;</b>{book.favorite && book.favorite ? <i>true</i> : <i>false</i>}</div>
 
 				{book.description &&
 					<>
