@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
 	useLazyQuery,
-	useMutation,
 	useApolloClient,
 	NetworkStatus,
 } from '@apollo/client';
@@ -10,7 +9,6 @@ import { Button } from '../../components/Button';
 import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
 import { GET_GOOGLE_BOOKS } from '../../graphql/queries/queries.js';
-import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 
 const RESTfulExample = () => {
 
@@ -33,10 +31,6 @@ const RESTfulExample = () => {
 			//  pollInterval: 500,
 			notifyOnNetworkStatusChange: true,
 		}
-	);
-
-	const [googleBookModifyFavorite, { error: googleBookModifyFavoriteERROR, data: googleBookModifyFavoriteDATA }] = useMutation(
-		GOOGLE_BOOK_MODIFY_FAVORITE,
 	);
 
 	useEffect(() => {
@@ -128,16 +122,6 @@ const RESTfulExample = () => {
 							onClick={() => refetch()}
 						>
 							RefetchQueryResults
-						</Button>
-					</div>
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => googleBookModifyFavorite({ variables: { googleBookId: 'mr4DzgEACAAJ', favorite: true }})}
-						>
-							MUTATION mr4DzgEACAAJ
 						</Button>
 					</div>
 
