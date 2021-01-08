@@ -20,6 +20,7 @@ export const GET_GOOGLE_BOOKS = gql`
 				publishedDate
 				description
 				smallThumbnail
+        favorite
 			}
 		}
 	}

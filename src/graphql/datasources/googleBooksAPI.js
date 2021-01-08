@@ -22,20 +22,30 @@ export class GoogleBooks extends RESTDataSource {
 			description: book.volumeInfo.description,
 			previewLink: book.volumeInfo.previewLink,
 			smallThumbnail: book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail,
+			favorite: null,
 		};
 	}
 
 	// https://www.googleapis.com/books/v1/volumes?q=gmat&startIndex=0&orderBy=newest&projection=lite&maxResults=40
+	// https://www.googleapis.com/books/v1/volumes/XDTlxgEACAAJ
 
 	//  REST API endpoint search for all books
 	async getBooks(searchString, orderBy) {
 		//const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=${startIndex}&orderBy=${orderBy}&projection=lite&maxResults=${maxResults}`;
 		const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=0&orderBy=${orderBy}&projection=lite&maxResults=40`;
-		console.log('RRRRRRRRRRRRRRRRRRRRRRR > route: ', route);
+		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > route: ', route);
 		const response = await this.get(route);
-		console.log('RRRRRRRRRRRRRRRRRRRRRRR > response: ', response);
+		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > response: ', response);
 		const reducedResponse = Array.isArray(response.items) ? response.items.map(book => this.bookReducer(book)) : [];
-		console.log('RRRRRRRRRRRRRRRRRRRRRRR > reducedResponse: ', reducedResponse);
+		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > reducedResponse: ', reducedResponse);
+		return reducedResponse;
+	}
+
+	async getBook({ googleBookId }) {
+		const route = `volumes/${googleBookId}`;
+		const response = await this.get(route);
+		const reducedResponse = this.bookReducer(response);
+		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > reducedResponse: ', reducedResponse);
 		return reducedResponse;
 	}
 };

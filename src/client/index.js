@@ -92,6 +92,8 @@ const render = async () => {
 	]);
 
 	// https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx
+	// https://github.com/apollographql/apollo-client/docs/source/local-state/reactive-variables.mdx
+	// https://github.com/apollographql/apollo-client/docs/source/local-state/managing-state-with-field-policies
 	const clientCache = new InMemoryCache({
 		typePolicies: {
 			// =====================================================
