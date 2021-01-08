@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
 
+import { ADD_GOOGLE_BOOK_TO_FAVORITES } from '../../graphql/mutations/mutations.js';
+
 export const GoogleBooksBook = ({ book }) => {
 
 	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);
+
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > book.favorite: ', book.favorite);
 
 	//  useEffect(() => {
 	//    console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentDidMount');

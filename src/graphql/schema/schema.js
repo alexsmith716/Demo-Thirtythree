@@ -15,6 +15,21 @@ export const typeDefs = gql`
 			searchString: String!
 			orderBy: String!
 		): GoogleBooksSearchResult
+
+		googleBook(id: ID!): Book
+	}
+
+	type Mutation {
+		googleBookModifyFavorite(
+			googleBookId: ID!
+			favorite: Boolean
+		): GoogleBooksUpdateResponse!
+	}
+
+	type GoogleBooksUpdateResponse {
+		success: Boolean!
+		message: String
+		books: [Book]
 	}
 
 	type GoogleBooksSearchResult {
@@ -24,7 +39,7 @@ export const typeDefs = gql`
 	}
 
 	type Book {
-		id: ID
+		id: ID!
 		title: String
 		subtitle: String
 		authors: [String]
@@ -33,6 +48,7 @@ export const typeDefs = gql`
 		description: String
 		previewLink: String
 		smallThumbnail: String
+		favorite: Boolean
 	}
 
 	type Character {
