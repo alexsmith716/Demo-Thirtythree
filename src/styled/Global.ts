@@ -730,4 +730,13 @@ export const GlobalStyle = createGlobalStyle`
 	.bg-color-cadetblue {
 		background-color: #8ee5ee;
 	}
+
+	// ========================================
+	// below and more will soon be styled-components
+	// ========================================
+	.justifyContentFlexStart {
+		@media screen and (max-width: 992px) {
+			justify-content: flex-start;
+		}
+	}
 `;
