@@ -22,7 +22,7 @@ export class GoogleBooks extends RESTDataSource {
 			description: book.volumeInfo.description,
 			previewLink: book.volumeInfo.previewLink,
 			smallThumbnail: book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail,
-			favorite: null,
+			favorite: false,
 		};
 	}
 

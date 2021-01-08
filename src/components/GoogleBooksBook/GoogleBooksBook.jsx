@@ -6,7 +6,6 @@ import { Button } from '../Button';
 
 import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 
-
 export const GoogleBooksBook = ({ book }) => {
 
 	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);
@@ -20,31 +19,22 @@ export const GoogleBooksBook = ({ book }) => {
 		return upgrade;
 	};
 
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > book.favorite: ', book.favorite);
-
 	useEffect(() => {
 
 		if (googleBookModifyFavoriteDATA) {
-			console.log(
-				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > googleBookModifyFavoriteDATA: ',
-				googleBookModifyFavoriteDATA,
-			);
+			// console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > googleBookModifyFavoriteDATA: ', googleBookModifyFavoriteDATA);
 		}
 
-		return () => {
-			console.log(
-				'>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > componentWillUnmount > cleanup phase',
-			);
-		};
-	}, [googleBookModifyFavoriteDATA]);
+	},[googleBookModifyFavoriteDATA]);
 
 	return (
 		<div className="row-flex">
+
 			<div className="col-two">
 
-				<div className="display-flex">
+				<div className="display-flex justify-content-center justifyContentFlexStart">
 
-					<div>
+					<div className="text-center">
 						{ book.smallThumbnail
 							?
 							<div>
@@ -53,10 +43,10 @@ export const GoogleBooksBook = ({ book }) => {
 							:
 							<div><i>Image not found</i></div>
 						}
-						<div className="text-center">
+						<div>
 							<Button
 								className="btn-light btn-tiny"
-								onClick={() => googleBookModifyFavorite({ variables: { googleBookId: book.id, favorite: true }})}
+								onClick={() => googleBookModifyFavorite({ variables: { googleBookId: book.id, favorite: book.favorite && book.favorite ? false : true }})}
 							>
 								{book.favorite && book.favorite ? "Remove from" : "Add to"} Favorites
 							</Button>
