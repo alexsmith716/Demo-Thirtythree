@@ -17,17 +17,17 @@ export const resolvers = {
 
 		googleBooksList: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
 
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > after: ', after);
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > searchString: ', searchString);
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > orderBy: ', orderBy);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > after: ', after);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > searchString: ', searchString);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > orderBy: ', orderBy);
 			const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
 
 			// destructured argument -destructure an object into individual variables ({cursor: after})
 			const books = paginateResults({ after, pageSize, results: allGoogleBooks });
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > books: ', books);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > books: ', books);
 
 			const c = books.length ? books[books.length - 1].cursor : null;
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > cursor: ', c);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > cursor: ', c);
 
 			return {
 				books,
@@ -46,7 +46,7 @@ export const resolvers = {
 		googleBookModifyFavorite: async (obj, { googleBookId, favorite }, { dataSources }) => {
 			const book = await dataSources.googleBooks.getBook({ googleBookId });
 			book.favorite = favorite;
-			console.log('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > book: ', book);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > book: ', book);
 			return {
 				success: true,
 				message: 'added to favorites',

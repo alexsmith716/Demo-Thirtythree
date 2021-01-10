@@ -106,8 +106,8 @@ const render = async () => {
 					googleBooksList: {
 						keyArgs: false,
 						merge(existing, incoming) {
-							console.log('>>>> CLIENT > InMemoryCache > existing AAAAAAAA: ', existing);
-							console.log('>>>> CLIENT > InMemoryCache > incoming BBBBBBBB: ',  incoming);
+							//console.log('>>>> CLIENT > InMemoryCache > existing AAAAAAAA: ', existing);
+							//console.log('>>>> CLIENT > InMemoryCache > incoming BBBBBBBB: ',  incoming);
 							let books = [];
 							if (existing && existing.books) {
 								books = books.concat(existing.books);
@@ -118,9 +118,9 @@ const render = async () => {
 							const q = {...incoming}
 							const w = {books}
 							const x = {...incoming, books}
-							console.log('>>>> CLIENT > InMemoryCache > incoming CCCCCCCCCCC: ',  q);
-							console.log('>>>> CLIENT > InMemoryCache > books DDDDDDDDDDD: ',  w);
-							console.log('>>>> CLIENT > InMemoryCache > incoming EEEEEEEE: ', x);
+							//console.log('>>>> CLIENT > InMemoryCache > incoming CCCCCCCCCCC: ',  q);
+							//console.log('>>>> CLIENT > InMemoryCache > books DDDDDDDDDDD: ',  w);
+							//console.log('>>>> CLIENT > InMemoryCache > incoming EEEEEEEE: ', x);
 							return {
 								...incoming,
 								books,
