@@ -1,15 +1,16 @@
 import React from 'react';
 
 export type Props = {
-	className?: string;
+	classNameX?: string;
 	onClick?: () => void;
 	type?: 'button' | 'submit' | 'reset' | undefined;
 	children?: React.ReactNode;
 };
 
-export const Button: React.FC<Props> = ({ className = 'btn-primary btn-md', onClick, type, children }) => {
+// why does "classNameX" work and "className" NOT work???????
+export const Button: React.FC<Props> = ({ classNameX='btn-primary btn-md', onClick=() => false, type='button', children='button' }) => {
 	return (
-		<button className={`btn ${className}`} onClick={onClick} type={type}>
+		<button className={`btn ${classNameX}`} onClick={onClick} type={type}>
 			{children}
 		</button>
 	);

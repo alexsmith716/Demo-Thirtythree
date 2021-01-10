@@ -21,9 +21,10 @@ const Home = () => {
 
 					<Styles.MastheadBlurbElipsis>... join the conversation.</Styles.MastheadBlurbElipsis>
 
-					<Styles.MastheadButton type="button" className="btn-primary btn-md" onClick={() => false}>
+					<Styles.MastheadButton type="button" classNameX="btn-danger btn-md" onClick={() => false}>
 						Sign Up Now »
 					</Styles.MastheadButton>
+
 				</div>
 			</Styles.Masthead>
 

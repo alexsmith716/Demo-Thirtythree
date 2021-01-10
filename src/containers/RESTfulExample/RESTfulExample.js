@@ -10,6 +10,7 @@ import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
 import { GET_GOOGLE_BOOKS } from '../../graphql/queries/queries.js';
 
+
 const RESTfulExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
