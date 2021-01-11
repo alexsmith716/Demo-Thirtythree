@@ -487,11 +487,8 @@ const About = () => {
 						type="button"
 						className={`btn-${toggleCustomerState ? 'success' : 'warning'}`}
 						onClick={() => setToggleCustomerState(!toggleCustomerState)}
-					>
-						{toggleCustomerState
-							? "They're All Here!"
-							: "Now they're Gone! But just make sure they always keep coming back!"}
-					</Button>
+						buttonText={toggleCustomerState ? "They're All Here!" : "Now they're Gone! But just make sure they always keep coming back!"}
+					/>
 				</div>
 
 				{toggleCustomerState && (

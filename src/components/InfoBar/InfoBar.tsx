@@ -56,9 +56,11 @@ export const InfoBar: React.FC = () => {
 							<div>{data && data.result.timeElapsed}</div>
 
 							<div className="mt-2">
-								<Button classNameX="btn-primary btn-md" onClick={doLoadInfo}>
-									Reload from server
-								</Button>
+								<Button
+									className="btn-primary btn-md"
+									onClick={doLoadInfo}
+									buttonText="Reload from server"
+								/>
 							</div>
 						</Styles.InfoBarContainerStyled>
 					)}

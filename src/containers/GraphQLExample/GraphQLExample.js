@@ -227,9 +227,8 @@ const GraphQLExample = () => {
 							type="button"
 							className="btn-success"
 							onClick={() => setClientExtract(client.extract())}
-						>
-							View Apollo Cache
-						</Button>
+							buttonText="View Apollo Cache"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -237,9 +236,8 @@ const GraphQLExample = () => {
 							type="button"
 							className="btn-success"
 							onClick={() => refetch()}
-						>
-							refetch
-						</Button>
+							buttonText="refetch"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -250,9 +248,8 @@ const GraphQLExample = () => {
 								query: GET_REVIEWS,
 								data: queryData
 							})}
-						>
-							writeQuery
-						</Button>
+							buttonText="writeQuery"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -260,9 +257,8 @@ const GraphQLExample = () => {
 							type="button"
 							className="btn-success"
 							onClick={() => addReview()}
-						>
-							useMutation
-						</Button>
+							buttonText="useMutation"
+						/>
 					</div>
 				</div>
 			</div>
