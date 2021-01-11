@@ -21,10 +21,13 @@ const Home = () => {
 
 					<Styles.MastheadBlurbElipsis>... join the conversation.</Styles.MastheadBlurbElipsis>
 
-					<Styles.MastheadButton type="button" classNameX="btn-danger btn-md" onClick={() => false}>
-						Sign Up Now »
-					</Styles.MastheadButton>
-
+					<Styles.MastheadButton
+						className="btn-success"
+						onClick={() => false}
+						type="button"
+						buttonText="Sign Up Now 1 »"
+					/>
+	
 				</div>
 			</Styles.Masthead>
 

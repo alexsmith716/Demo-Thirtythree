@@ -111,9 +111,8 @@ const RESTfulExample = () => {
 							type="button"
 							className="btn-success btn-md"
 							onClick={() => setClientExtract(client.extract())}
-						>
-							View Apollo Cache
-						</Button>
+							buttonText="View Apollo Cache"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -121,9 +120,8 @@ const RESTfulExample = () => {
 							type="button"
 							className="btn-success btn-md"
 							onClick={() => refetch()}
-						>
-							RefetchQueryResults
-						</Button>
+							buttonText="RefetchQueryResults"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -132,9 +130,8 @@ const RESTfulExample = () => {
 							className="btn-success btn-md"
 							//onClick={() => setGoogleBookSearch('mcat')}
 							onClick={() => getGoogleBooks({ variables: { searchString: 'kaplan test prep' }, fetchPolicy: 'network-only'})}
-						>
-							Search Kaplan
-						</Button>
+							buttonText="Search Kaplan"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -143,9 +140,8 @@ const RESTfulExample = () => {
 							className="btn-success btn-md"
 							//onClick={() => setGoogleBookSearch('gmat')}
 							onClick={() => getGoogleBooks({ variables: { searchString: 'gmat' }, fetchPolicy: 'network-only'})}
-						>
-							Search GMAT
-						</Button>
+							buttonText="Search GMAT"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -154,9 +150,8 @@ const RESTfulExample = () => {
 							className="btn-success btn-md"
 							//onClick={() => setGoogleBookSearch('lsat')}
 							onClick={() => getGoogleBooks({ variables: { searchString: 'lsat' }, fetchPolicy: 'network-only'})}
-						>
-							Search LSAT
-						</Button>
+							buttonText="Search LSAT"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -179,9 +174,8 @@ const RESTfulExample = () => {
 							type="button"
 							className="btn-success btn-md"
 							onClick={() => getGoogleBooks()}
-						>
-							Get Google Books
-						</Button>
+							buttonText="Get Google Books"
+						/>
 					</div>
 
 					<div className="mb-3">
@@ -196,9 +190,8 @@ const RESTfulExample = () => {
 									// fetchPolicy: 'cache-and-network',
 								});
 							}}
-						>
-							fetchMore Google Books
-						</Button>
+							buttonText="fetchMore Google Books"
+						/>
 					</div>
 
 				</div>

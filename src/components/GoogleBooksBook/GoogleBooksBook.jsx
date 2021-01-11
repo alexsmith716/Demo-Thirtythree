@@ -48,9 +48,8 @@ export const GoogleBooksBook = ({ book }) => {
 							<Button
 								className="btn-light btn-tiny"
 								onClick={() => googleBookModifyFavorite({ variables: { googleBookId: book.id, favorite: book.favorite && book.favorite ? false : true }})}
-							>
-								{book.favorite && book.favorite ? "Remove from" : "Add to"} Favorites
-							</Button>
+								buttonText={`${book.favorite && book.favorite ? "Remove from" : "Add to"} Favorites`}
+							/>
 						</div>
 					</div>
 				</Styles.Thumbnail>
@@ -75,12 +74,11 @@ export const GoogleBooksBook = ({ book }) => {
 						<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
 							{book.description}
 						</div>
-						<Button className="btn-light btn-tiny" onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)}>
-							{ toggleBookDescriptionView
-								? "<< Less"
-								: "More >>"
-							}
-						</Button>
+						<Button
+							className="btn-light btn-tiny"
+							onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)}
+							buttonText={toggleBookDescriptionView ? "<< Less" : "More >>"}
+						/>
 					</>
 				}
 			</div>
