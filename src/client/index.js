@@ -71,7 +71,7 @@ const render = async () => {
 	// =====================================================
 
 	const httpLink = createHttpLink({
-		uri: 'http://localhost:8080/graphql/',
+		uri: 'https://rickandmortyapi.com/graphql/',
 	});
 
 	const errorLink = onError(({ graphQLErrors, networkError }) => {

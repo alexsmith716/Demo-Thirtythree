@@ -550,13 +550,13 @@ export const GlobalStyle = createGlobalStyle`
 		border: 1px solid transparent;
 		cursor: pointer;
 
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		border-radius: 0.25rem;
 
-    color: #fff;
-    background-color: #0d6efd;
+		color: #fff;
+		background-color: #0d6efd;
 	}
 
 	.btn-tiny {

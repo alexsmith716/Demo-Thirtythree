@@ -2,7 +2,7 @@ query GetCharacter {
 	character @client
 }
 
-query GetRickAndMortyCharacter($id: ID) {
+query GetRickAndMortyCharacter($id: ID!) {
 	character(id: $id) {
 		id
 		name
@@ -28,7 +28,7 @@ query GetRickAndMortyCharacter($id: ID) {
 	}
 }
 
-query GetRickAndMortyCharacters($id: ID) {
+query GetRickAndMortyCharacters($id: ID!) {
 	characters(page: 2, filter: { name: "rick" }) {
 		info {
 			count
