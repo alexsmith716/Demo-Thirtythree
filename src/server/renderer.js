@@ -21,7 +21,7 @@ import { getUserAgent, isBot } from '../utils/device';
 import Html from '../helpers/Html';
 import { apiClient } from '../helpers/apiClient';
 // -------------------------------------------------------------------
-//import { GetReviews, GetADroid, GetCharacter } from '../graphql/queries/queries.graphql';
+import { GetRickAndMortyCharacter, GetRickAndMortyCharacterIdOne } from '../graphql/queries/queries.graphql';
 import * as graphqlQueries from '../graphql/queries/queries.js';
 //import { resolvers } from '../graphql/resolvers/resolvers.js';
 // -------------------------------------------------------------------
@@ -86,7 +86,7 @@ export async function get(req, res) {
 	//            http://localhost:4000/graphql
 
 	const httpLink = createHttpLink({
-		uri: 'http://localhost:8080/graphql/',
+		uri: 'https://rickandmortyapi.com/graphql/',
 		// fetch: customFetch,
 		fetch: fetch,
 	});
@@ -158,70 +158,17 @@ export async function get(req, res) {
 
 		// ==========================================================================
 
-		//  https://www.apollographql.com/docs/tutorial/local-state/
-		//  https://www.apollographql.com/docs/react/data/local-state/
-		//  https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/
+		const characterIdOne = await clientApollo.query({ query: GetRickAndMortyCharacterIdOne });
+		console.log('>>>> RENDERER > GetRickAndMortyCharacterIdOne: ', characterIdOne);
 
-		//  implement a client side GraphQL:
-		//    1) apollo-link-rest
-		//    2) local resolvers
+		const characterTwo = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 2 } });
+		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
 
-		//  Tools to manage local state:
-		//    How to store and query local data in the Apollo cache:
-		//      https://www.apollographql.com/docs/tutorial/local-state/
+		const characterEight = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_BASIC, variables: { id: 8 }});
+		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_BASIC: ', characterEight);
 
-		//  "local resolvers":
-		//    The same mechanisms that exist in a GraphQL server (schema paired with resolvers) are used for managing 'InMemoryCache'
-		//    result closely resembles a server-side GraphQL solution
-		//  resolver: to implement the local state update as a GraphQL mutation
-		//  return the same type of data specified in the schema or a promise for that data
-
-		//  write a client schema and resolvers for your local data
-		//  query (client schema/local data) with @client directive
-
-		//  -----------------------
-		//  TODO:
-		//  write local schema to be directly portable to a server-side     (as if existed server-side)
-		//  write local resolvers that fetch requested data from a REST API (wrapping a REST API on the client)
-		//  -----------------------
-
-		//  @client directive: query and update cache (InMemoryCache)
-
-		//  https://rickandmortyapi.com/documentation/
-		//  'https://rickandmortyapi.com/api/episode/'
-		//  `https://rickandmortyapi.com/api/character/${ids}`
-		//  `https://rickandmortyapi.com/api/episode/${id}`
-		//  https://rickandmortyapi.com/api/character/6
-		//  https://rickandmortyapi.com/api/character/?name=rick&status=alive
-		//  https://rickandmortyapi.com/api/location/3,21
-
-		//  const queryCharacter = await clientApollo.query({query: gql`
-		//    query Character($id: ID) {
-		//      character(id: "1") @rest(type: "Post", path: "character/1") {
-		//        id
-		//        name
-		//        status
-		//        species
-		//        type
-		//        gender
-		//        origin {
-		//          name
-		//          type
-		//          dimension
-		//        }
-		//        location {
-		//          name
-		//          type
-		//          dimension
-		//        }
-		//        image
-		//        episode {
-		//          name
-		//          episode
-		//        }
-		//      }
-		//    }
-		//  `});
+		const characterNine = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_FULL, variables: { id: 9 }});
+		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL: ', characterNine);
 
 		clientApollo.writeQuery({
 			query: gql`
@@ -233,41 +180,6 @@ export async function get(req, res) {
 				cartItems: ['itemAA', 'itemBB', 'itemCC'],
 			},
 		});
-
-		//  const q = await clientApollo.query({
-		//    fetchPolicy: 'network-only',
-		//    query: gql`
-		//      query {
-		//        character
-		//      }`
-		//  }).then(result => console.log(result))
-
-		// ==========================================================================
-		// ==========================================================================
-
-		//  prefetch data (load data into cache): "client.query"
-		//  set "initialState" of data
-		// -------------------------------------------------------------------
-		//  const qqa = await clientApollo.query({ query: GetCharacter });
-		//  const qqb = await clientApollo.query({ query: GetReviews, variables: { episode: "EMPIRE" } });
-		//  const qqc = await clientApollo.query({ query: GetADroid, variables: { droidID: 2001 } });
-		//  const qqd = await clientApollo.query({ query: graphqlQueries.GET_HERO, });
-		//  await clientApollo.query({ query: graphqlQueries.GET_THE_SCHEMA, });
-		const h = await clientApollo.query({ query: graphqlQueries.GET_HELLO, });
-		//	const j = await clientApollo.query({ query: graphqlQueries.GET_CHARACTER_REST, variables: { id: 4 }});
-		// -------------------------------------------------------------------
-
-		console.log('>>>> RENDERER > clientApollo.query > apolloServer > GET_HELLO: ', JSON.stringify(h));
-		//	console.log('>>>> RENDERER > clientApollo.query > apolloServer > GET_CHARACTER_REST: ', JSON.stringify(j));
-		//  console.log('>>>> RENDERER > clientApollo.query > GetCharacter: ', qqa);
-		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
-		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
-		//  console.log('>>>> RENDERER > clientApollo.query: ', JSON.stringify(qq));
-
-		//  Object.keys(q).forEach(key => {
-		//    const k = q[key];
-		//    console.log('>>>> RENDERER > clientApollo.query > Object.keys().forEach(): ', k);
-		//  });
 
 		// ==========================================================================
 
@@ -369,7 +281,6 @@ export async function get(req, res) {
 		return res.status(200).send(ssrHtml);
 	} catch (error) {
 		console.log('>>>> RENDERER > RESPONSE > ERROR: ', error);
-		// const errorHtml = `<!DOCTYPE html><html lang="en"><div>Error Loading. Response Status 500.</div></html>`;
 		return res.status(500).send(error);
 	} finally {
 		sheet.seal()
