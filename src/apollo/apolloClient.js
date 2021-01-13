@@ -1,23 +1,31 @@
 import { ApolloClient, InMemoryCache, createHttpLink, ApolloLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import fetch from 'node-fetch';
+//	import fetch from 'node-fetch';
+import fetch from 'isomorphic-fetch';
 
 export default function apolloClient({ uri, ssrMode = false }) {
 
 	const httpLink = createHttpLink({
 		uri: uri,
-		fetch: ssrMode ? fetch : null,
+		// fetch: ssrMode ? fetch : null,
+		fetch: fetch,
 	});
 
 	const errorLink = onError(({ graphQLErrors, networkError }) => {
 		if (graphQLErrors) {
+			//	for (let err of graphQLErrors) {
+			//		switch (err.extensions.code) {
+			//			case 'ENOTFOUND':
+			//				return null;
+			//		}
+			//	}
 			graphQLErrors.map(({ message, locations, path }) =>
-				console.log(`>>>> CLIENT > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),
+				console.log(`>>>> apolloClient > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),
 			);
 		}
 
 		if (networkError) {
-			console.log(`>>>> CLIENT > [Network error]: ${networkError}`);
+			console.log(`>>>> apolloClient > [Network error]: ${networkError}`);
 		}
 	});
 
@@ -63,5 +71,17 @@ export default function apolloClient({ uri, ssrMode = false }) {
 		link,
 		cache,
 		ssrMode,
+		//	defaultOptions: {
+		//		watchQuery: {
+		//			errorPolicy: 'ignore',
+		//		},
+		//		query: {
+		//			fetchPolicy: 'network-only',
+		//			errorPolicy: 'all',
+		//		},
+		//		mutate: {
+		//			errorPolicy: 'all',
+		//		},
+		//	},
 	});
 }
