@@ -7,12 +7,35 @@ import {
 } from '@apollo/client';
 import { Button } from '../../components/Button';
 
-import { GetRickAndMortyCharacter } from '../../graphql/queries/queries.graphql';
+import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
+import { GET_A_RICK_AND_MORTY_CHARACTER_FULL } from '../../graphql/queries/queries.js';
 
 
 const GraphQLExample = () => {
 
 	const client = useApolloClient();
+
+	const [getRickAndMortyCharacters, { loading, error, data: rickAndMortyCharactersData, refetch, fetchMore, networkStatus }] = useLazyQuery(
+		GET_A_RICK_AND_MORTY_CHARACTER_FULL,
+		{
+			variables: {
+				id: '',
+			},
+			notifyOnNetworkStatusChange: true,
+		}
+	);
+
+	useEffect(() => {
+			if (rickAndMortyCharactersData) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksList: ', rickAndMortyCharactersData.googleBooksList);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksList.cursor: ', rickAndMortyCharactersData.googleBooksList.cursor);
+			}
+			if (rickAndMortyCharacterSearch) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharacterSearch: ', rickAndMortyCharacterSearch);
+			}
+		},
+		[rickAndMortyCharactersData, rickAndMortyCharacterSearch]
+	);
 
 	return (
 		<>

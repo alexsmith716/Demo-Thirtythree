@@ -87,6 +87,7 @@ export async function get(req, res) {
 
 	const httpLink = createHttpLink({
 		uri: 'https://rickandmortyapi.com/graphql/',
+		//	uri: 'http://localhost:8080/graphql/',
 		// fetch: customFetch,
 		fetch: fetch,
 	});
@@ -156,12 +157,7 @@ export async function get(req, res) {
 	try {
 		console.log('>>>> RENDERER > InMemoryCache > CACHE > cache.extract() 1: ', cache.extract());
 
-		// ==========================================================================
-
-		const characterIdOne = await clientApollo.query({ query: GetRickAndMortyCharacterIdOne });
-		console.log('>>>> RENDERER > GetRickAndMortyCharacterIdOne: ', characterIdOne);
-
-		const characterTwo = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 2 } });
+		const characterTwo = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
 		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
 
 		const characterEight = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_BASIC, variables: { id: 8 }});
@@ -181,9 +177,9 @@ export async function get(req, res) {
 			},
 		});
 
-		// ==========================================================================
-
 		console.log('>>>> RENDERER > InMemoryCache > CACHE > cache.extract() 2: ', cache.extract());
+
+		// ==========================================================================
 
 		const AppY = () => React.createElement(AppX);
 

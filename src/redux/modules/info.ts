@@ -73,15 +73,15 @@ export function isInfoLoaded(storeState: State): boolean {
 	return storeState && storeState.loaded;
 }
 
-export function loadInfoApiClient(): LoadApiClientActions {
-	console.log('>>>>>>>>>>>>>>>> INFO > loadInfoApiClient() +++++++++++++++++++++++++++');
-	const location = 'https://api.github.com/feeds';
-	// const location = 'https://www.metaweather.com/api/location/2459115/';
-	return {
-		types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-		promise: ({ client }: any) => client.get(location),
-	};
-}
+//  export function loadInfoApiClient(): LoadApiClientActions {
+//  	console.log('>>>>>>>>>>>>>>>> INFO > loadInfoApiClient() +++++++++++++++++++++++++++');
+//  	const location = 'https://api.github.com/feeds';
+//  	// const location = 'https://www.metaweather.com/api/location/2459115/';
+//  	return {
+//  		types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
+//  		promise: ({ client }: any) => client.get(location),
+//  	};
+//  }
 
 export function loadInfo(): LoadActions {
 	console.log('>>>>>>>>>>>>>>>> INFO > loadInfo() +++++++++++++++++++++++++++');
