@@ -22,11 +22,11 @@ import { apiClient } from '../helpers/apiClient';
 
 import { GetRickAndMortyCharacter, GetRickAndMortyCharacterIdOne } from '../graphql/queries/queries.graphql';
 import * as graphqlQueries from '../graphql/queries/queries.js';
-//import { resolvers } from '../graphql/resolvers/resolvers.js';
 // -------------------------------------------------------------------
 
 const nodeStats = path.resolve(__dirname,'../../public/dist/node/loadable-stats.json');
 const webStats = path.resolve(__dirname,'../../public/dist/web/loadable-stats.json');
+
 // -------------------------------------------------------------------
 
 export async function get(req, res) {
@@ -60,21 +60,21 @@ export async function get(req, res) {
 	// =====================================================
 	const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
 	const { default: AppX } = nodeExtractor.requireEntrypoint('main');
-	// const extractor = new ChunkExtractor({ statsFile: webStats });
+	const extractor = new ChunkExtractor({ statsFile: webStats });
 	//  // =====================================================
 
 	//  // =====================================================
-	//  const linkElements = extractor.getLinkElements();
-	//  const styleElements = extractor.getStyleElements();
-	//  const scriptElements = extractor.getScriptElements();
+	const linkElements = extractor.getLinkElements();
+	const styleElements = extractor.getStyleElements();
+	const scriptElements = extractor.getScriptElements();
 	//  // =====================================================
 
-	//  function hydrate() {
-	//    console.log('############## RENDERER > HYDRATE ###########');
-	//    res.write('<!DOCTYPE html>');
-	//    const stream = renderToNodeStream(<Html linkElements={linkElements} styleElements={styleElements} scriptElements={scriptElements} store={JSON.stringify(store)} />);
-	//    stream.pipe(res);
-	//  }
+	function hydrate() {
+	  console.log('############## RENDERER > HYDRATE ###########');
+	  res.write('<!DOCTYPE html>');
+	  const stream = renderToNodeStream(<Html linkElements={linkElements} styleElements={styleElements} scriptElements={scriptElements} store={JSON.stringify(store)} />);
+	  stream.pipe(res);
+	}
 
 	//  //  if (__DISABLE_SSR__) {
 	//  //    return hydrate();
@@ -83,9 +83,11 @@ export async function get(req, res) {
 
 	await asyncGetPromises(routes, req.path, store);
 
+	// ==========================================================================
+
 	try {
 
-		const characterTwo = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
+		const characterTen = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
 		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
 
 		const characterEight = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_BASIC, variables: { id: 8 }});
@@ -203,7 +205,9 @@ export async function get(req, res) {
 		return res.status(200).send(ssrHtml);
 	} catch (error) {
 		console.log('>>>> RENDERER > RESPONSE > ERROR: ', error);
-		return res.status(500).send(error);
+		// return res.status(500).send(error);
+		res.status(500)
+		hydrate();
 	} finally {
 		sheet.seal()
 	}
