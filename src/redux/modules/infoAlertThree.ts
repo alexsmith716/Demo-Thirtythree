@@ -70,8 +70,6 @@ export function isInfoAlertThreeLoaded(storeState: State): boolean {
 
 export function loadInfoAlertThree(): LoadActions {
   console.log('>>>>>>>>>>>>>>>> INFOALERTTHREE > loadInfo() +++++++++++++++++++++++++++');
-  // const location = 'https://api.github.com/feeds';
-  // const location = 'https://www.metaweather.com/api/location/2459115/';
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: () =>

@@ -22,6 +22,10 @@ https://github.com/developit/unfetch
 
 ### UPDATE:
 
+https://webpack.js.org/configuration/node/#nodeprocess
+https://webpack.js.org/configuration/resolve/#resolvefallback
+https://webpack.js.org/configuration/resolve/#resolvealias
+https://nodejs.org/docs/latest/api/globals.html
 
 
 ### TODO:

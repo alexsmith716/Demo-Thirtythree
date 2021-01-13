@@ -3,7 +3,7 @@ import {
 	useMutation,
 } from '@apollo/client';
 import { Button } from '../Button';
-import * as Styles from './styles';
+import { Thumbnail } from '../Styles';
 import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 
 
@@ -33,7 +33,7 @@ export const GoogleBooksBook = ({ book }) => {
 
 			<div className="col-two">
 
-				<Styles.Thumbnail>
+				<Thumbnail>
 
 					<div className="text-center">
 						{ book.smallThumbnail
@@ -52,7 +52,7 @@ export const GoogleBooksBook = ({ book }) => {
 							/>
 						</div>
 					</div>
-				</Styles.Thumbnail>
+				</Thumbnail>
 			</div>
 
 			<div className="col-ten">
