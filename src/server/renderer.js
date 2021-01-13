@@ -8,11 +8,10 @@ import { renderRoutes } from 'react-router-config';
 import { HelmetProvider } from 'react-helmet-async';
 import { ChunkExtractor } from '@loadable/server';
 import { ServerStyleSheet } from 'styled-components';
-import fetch from 'node-fetch';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink, gql } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
+import { ApolloProvider, gql } from '@apollo/client';
 import { getDataFromTree } from '@apollo/client/react/ssr';
-// -------------------------------------------------------------------
+
+import apolloClient from '../apollo/apolloClient';
 import asyncGetPromises from '../utils/asyncGetPromises';
 import routes from '../client/routes';
 import configureStore from '../redux/configureStore';
@@ -20,23 +19,12 @@ import initialStatePreloaded from '../redux/initial-preloaded-state';
 import { getUserAgent, isBot } from '../utils/device';
 import Html from '../helpers/Html';
 import { apiClient } from '../helpers/apiClient';
-// -------------------------------------------------------------------
+
 import { GetRickAndMortyCharacter, GetRickAndMortyCharacterIdOne } from '../graphql/queries/queries.graphql';
 import * as graphqlQueries from '../graphql/queries/queries.js';
 //import { resolvers } from '../graphql/resolvers/resolvers.js';
 // -------------------------------------------------------------------
 
-//  provide for client ("to avoid network calls and mocking data"):
-//  https://github.com/apollographql/apollo-client/blob/master/docs/source/api/link/apollo-link-schema.md
-//  https://graphql.org/graphql-js/graphql/#entry-point
-
-//  When performing SSR on the same server, you can use this library to avoid making network calls
-//  build "new SchemaLink({ schema })"
-
-//  pre-fetch needed data (graphql/REST) and build a schema
-//  pre-fetch needed data (graphql/REST) (SchemaLink) on server for SSR
-
-// -------------------------------------------------------------------
 const nodeStats = path.resolve(__dirname,'../../public/dist/node/loadable-stats.json');
 const webStats = path.resolve(__dirname,'../../public/dist/web/loadable-stats.json');
 // -------------------------------------------------------------------
@@ -67,66 +55,7 @@ export async function get(req, res) {
 
 	// =====================================================
 
-	//  Composing a link chain:
-	//  Each link should represent a self-contained modification to a GraphQL operation. 
-	//  By composing these links into a chain, you can create an arbitrarily complex model for your client's data flow.
-
-	//  There are two forms of link composition: additive and directional.
-	//    * Additive composition involves combining a set of links into a serially executed chain.
-	//    * Directional composition involves branching to one of multiple links, depending on the details of an operation.
-	//  Directional composition: defined with the "split" method of an ApolloLink instance
-
-	//  https://www.apollographql.com/docs/react/v3.0-beta/api/link/apollo-link-rest/
-	//  setup "RestLink" instance:
-	//  specify endpoint to use in the rest directive:
-
-	//  https://github.com/afuh/rick-and-morty-api
-	//  REST:     https://rickandmortyapi.com/api/
-	//  GRAPHQL:  https://rickandmortyapi.com/graphql/
-	//            http://localhost:4000/graphql
-
-	const httpLink = createHttpLink({
-		uri: 'https://rickandmortyapi.com/graphql/',
-		//	uri: 'http://localhost:8080/graphql/',
-		// fetch: customFetch,
-		fetch: fetch,
-	});
-
-	const cache = new InMemoryCache();
-
-	const errorLink = onError(({ graphQLErrors, networkError }) => {
-		if (graphQLErrors && graphQLErrors?.length > 0) {
-			//  catchError((e) => handleError(e))
-			graphQLErrors.map(({ message, locations, path }) =>
-				console.log(
-					`>>>> RENDERER > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-				),
-			);
-		}
-
-		// https://hasura.io/blog/handling-graphql-hasura-errors-with-react/
-		// https://github.com/apollographql/apollo-link/tree/master/packages/apollo-link-error#retrying-failed-requests
-		if (networkError) {
-			console.log(`>>>> RENDERER > [Network error!!!!!]: ${networkError}`);
-		}
-	});
-
-	//  "httpLink" is terminating so must be last, while retry & error wrap the links to their right
-	//  State & context links should happen before (to the left of) restLink
-	//  one of "uri" or "link" is required; if both are specified, "link" will take precedence
-	const link = ApolloLink.from([
-		//  authLink,
-		errorLink,
-		//  retryLink,
-		httpLink,
-	]);
-
-	const clientApollo = new ApolloClient({
-		ssrMode: true,
-		cache,
-		link,
-		//	resolvers,
-	});
+	const clientApollo = apolloClient({ uri: 'https://rickandmortyapi.com/graphql/', ssrMode: true });
 
 	// =====================================================
 	const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
@@ -155,7 +84,6 @@ export async function get(req, res) {
 	await asyncGetPromises(routes, req.path, store);
 
 	try {
-		console.log('>>>> RENDERER > InMemoryCache > CACHE > cache.extract() 1: ', cache.extract());
 
 		const characterTwo = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
 		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
@@ -176,8 +104,6 @@ export async function get(req, res) {
 				cartItems: ['itemAA', 'itemBB', 'itemCC'],
 			},
 		});
-
-		console.log('>>>> RENDERER > InMemoryCache > CACHE > cache.extract() 2: ', cache.extract());
 
 		// ==========================================================================
 

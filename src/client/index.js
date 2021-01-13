@@ -10,9 +10,9 @@ import { loadableReady } from '@loadable/component';
 import localForage from 'localforage';
 import { getStoredState } from 'redux-persist';
 import { Provider } from 'react-redux';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
+import { ApolloProvider } from '@apollo/client';
 
+import apolloClient from '../apollo/apolloClient';
 import asyncGetPromises from '../utils/asyncGetPromises';
 import { RouterTrigger } from '../components/RouterTrigger/RouterTrigger';
 import routes from './routes';
@@ -70,74 +70,7 @@ const render = async () => {
 
 	// =====================================================
 
-	const httpLink = createHttpLink({
-		//	uri: 'https://rickandmortyapi.com/graphql/',
-		uri: 'http://localhost:8080/graphql/',
-	});
-
-	const errorLink = onError(({ graphQLErrors, networkError }) => {
-		if (graphQLErrors) {
-			graphQLErrors.map(({ message, locations, path }) =>
-				console.log(`>>>> CLIENT > [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,),
-			);
-		}
-
-		if (networkError) {
-			console.log(`>>>> CLIENT > [Network error]: ${networkError}`);
-		}
-	});
-
-	const link = ApolloLink.from([
-		errorLink,
-		httpLink,
-	]);
-
-	// https://github.com/apollographql/apollo-client/blob/main/docs/source/pagination/core-api.mdx
-	// https://github.com/apollographql/apollo-client/docs/source/local-state/reactive-variables.mdx
-	// https://github.com/apollographql/apollo-client/docs/source/local-state/managing-state-with-field-policies
-	const clientCache = new InMemoryCache({
-		typePolicies: {
-			// =====================================================
-			Query: {
-				fields: {
-					// --------------------------------------
-					// define field policy for "googleBooksList"
-					// define field policy to merge the results of paginated queries into a single list
-					// googleBooksList: relayStylePagination(),
-					googleBooksList: {
-						keyArgs: false,
-						merge(existing, incoming) {
-							//console.log('>>>> CLIENT > InMemoryCache > existing AAAAAAAA: ', existing);
-							//console.log('>>>> CLIENT > InMemoryCache > incoming BBBBBBBB: ',  incoming);
-							let books = [];
-							if (existing && existing.books) {
-								books = books.concat(existing.books);
-							}
-							if (incoming && incoming.books) {
-								books = books.concat(incoming.books);
-							}
-							const q = {...incoming}
-							const w = {books}
-							const x = {...incoming, books}
-							//console.log('>>>> CLIENT > InMemoryCache > incoming CCCCCCCCCCC: ',  q);
-							//console.log('>>>> CLIENT > InMemoryCache > books DDDDDDDDDDD: ',  w);
-							//console.log('>>>> CLIENT > InMemoryCache > incoming EEEEEEEE: ', x);
-							return {
-								...incoming,
-								books,
-							};
-						}
-					}
-				}
-			}
-		}
-	});
-
-	const clientApollo = new ApolloClient({
-		ssrMode: false,
-		cache: clientCache.restore(window.__APOLLO_STATE__),
-		link,
-	});
+	const clientApollo = apolloClient({ uri: 'http://localhost:8080/graphql/', ssrMode: false });
 
 	// =====================================================
 
@@ -168,18 +101,9 @@ const render = async () => {
 			</HelmetProvider>
 		);
 
-
-		if (dest && dest.innerHTML !== "") {
-			console.log('############## CLIENT > ReactDOM.hydrate 00000 ###########')
-		} else {
-			console.log('############## CLIENT > ReactDOM.render 00000 ###########')
-		}
-
 		if (dest.hasChildNodes()) {
-			console.log('############## CLIENT > ReactDOM.hydrate 111111 ###########')
 			ReactDOM.hydrate(element, dest);
 		} else {
-			console.log('############## CLIENT > ReactDOM.render 111111 ###########')
 			ReactDOM.render(element, dest);
 		}
 	};
