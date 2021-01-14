@@ -18,21 +18,43 @@ const RESTfulExample = () => {
 
 	const client = useApolloClient();
 
-	//  network-only
-	//  cache-and-network
-	const [getGoogleBooks, { loading, error, data: googleBooksData, refetch, fetchMore, networkStatus }] = useLazyQuery(
-		GET_GOOGLE_BOOKS,
-		{
-			variables: {
-				// searchString: `${googleBookSearch}`,
-				searchString: '',
-				orderBy: 'newest',
-			},
-			//  fetchPolicy: 'cache-and-network',
-			//  pollInterval: 500,
-			notifyOnNetworkStatusChange: true,
-		}
+	const [getGoogleBooks, {
+			loading, error,
+			data: googleBooksData,
+			previousData: googleBooksPreviousData,
+			refetch,
+			fetchMore,
+			networkStatus 
+		}] = useLazyQuery(
+			GET_GOOGLE_BOOKS,
+			{
+				variables: {
+					// searchString: `${googleBookSearch}`,
+					searchString: '',
+					orderBy: 'newest',
+				},
+				//  fetchPolicy: 'cache-and-network',
+				//  pollInterval: 500,
+				notifyOnNetworkStatusChange: true,
+			}
 	);
+
+	//  const [getGoogleBooks,{loading,error,data: googleBooksData,previousData: googleBooksPreviousData,refetch,fetchMore,networkStatus}] = useLazyQuery(
+	//  	GET_GOOGLE_BOOKS,
+	//  	{
+	//  		variables: {
+	//  			// searchString: `${googleBookSearch}`,
+	//  			searchString: '',
+	//  			orderBy: 'newest',
+	//  		},
+	//  		//  fetchPolicy: 'cache-and-network',
+	//  		//  pollInterval: 500,
+	//  		notifyOnNetworkStatusChange: true,
+	//  	}
+	//  );
+
+	// Provide a previousData property in useQuery/useLazyQuery results
+	// result.data ?? result.previousData to obtain the most recent useful data
 
 	useEffect(() => {
 			if (googleBooksData) {
