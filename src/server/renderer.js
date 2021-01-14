@@ -61,19 +61,19 @@ export async function get(req, res) {
 	const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
 	const { default: AppX } = nodeExtractor.requireEntrypoint('main');
 	const extractor = new ChunkExtractor({ statsFile: webStats });
-	//  // =====================================================
+	// =====================================================
 
-	//  // =====================================================
+	// =====================================================
 	const linkElements = extractor.getLinkElements();
 	const styleElements = extractor.getStyleElements();
 	const scriptElements = extractor.getScriptElements();
-	//  // =====================================================
+	// =====================================================
 
 	function hydrate() {
-	  console.log('############## RENDERER > HYDRATE ###########');
-	  res.write('<!DOCTYPE html>');
-	  const stream = renderToNodeStream(<Html linkElements={linkElements} styleElements={styleElements} scriptElements={scriptElements} store={JSON.stringify(store)} />);
-	  stream.pipe(res);
+		console.log('############## RENDERER > HYDRATE ###########');
+		res.write('<!DOCTYPE html>');
+		const stream = renderToNodeStream(<Html linkElements={linkElements} styleElements={styleElements} scriptElements={scriptElements} store={JSON.stringify(store)} />);
+		stream.pipe(res);
 	}
 
 	//  //  if (__DISABLE_SSR__) {
@@ -83,31 +83,41 @@ export async function get(req, res) {
 
 	await asyncGetPromises(routes, req.path, store);
 
+	try {
+		const characterTen = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
+		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
+	} catch (error) {
+		console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
+	}
+
+	try {
+		const characterEight = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_BASIC, variables: { id: 8 }});
+		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_BASIC: ', characterEight);
+	} catch (error) {
+		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_BASIC > ERROR: ', error);
+	}
+
+	try {
+		const characterNine = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_FULL, variables: { id: 9 }});
+		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL: ', characterNine);
+	} catch (error) {
+		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL > ERROR: ', error);
+	}
+
+	clientApollo.writeQuery({
+		query: gql`
+			query GetCartItems {
+				cartItems
+			}
+		`,
+		data: {
+			cartItems: ['itemAA', 'itemBB', 'itemCC'],
+		},
+	});
+
 	// ==========================================================================
 
 	try {
-
-		const characterTen = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
-		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
-
-		const characterEight = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_BASIC, variables: { id: 8 }});
-		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_BASIC: ', characterEight);
-
-		const characterNine = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_FULL, variables: { id: 9 }});
-		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL: ', characterNine);
-
-		clientApollo.writeQuery({
-			query: gql`
-				query GetCartItems {
-					cartItems
-				}
-			`,
-			data: {
-				cartItems: ['itemAA', 'itemBB', 'itemCC'],
-			},
-		});
-
-		// ==========================================================================
 
 		const AppY = () => React.createElement(AppX);
 
