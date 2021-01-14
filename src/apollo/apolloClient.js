@@ -84,18 +84,18 @@ export default function apolloClient({ uri, ssrMode = false }) {
 		link,
 		cache,
 		ssrMode,
-		//	defaultOptions: {
-		//		watchQuery: {
-		//			fetchPolicy: 'cache-and-network',
-		//			errorPolicy: 'ignore',
-		//		},
-		//		query: {
-		//			fetchPolicy: 'network-only',
-		//			errorPolicy: 'all',
-		//		},
-		//		mutate: {
-		//			errorPolicy: 'all',
-		//		},
-		//	},
+		defaultOptions: {
+			//	watchQuery: {
+			//		fetchPolicy: 'cache-and-network',
+			//		errorPolicy: 'all',
+			//	},
+			//	query: {
+			//		fetchPolicy: 'network-only',
+			//		errorPolicy: 'all',
+			//	},
+			//	mutate: {
+			//		errorPolicy: 'all',
+			//	},
+		},
 	});
 }

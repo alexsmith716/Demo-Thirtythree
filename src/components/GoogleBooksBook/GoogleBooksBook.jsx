@@ -3,7 +3,7 @@ import {
 	useMutation,
 } from '@apollo/client';
 import { Button } from '../Button';
-import { Thumbnail } from '../Styles';
+import { Thumbnail } from '../../Styles';
 import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 
 
