@@ -22,7 +22,7 @@
 		"format": "prettier --config .prettierrc --write src/"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.4.0-beta.4",
+		"@apollo/client": "^3.3.7",
 		"@loadable/component": "^5.14.1",
 		"@loadable/server": "^5.14.0",
 		"apollo-datasource-rest": "^0.9.7",

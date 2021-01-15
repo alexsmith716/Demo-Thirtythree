@@ -40,8 +40,8 @@ export const resolvers = {
 		},
 	},
 
-  // https://github.com/apollographql/apollo-client/blob/main/docs/source/data/mutations.mdx#updating-a-single-existing-entity
-  // if mutation updates a single entity, AC automatically updates that value in cache when the mutation returns
+	// https://github.com/apollographql/apollo-client/blob/main/docs/source/data/mutations.mdx#updating-a-single-existing-entity
+	// if mutation updates a single entity, AC automatically updates that value in cache when the mutation returns
 	Mutation: {
 		googleBookModifyFavorite: async (obj, { googleBookId, favorite }, { dataSources }) => {
 			const book = await dataSources.googleBooks.getBook({ googleBookId });
