@@ -31,5 +31,5 @@ https://github.com/developit/unfetch
 
 ### TODO:
 
-* whole bunch of stuff
-* test on heroku
+* complete Rick And Morty graphql API
+* test on Heroku

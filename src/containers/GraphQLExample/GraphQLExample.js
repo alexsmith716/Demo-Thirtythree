@@ -27,8 +27,8 @@ const GraphQLExample = () => {
 
 	useEffect(() => {
 			if (rickAndMortyCharactersData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksList: ', rickAndMortyCharactersData.googleBooksList);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksList.cursor: ', rickAndMortyCharactersData.googleBooksList.cursor);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksListRAM: ', rickAndMortyCharactersData.googleBooksListRAM);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksListRAM.cursor: ', rickAndMortyCharactersData.googleBooksListRAM.cursor);
 			}
 			if (rickAndMortyCharacterSearch) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharacterSearch: ', rickAndMortyCharacterSearch);
