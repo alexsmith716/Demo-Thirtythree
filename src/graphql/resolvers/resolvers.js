@@ -1,33 +1,35 @@
 import { paginateResults } from '../utils/utils';
-import { GoogleBooks } from '../datasources/googleBooksAPI';
-import { RickAndMortyAPICharacter } from '../datasources/rickAndMortyAPI';
+import { GoogleBooksAPI } from '../datasources/googleBooksAPI';
+import graphqlClient from '../../apollo/graphqlClient';
+
+import * as graphqlQueries from '../queries/queries.js';
 
 export const dataSources = () => ({
-	googleBooks: new GoogleBooks(),
-	rickAndMortyAPICharacter: new RickAndMortyAPICharacter(),
+	googleBooks: new GoogleBooksAPI(),
 });
 
+
+// tell Apollo Server how to populate data for every schema field
 export const resolvers = {
 	Query: {
 		hello: () => 'Hello world!',
 
-		character: async (obj, { id }, { dataSources }) => (
-			dataSources.rickAndMortyAPICharacter.character({ id })
-		),
+		//  character: async (obj, { id }, { dataSources }) => (
+		//  	dataSources.rickAndMortyAPICharacter.character({ id })
+		//  ),
 
-		googleBooksList: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
-
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > after: ', after);
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > searchString: ', searchString);
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > orderBy: ', orderBy);
+		googleBooks: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > after: ', after);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > searchString: ', searchString);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > orderBy: ', orderBy);
 			const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
 
 			// destructured argument -destructure an object into individual variables ({cursor: after})
 			const books = paginateResults({ after, pageSize, results: allGoogleBooks });
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > books: ', books);
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books: ', books);
 
-			const c = books.length ? books[books.length - 1].cursor : null;
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooksList > cursor: ', c);
+			// const c = books.length ? books[books.length - 1].cursor : null;
+			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > cursor: ', c);
 
 			return {
 				books,
@@ -38,13 +40,25 @@ export const resolvers = {
 					: false,
 			};
 		},
+
+		googleBook: async (obj, { id }, { dataSources }) => {
+			const book = await dataSources.googleBooks.getBook({ id });
+			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > book: ', book);
+			return book;
+		},
+
+		rickAndMortyCharacter: async (obj, { id }) => {
+			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > ID: ', id);
+			const character = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql/', method: 'POST', query: });
+			return character;
+		},
 	},
 
 	// https://github.com/apollographql/apollo-client/blob/main/docs/source/data/mutations.mdx#updating-a-single-existing-entity
 	// if mutation updates a single entity, AC automatically updates that value in cache when the mutation returns
 	Mutation: {
-		googleBookModifyFavorite: async (obj, { googleBookId, favorite }, { dataSources }) => {
-			const book = await dataSources.googleBooks.getBook({ googleBookId });
+		googleBookModifyFavorite: async (obj, { id, favorite }, { dataSources }) => {
+			const book = await dataSources.googleBooks.getBook({ id });
 			book.favorite = favorite;
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > book: ', book);
 			return {

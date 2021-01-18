@@ -5,36 +5,41 @@ import {
 	useApolloClient,
 	NetworkStatus,
 } from '@apollo/client';
-import { Button } from '../../components/Button';
 
+import { Button } from '../../components/Button';
 import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
-import { GET_A_RICK_AND_MORTY_CHARACTER_FULL } from '../../graphql/queries/queries.js';
+import { GET_A_RICK_AND_MORTY_CHARACTER } from '../../graphql/queries/queries.js';
 
 
 const GraphQLExample = () => {
 
 	const client = useApolloClient();
 
-	const [getRickAndMortyCharacters, { loading, error, data: rickAndMortyCharactersData, refetch, fetchMore, networkStatus }] = useLazyQuery(
-		GET_A_RICK_AND_MORTY_CHARACTER_FULL,
-		{
-			variables: {
-				id: '',
-			},
-			notifyOnNetworkStatusChange: true,
-		}
+
+	const [getRickAndMortyCharacter, {
+			loading, 
+			error,
+			data: rickAndMortyCharactersData,
+			previousData: rickAndMortyCharactersPreviousData,
+			refetch,
+			fetchMore,
+			networkStatus 
+		}] = useLazyQuery(
+			GET_A_RICK_AND_MORTY_CHARACTER,
+			{
+				variables: {
+					id: '',
+				},
+				notifyOnNetworkStatusChange: true,
+			}
 	);
 
 	useEffect(() => {
 			if (rickAndMortyCharactersData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksListRAM: ', rickAndMortyCharactersData.googleBooksListRAM);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.googleBooksListRAM.cursor: ', rickAndMortyCharactersData.googleBooksListRAM.cursor);
-			}
-			if (rickAndMortyCharacterSearch) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharacterSearch: ', rickAndMortyCharacterSearch);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.rickAndMortyCharacters: ', rickAndMortyCharactersData.rickAndMortyCharacters);
 			}
 		},
-		[rickAndMortyCharactersData, rickAndMortyCharacterSearch]
+		[rickAndMortyCharactersData,]
 	);
 
 	return (
@@ -51,8 +56,26 @@ const GraphQLExample = () => {
 				{/* ---------------------------------------------- */}
 
 				<div className="bg-color-ivory container-padding-border-radius-1 text-break mb-5">
-
 					<div className="mb-3">
+
+						{networkStatus === NetworkStatus.refetch && (
+							<p>
+								Refetching...
+							</p>
+						)}
+
+						{loading && (
+							<p>
+								Loading...
+							</p>
+						)}
+
+						{error && (
+							<p>
+								Query Error!
+							</p>
+						)}
+
 						<Button
 							type="button"
 							className="btn-success btn-md"
@@ -65,13 +88,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-						/>
-					</div>
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
+							onClick={() => getRickAndMortyCharacter({ variables: { id: '8' }, fetchPolicy: 'network-only'})}
+							buttonText="Get character 8"
 						/>
 					</div>
 

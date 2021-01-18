@@ -6,8 +6,7 @@ import { Button } from '../Button';
 import { Thumbnail } from '../../Styles';
 import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 
-
-export const GoogleBooksBook = ({ book }) => {
+export const GoogleBookBook = ({ book }) => {
 
 	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);
 
@@ -23,7 +22,7 @@ export const GoogleBooksBook = ({ book }) => {
 	useEffect(() => {
 
 		if (googleBookModifyFavoriteDATA) {
-			// console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBooksBook > useEffect() > googleBookModifyFavoriteDATA: ', googleBookModifyFavoriteDATA);
+			// console.log('>>>>>>>>>>>>>>>>>>>>>>>> GoogleBookBook > useEffect() > googleBookModifyFavoriteDATA: ', googleBookModifyFavoriteDATA);
 		}
 
 	},[googleBookModifyFavoriteDATA]);
@@ -47,7 +46,7 @@ export const GoogleBooksBook = ({ book }) => {
 						<div>
 							<Button
 								className="btn-light btn-tiny"
-								onClick={() => googleBookModifyFavorite({ variables: { googleBookId: book.id, favorite: book.favorite && book.favorite ? false : true }})}
+								onClick={() => googleBookModifyFavorite({ variables: { id: book.id, favorite: book.favorite && book.favorite ? false : true }})}
 								buttonText={`${book.favorite && book.favorite ? "Remove from" : "Add to"} Favorites`}
 							/>
 						</div>
