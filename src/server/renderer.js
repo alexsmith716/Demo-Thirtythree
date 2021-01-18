@@ -81,22 +81,22 @@ export async function get(req, res) {
 	//  //  if (__DISABLE_SSR__) {
 	//  //    return hydrate();
 	//  //  }
-	//  // =====================================================
+	// =====================================================
 
 	await asyncGetPromises(routes, req.path, store);
 
-	try {
-		const gbram = await clientApollo.query({
-			query: graphqlQueries.GET_GOOGLE_BOOKS,
-			variables: {
-				searchString: 'rick and morty',
-				orderBy: 'newest',
-			},
-		});
-		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', gbram);
-	} catch (error) {
-		console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
-	}
+  //  try {
+  //  	const gbram = await clientApollo.query({
+  //  		query: graphqlQueries.GET_GOOGLE_BOOKS,
+  //  		variables: {
+  //  			searchString: 'rick and morty',
+  //  			orderBy: 'newest',
+  //  		},
+  //  	});
+  //  	console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', JSON.stringify(gbram));
+  //  } catch (error) {
+  //  	console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
+  //  }
 
 	//	try {
 	//		const characterTen = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
@@ -106,14 +106,7 @@ export async function get(req, res) {
 	//	}
 
 	//	try {
-	//		const characterEight = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_BASIC, variables: { id: 8 }});
-	//		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_BASIC: ', characterEight);
-	//	} catch (error) {
-	//		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_BASIC > ERROR: ', error);
-	//	}
-
-	//	try {
-	//		const characterNine = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER_FULL, variables: { id: 9 }});
+	//		const characterNine = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER, variables: { id: 9 }});
 	//		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL: ', characterNine);
 	//	} catch (error) {
 	//		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL > ERROR: ', error);

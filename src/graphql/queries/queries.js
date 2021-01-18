@@ -9,7 +9,7 @@ export const GET_HELLO = gql`
 
 export const GET_GOOGLE_BOOKS = gql`
 	query GetGoogleBooks($after: String, $searchString: String!, $orderBy: String!) {
-		googleBooksList(after: $after, searchString: $searchString, orderBy: $orderBy) {
+		googleBooks(after: $after, searchString: $searchString, orderBy: $orderBy) {
 			cursor
 			hasMore
 			books {
@@ -26,8 +26,36 @@ export const GET_GOOGLE_BOOKS = gql`
 	}
 `;
 
-export const GET_A_RICK_AND_MORTY_CHARACTER_BASIC = gql`
-	query GetCharacterRest($id: ID!) {
+export const GET_GOOGLE_BOOK = gql`
+	query GetGoogleBook($id: ID!) {
+		googleBook(id: $id) {
+			id
+			title
+			authors
+			publisher
+			publishedDate
+			description
+			smallThumbnail
+			favorite
+		}
+	}
+`;
+
+export const GET_A_RICK_AND_MORTY_CHARACTERS = gql`
+	query GetRickAndMortyCharacters($after: String, $searchString: String!) {
+		rickAndMortyCharacters(after: $after, searchString: $searchString) {
+			cursor
+			hasMore
+			characters {
+				id
+				name
+			}
+		}
+	}
+`;
+
+export const GET_A_RICK_AND_MORTY_CHARACTER = gql`
+	query GetRickAndMortyCharacterFull($id: ID!){
 		character(id: $id) {
 			id
 			name
@@ -35,6 +63,21 @@ export const GET_A_RICK_AND_MORTY_CHARACTER_BASIC = gql`
 			species
 			type
 			gender
+			origin {
+				name
+				type
+				dimension
+			}
+			location {
+				name
+				type
+				dimension
+			}
+			image
+			episode {
+				name
+				episode
+			}
 		}
 	}
 `;
@@ -74,34 +117,6 @@ export const GET_A_DROID_ALIAS = gql`
 		}
 	}
 	${fragmentTypeDroid}
-`;
-
-export const GET_A_RICK_AND_MORTY_CHARACTER_FULL = gql`
-	query Character($id: ID!){
-		character(id: $id) {
-			id
-			name
-			status
-			species
-			type
-			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
-		}
-	}
 `;
 
 export const GET_CHARACTER_REST = gql`

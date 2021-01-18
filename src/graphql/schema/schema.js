@@ -4,26 +4,40 @@ import gql from 'graphql-tag';
 //  build the schema on how the GraphQL API will be used by the front-end
 //  ============================================
 export const typeDefs = gql`
+	scalar ObjID
+
 	type Query {
 		hello: String
 
-		character(id: ID): Character
-
-		googleBooksList(
-			pageSize: Int,
+		googleBooks(
 			after: String,
 			searchString: String!
 			orderBy: String!
-		): GoogleBooksSearchResult
+			pageSize: Int,
+		): GoogleBookConnection
 
 		googleBook(id: ID!): Book
+
+		rickAndMortyCharacters(
+			after: String,
+			searchString: String!
+			pageSize: Int,
+		): rickAndMortyCharacterConnection
+
+		rickAndMortyCharacter(id: ID!): Character
 	}
 
 	type Mutation {
 		googleBookModifyFavorite(
-			googleBookId: ID!
+			id: ID!
 			favorite: Boolean
 		): GoogleBooksUpdateResponse!
+	}
+
+	type rickAndMortyCharacterConnection {
+		cursor: String!
+		hasMore: Boolean!
+		characters: [Character]!
 	}
 
 	type GoogleBooksUpdateResponse {
@@ -32,7 +46,7 @@ export const typeDefs = gql`
 		books: [Book]
 	}
 
-	type GoogleBooksSearchResult {
+	type GoogleBookConnection {
 		cursor: String!
 		hasMore: Boolean!
 		books: [Book]!

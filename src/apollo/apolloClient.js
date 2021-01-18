@@ -43,9 +43,12 @@ export default function apolloClient({ uri, ssrMode = false }) {
 			Query: {
 				fields: {
 					// --------------------------------------
-					googleBooksList: {
+					googleBooks: {
 						keyArgs: false,
-						merge(existing, incoming) {
+						//	read(existing, options) {
+						//		return existing ? existing : undefined;
+						//	},
+						merge(existing, incoming, option) {
 							let books = [];
 							if (existing && existing.books) {
 								books = books.concat(existing.books);
@@ -56,6 +59,23 @@ export default function apolloClient({ uri, ssrMode = false }) {
 							return {
 								...incoming,
 								books,
+							};
+						}
+					},
+					// --------------------------------------
+					rickAndMortyCharacters: {
+						keyArgs: false,
+						merge(existing, incoming, option) {
+							let characters = [];
+							if (existing && existing.characters) {
+								characters = characters.concat(existing.characters);
+							}
+							if (incoming && incoming.characters) {
+								characters = characters.concat(incoming.characters);
+							}
+							return {
+								...incoming,
+								characters,
 							};
 						}
 					}
@@ -71,14 +91,14 @@ export default function apolloClient({ uri, ssrMode = false }) {
 		cache = cache.restore(window.__APOLLO_STATE__);
 	}
 
-	//	* none: 	This is the default policy to match how Apollo Client 1.0 worked. 
-	//							Any GraphQL Errors are treated the same as network errors and any data is ignored from the response.
+	//	* none: 	the default policy
+	//							Any GraphQL Errors are treated the same as network errors and any data is ignored from the response
 
-	//	* ignore: Ignore allows you to read any data that is returned alongside GraphQL Errors,
-	//							but doesn't save the errors or report them to your UI.
+	//	* ignore: allows to read any data that is returned alongside GraphQL Errors,
+	//							but doesn't save the errors or report them to UI
 
-	//	* all: 		Using the all policy is the best way to notify your users of potential issues while still showing as much data as possible from your server.
-	//							It saves both data and errors so your UI can use them.
+	//	* all: 		the best way to notify users of potential issues while still showing as much data as possible from server
+	//							It saves both data and errors so UI can use them
 	// -----------------------------------------------------------
 	return new ApolloClient({
 		link,

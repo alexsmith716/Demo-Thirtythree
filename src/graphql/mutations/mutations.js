@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GOOGLE_BOOK_MODIFY_FAVORITE = gql`
-	mutation GoogleBookModifyFavorite($googleBookId: ID!, $favorite: Boolean) {
-		googleBookModifyFavorite(googleBookId: $googleBookId, favorite: $favorite) {
+	mutation GoogleBookModifyFavorite($id: ID!, $favorite: Boolean) {
+		googleBookModifyFavorite(id: $id, favorite: $favorite) {
 			success
 			message
 			books {

@@ -50,11 +50,11 @@ const routes = [
 						exact: true,
 						component: RESTfulExample,
 					},
-					{
-						path: '/graphqlexample',
-						exact: true,
-						component: GraphQLExample,
-					},
+          {
+          	path: '/graphqlexample',
+          	exact: true,
+          	component: GraphQLExample,
+          },
 					{
 						path: '/graphiqlexample',
 						exact: true,

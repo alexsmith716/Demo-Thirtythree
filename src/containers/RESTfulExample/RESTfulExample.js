@@ -5,10 +5,10 @@ import {
 	useApolloClient,
 	NetworkStatus,
 } from '@apollo/client';
-import { Button } from '../../components/Button';
-import { GoogleBooksBook } from '../../components/GoogleBooksBook';
 
-import { GET_GOOGLE_BOOKS } from '../../graphql/queries/queries.js';
+import { Button } from '../../components/Button';
+import { GoogleBookBook, } from '../../components/GoogleBookBook';
+import { GET_GOOGLE_BOOKS, GET_GOOGLE_BOOK } from '../../graphql/queries/queries.js';
 
 
 const RESTfulExample = () => {
@@ -19,12 +19,13 @@ const RESTfulExample = () => {
 	const client = useApolloClient();
 
 	const [getGoogleBooks, {
-			loading, error,
+			loading, 
+			error,
 			data: googleBooksData,
 			previousData: googleBooksPreviousData,
 			refetch,
 			fetchMore,
-			networkStatus 
+			networkStatus,
 		}] = useLazyQuery(
 			GET_GOOGLE_BOOKS,
 			{
@@ -39,18 +40,29 @@ const RESTfulExample = () => {
 			}
 	);
 
+	const [getGoogleBook, {
+			loading: googleBookLoading, 
+			error: googleBookError,
+			data: googleBookData,
+		}] = useLazyQuery(
+			GET_GOOGLE_BOOK,
+	);
+
 	// Provide a previousData property in useQuery/useLazyQuery results
 	// result.data ?? result.previousData to obtain the most recent useful data
 	useEffect(() => {
 			if (googleBooksData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooksList: ', googleBooksData.googleBooksList);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooksList.cursor: ', googleBooksData.googleBooksList.cursor);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooks: ', googleBooksData.googleBooks);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooks.cursor: ', googleBooksData.googleBooks.cursor);
 			}
 			if (googleBookSearch) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBookSearch: ', googleBookSearch);
 			}
+			if (googleBookData) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBookData.googleBook: ', googleBookData.googleBook);
+			}
 		},
-		[googleBooksData, googleBookSearch]
+		[googleBooksData, googleBookSearch, googleBookData]
 	);
 
 	return (
@@ -75,13 +87,13 @@ const RESTfulExample = () => {
 							</p>
 						)}
 
-						{loading && (
+						{loading || googleBookLoading && (
 							<p>
 								Loading...
 							</p>
 						)}
 
-						{error && (
+						{error || googleBookError && (
 							<p>
 								Query Error!
 							</p>
@@ -93,11 +105,24 @@ const RESTfulExample = () => {
 									<h5>getGoogleBooks Data:</h5>
 								</div>
 								{/* ----------------------------------------------------------------------- */}
-								{googleBooksData.googleBooksList.books.map((book, index) => (
+								{googleBooksData.googleBooks.books.map((book, index) => (
 									<div key={index} className="mb-3 container-padding-border-radius-2">
-										<GoogleBooksBook book={ book } />
+										<GoogleBookBook book={ book } />
 									</div>
 								))}
+								{/* ----------------------------------------------------------------------- */}
+							</div>
+						)}
+
+						{googleBookData && (
+							<div>
+								<div className="mb-3">
+									<h5>getGoogleBook Data:</h5>
+								</div>
+								{/* ----------------------------------------------------------------------- */}
+									<div key={googleBookData.googleBook.id} className="mb-3 container-padding-border-radius-2">
+										<GoogleBookBook book={ googleBookData.googleBook } />
+									</div>
 								{/* ----------------------------------------------------------------------- */}
 							</div>
 						)}
@@ -128,6 +153,15 @@ const RESTfulExample = () => {
 							className="btn-success btn-md"
 							onClick={() => refetch()}
 							buttonText="RefetchQueryResults"
+						/>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success btn-md"
+							onClick={ () => getGoogleBook({ variables: { id: 'uW_zzQEACAAJ' }}) }
+							buttonText="Get Book ID: uW_zzQEACAAJ"
 						/>
 					</div>
 
@@ -192,7 +226,7 @@ const RESTfulExample = () => {
 							onClick={ async () => {
 								await fetchMore({
 									variables: {
-										after: googleBooksData.googleBooksList.cursor,
+										after: googleBooksData.googleBooks.cursor,
 									},
 									// fetchPolicy: 'cache-and-network',
 								});
