@@ -21,7 +21,7 @@ const GraphiQLPage = () => {
 		<Styles.GraphiQLPage>
 			<GraphiQL
 				fetcher={async (graphQLParams) => {
-					const data = await fetch('http://localhost:8080/graphql', {
+					const data = await fetch('https://rickandmortyapi.com/graphql', {
 						method: 'POST',
 						headers: {
 							Accept: 'application/json',

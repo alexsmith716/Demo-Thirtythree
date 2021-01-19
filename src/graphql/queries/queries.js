@@ -41,9 +41,9 @@ export const GET_GOOGLE_BOOK = gql`
 	}
 `;
 
-export const GET_A_RICK_AND_MORTY_CHARACTERS = gql`
+export const GET_RICK_AND_MORTY_CHARACTERS = gql`
 	query GetRickAndMortyCharacters($after: String, $searchString: String!) {
-		rickAndMortyCharacters(after: $after, searchString: $searchString) {
+		characters(after: $after, searchString: $searchString) {
 			cursor
 			hasMore
 			characters {
@@ -54,8 +54,8 @@ export const GET_A_RICK_AND_MORTY_CHARACTERS = gql`
 	}
 `;
 
-export const GET_A_RICK_AND_MORTY_CHARACTER = gql`
-	query GetRickAndMortyCharacterFull($id: ID!){
+export const GET_RICK_AND_MORTY_CHARACTER = gql`
+	query GetRickAndMortyCharacter($id: ID!){
 		character(id: $id) {
 			id
 			name
@@ -63,21 +63,6 @@ export const GET_A_RICK_AND_MORTY_CHARACTER = gql`
 			species
 			type
 			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
 		}
 	}
 `;

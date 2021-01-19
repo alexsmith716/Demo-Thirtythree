@@ -2,14 +2,14 @@ import { paginateResults } from '../utils/utils';
 import { GoogleBooksAPI } from '../datasources/googleBooksAPI';
 import graphqlClient from '../../apollo/graphqlClient';
 
-import * as graphqlQueries from '../queries/queries.js';
+//	import { } from '../queries/queries.graphql';
+import { GetRickAndMortyCharacter } from '../queries/queries.graphql';
 
 export const dataSources = () => ({
 	googleBooks: new GoogleBooksAPI(),
 });
 
 
-// tell Apollo Server how to populate data for every schema field
 export const resolvers = {
 	Query: {
 		hello: () => 'Hello world!',
@@ -18,6 +18,7 @@ export const resolvers = {
 		//  	dataSources.rickAndMortyAPICharacter.character({ id })
 		//  ),
 
+		// RESTDatasource
 		googleBooks: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > after: ', after);
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > searchString: ', searchString);
@@ -41,15 +42,19 @@ export const resolvers = {
 			};
 		},
 
+		// RESTDatasource
 		googleBook: async (obj, { id }, { dataSources }) => {
 			const book = await dataSources.googleBooks.getBook({ id });
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > book: ', book);
 			return book;
 		},
 
-		rickAndMortyCharacter: async (obj, { id }) => {
+		// No Datasource
+		// FIX THIS ----------------------------------
+		character: async (obj, { id }) => {
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > ID: ', id);
-			const character = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql/', method: 'POST', query: });
+			const character = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GetRickAndMortyCharacter, variables: {id: id}});
+			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
 			return character;
 		},
 	},

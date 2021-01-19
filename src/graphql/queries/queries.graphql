@@ -10,21 +10,6 @@ query GetRickAndMortyCharacter($id: ID!) {
 		species
 		type
 		gender
-		origin {
-			name
-			type
-			dimension
-		}
-		location {
-			name
-			type
-			dimension
-		}
-		image
-		episode {
-			name
-			episode
-		}
 	}
 }
 
@@ -50,21 +35,6 @@ query GetRickAndMortyCharacterIdOne {
 		species
 		type
 		gender
-		origin {
-			name
-			type
-			dimension
-		}
-		location {
-			name
-			type
-			dimension
-		}
-		image
-		episode {
-			name
-			episode
-		}
 	}
 }
 

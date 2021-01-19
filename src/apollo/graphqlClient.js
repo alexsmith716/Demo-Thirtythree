@@ -1,21 +1,60 @@
 import fetch from 'isomorphic-fetch';
 
-export default function graphqlClient({ endpoint, method='POST', query }) {
+import { GetRickAndMortyCharacter } from '../graphql/queries/queries.graphql';
 
-	console.log('>>>> graphqlClient > endpoint: ', endpoint);
-	console.log('>>>> graphqlClient > method: ', method);
-	console.log('>>>> graphqlClient > query: ', query);
+var queryA = `{
+	character(id: 9) {
+		id
+		name
+		status
+		species
+		type
+		gender
+		origin {
+			name
+			type
+			dimension
+		}
+		location {
+			name
+			type
+			dimension
+		}
+		image
+		episode {
+			name
+			episode
+		}
+	}
+}`;
 
-	//	fetch('http://localhost:4000', {
-	//		method: 'POST',
-	//		headers: { 'Content-Type': 'application/json' },
-	//		body: JSON.stringify({ query: `
 
-	//			}` 
-	//		}),
-	//	})
-	//	.then(res => res.json())
-	//	.then(res => console.log(res.data));
+export default function graphqlClient({ endpoint, query, variables = {}, method='POST' }) {
 
-	return 'graphqlClient';
-}
+	//	console.log('>>>> graphqlClient > endpoint: ', endpoint);
+	//	console.log('>>>> graphqlClient > query: ', query);
+	//	console.log('>>>> graphqlClient > variables: ', {...variables});
+	//	console.log('>>>> graphqlClient > method: ', method);
+
+	fetch(endpoint, {
+		method: method,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			query: queryA,
+			variables: {...variables}
+		}),
+	})
+		.then(response => response.json())
+		.then(data => {
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			console.log('>>>> graphqlClient > DATA:', JSON.stringify(data));
+			return data;
+		})
+		.catch(err => {
+			console.error('>>>> graphqlClient > ERROR:', err.message);
+		});
+};
