@@ -85,18 +85,18 @@ export async function get(req, res) {
 
 	await asyncGetPromises(routes, req.path, store);
 
-  //  try {
-  //  	const gbram = await clientApollo.query({
-  //  		query: graphqlQueries.GET_GOOGLE_BOOKS,
-  //  		variables: {
-  //  			searchString: 'rick and morty',
-  //  			orderBy: 'newest',
-  //  		},
-  //  	});
-  //  	console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', JSON.stringify(gbram));
-  //  } catch (error) {
-  //  	console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
-  //  }
+	//  try {
+	//  	const gbram = await clientApollo.query({
+	//  		query: graphqlQueries.GET_GOOGLE_BOOKS,
+	//  		variables: {
+	//  			searchString: 'rick and morty',
+	//  			orderBy: 'newest',
+	//  		},
+	//  	});
+	//  	console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', JSON.stringify(gbram));
+	//  } catch (error) {
+	//  	console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
+	//  }
 
 	//	try {
 	//		const characterTen = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});

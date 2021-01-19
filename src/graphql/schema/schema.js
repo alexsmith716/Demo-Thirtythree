@@ -1,8 +1,5 @@
 import gql from 'graphql-tag';
 
-//  Schema-First Developement
-//  build the schema on how the GraphQL API will be used by the front-end
-//  ============================================
 export const typeDefs = gql`
 	scalar ObjID
 
@@ -18,13 +15,13 @@ export const typeDefs = gql`
 
 		googleBook(id: ID!): Book
 
-		rickAndMortyCharacters(
+		characters(
 			after: String,
 			searchString: String!
 			pageSize: Int,
 		): rickAndMortyCharacterConnection
 
-		rickAndMortyCharacter(id: ID!): Character
+		character(id: ID!): Character
 	}
 
 	type Mutation {
@@ -72,28 +69,5 @@ export const typeDefs = gql`
 		species: String
 		type: String
 		gender: String
-		origin: Location
-		location: Location
-		image: String
-		episode: [Episode]
-		created: String
-	}
-
-	type Location {
-		id: ID
-		name: String
-		type: String
-		dimension: String
-		residents: [Character]
-		created: String
-	}
-
-	type Episode {
-		id: ID
-		name: String
-		air_date: String
-		episode: String
-		characters: [Character]
-		created: String
 	}
 `;

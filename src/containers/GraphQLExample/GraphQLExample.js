@@ -8,7 +8,7 @@ import {
 
 import { Button } from '../../components/Button';
 import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
-import { GET_A_RICK_AND_MORTY_CHARACTER } from '../../graphql/queries/queries.js';
+import { GET_RICK_AND_MORTY_CHARACTER } from '../../graphql/queries/queries.js';
 
 
 const GraphQLExample = () => {
@@ -25,7 +25,7 @@ const GraphQLExample = () => {
 			fetchMore,
 			networkStatus 
 		}] = useLazyQuery(
-			GET_A_RICK_AND_MORTY_CHARACTER,
+			GET_RICK_AND_MORTY_CHARACTER,
 			{
 				variables: {
 					id: '',
@@ -36,7 +36,7 @@ const GraphQLExample = () => {
 
 	useEffect(() => {
 			if (rickAndMortyCharactersData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > rickAndMortyCharactersData.rickAndMortyCharacters: ', rickAndMortyCharactersData.rickAndMortyCharacters);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > useEffect() > rickAndMortyCharactersData.rickAndMortyCharacters: ', rickAndMortyCharactersData.rickAndMortyCharacters);
 			}
 		},
 		[rickAndMortyCharactersData,]
@@ -88,8 +88,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({ variables: { id: '8' }, fetchPolicy: 'network-only'})}
-							buttonText="Get character 8"
+							onClick={() => getRickAndMortyCharacter({ variables: { id: '9' }, fetchPolicy: 'network-only'})}
+							buttonText="Get character"
 						/>
 					</div>
 
