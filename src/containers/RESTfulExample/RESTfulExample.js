@@ -135,7 +135,6 @@ const RESTfulExample = () => {
 								<div>----------------------------------</div>
 							</div>
 						)}
-
 					</div>
 
 					<div className="mb-3">

@@ -22,7 +22,7 @@ import { apiClient } from '../helpers/apiClient';
 // -------------------------------------------------------------------
 
 import { GetRickAndMortyCharacter, GetRickAndMortyCharacterIdOne } from '../graphql/queries/queries.graphql';
-import * as graphqlQueries from '../graphql/queries/queries.js';
+import * as graphqlQueries from '../graphql/queries/queries';
 
 // -------------------------------------------------------------------
 
