@@ -16,6 +16,21 @@ export const GET_RICK_AND_MORTY_CHARACTER_X = `
 			species
 			type
 			gender
+			origin {
+				name
+				type
+				dimension
+			}
+			location {
+				name
+				type
+				dimension
+			}
+			image
+			episode {
+				name
+				episode
+			}
 		}
 	}
 `;
@@ -29,6 +44,21 @@ export const GET_RICK_AND_MORTY_CHARACTER = gql`
 			species
 			type
 			gender
+			origin {
+				name
+				type
+				dimension
+			}
+			location {
+				name
+				type
+				dimension
+			}
+			image
+			episode {
+				name
+				episode
+			}
 		}
 	}
 `;
