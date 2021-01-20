@@ -2,8 +2,8 @@ import { paginateResults } from '../utils/utils';
 import { GoogleBooksAPI } from '../datasources/googleBooksAPI';
 import graphqlClient from '../../apollo/graphqlClient';
 
-//	import { } from '../queries/queries.graphql';
-import { GetRickAndMortyCharacter } from '../queries/queries.graphql';
+import { GET_RICK_AND_MORTY_CHARACTER_X } from '../queries/queries';
+//import { GetRickAndMortyCharacter } from '../queries/queries.graphql';
 
 export const dataSources = () => ({
 	googleBooks: new GoogleBooksAPI(),
@@ -50,12 +50,14 @@ export const resolvers = {
 		},
 
 		// No Datasource
-		// FIX THIS ----------------------------------
 		character: async (obj, { id }) => {
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > ID: ', id);
-			const character = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GetRickAndMortyCharacter, variables: {id: id}});
+			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER_X, variables: {id: id}});
+			const { data: { character }} = response;
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
-			return character;
+			return {
+				...character
+			}
 		},
 	},
 
@@ -73,7 +75,4 @@ export const resolvers = {
 			};
 		},
 	},
-
-	//	Book: {
-	//	}
 };

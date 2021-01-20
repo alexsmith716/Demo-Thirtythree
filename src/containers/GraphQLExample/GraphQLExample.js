@@ -13,33 +13,29 @@ import { GET_RICK_AND_MORTY_CHARACTER } from '../../graphql/queries/queries.js';
 
 const GraphQLExample = () => {
 
+	const [clientExtract, setClientExtract] = useState(null);
 	const client = useApolloClient();
-
 
 	const [getRickAndMortyCharacter, {
 			loading, 
 			error,
-			data: rickAndMortyCharactersData,
-			previousData: rickAndMortyCharactersPreviousData,
+			data,
 			refetch,
 			fetchMore,
 			networkStatus 
 		}] = useLazyQuery(
 			GET_RICK_AND_MORTY_CHARACTER,
 			{
-				variables: {
-					id: '',
-				},
 				notifyOnNetworkStatusChange: true,
 			}
 	);
 
 	useEffect(() => {
-			if (rickAndMortyCharactersData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > useEffect() > rickAndMortyCharactersData.rickAndMortyCharacters: ', rickAndMortyCharactersData.rickAndMortyCharacters);
+			if (data) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > useEffect() > DATA: ', data.character);
 			}
 		},
-		[rickAndMortyCharactersData,]
+		[data,]
 	);
 
 	return (
@@ -76,6 +72,17 @@ const GraphQLExample = () => {
 							</p>
 						)}
 
+						{clientExtract !== null && (
+							<div>
+								<h5>ApolloClient Cache:</h5>
+								<div>----------------------------------</div>
+								<div>{JSON.stringify(clientExtract)}</div>
+								<div>----------------------------------</div>
+							</div>
+						)}
+					</div>
+
+					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success btn-md"
@@ -88,8 +95,26 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({ variables: { id: '9' }, fetchPolicy: 'network-only'})}
-							buttonText="Get character"
+							onClick={() => getRickAndMortyCharacter({ variables: { id: 1 }, fetchPolicy: 'network-only'})}
+							buttonText="Get character 1"
+						/>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success btn-md"
+							onClick={() => getRickAndMortyCharacter({ variables: { id: 3 }, fetchPolicy: 'network-only'})}
+							buttonText="Get character 3"
+						/>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success btn-md"
+							onClick={() => getRickAndMortyCharacter({ variables: { id: 9 }, fetchPolicy: 'network-only'})}
+							buttonText="Get character 9"
 						/>
 					</div>
 
