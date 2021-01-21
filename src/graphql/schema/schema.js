@@ -19,7 +19,7 @@ export const typeDefs = gql`
 			after: String,
 			searchString: String!
 			pageSize: Int,
-		): rickAndMortyCharacterConnection
+		): RickAndMortyCharacterConnection
 
 		character(id: ID!): Character
 	}
@@ -31,7 +31,7 @@ export const typeDefs = gql`
 		): GoogleBooksUpdateResponse!
 	}
 
-	type rickAndMortyCharacterConnection {
+	type RickAndMortyCharacterConnection {
 		cursor: String!
 		hasMore: Boolean!
 		characters: [Character]!

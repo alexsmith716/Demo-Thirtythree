@@ -3,12 +3,12 @@ import {
 	useMutation,
 } from '@apollo/client';
 import { Button } from '../Button';
-import { Thumbnail } from '../../Styles';
+import { Thumbnail, ThumbnailImage } from '../../Styles';
 import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 
 export const GoogleBookBook = ({ book }) => {
 
-	const [toggleBookDescriptionView, setToggleBookDescriptionView] = useState(false);
+	const [toggleDescriptionView, setToggleDescriptionView] = useState(false);
 
 	const [googleBookModifyFavorite, { error: googleBookModifyFavoriteERROR, data: googleBookModifyFavoriteDATA }] = useMutation(
 		GOOGLE_BOOK_MODIFY_FAVORITE,
@@ -33,12 +33,11 @@ export const GoogleBookBook = ({ book }) => {
 			<div className="col-two">
 
 				<Thumbnail>
-
 					<div className="text-center">
 						{ book.smallThumbnail
 							?
 							<div>
-								<img src={upgradeThumbnailURL(book.smallThumbnail)} alt={book.title}/>
+								<ThumbnailImage src={upgradeThumbnailURL(book.smallThumbnail)} alt={book.title}/>
 							</div>
 							:
 							<div><i>Image not found</i></div>
@@ -70,13 +69,13 @@ export const GoogleBookBook = ({ book }) => {
 
 				{book.description &&
 					<>
-						<div className={!toggleBookDescriptionView ? 'text-overflow-ellipsis' : ''}>
+						<div className={!toggleDescriptionView ? 'text-overflow-ellipsis' : ''}>
 							{book.description}
 						</div>
 						<Button
 							className="btn-light btn-tiny"
-							onClick={() => setToggleBookDescriptionView(!toggleBookDescriptionView)}
-							buttonText={toggleBookDescriptionView ? "<< Less" : "More >>"}
+							onClick={() => setToggleDescriptionView(!toggleDescriptionView)}
+							buttonText={toggleDescriptionView ? "<< Less" : "More >>"}
 						/>
 					</>
 				}

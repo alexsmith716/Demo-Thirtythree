@@ -19,7 +19,8 @@ const GraphQLExample = () => {
 	const [getRickAndMortyCharacter, {
 			loading, 
 			error,
-			data,
+			data: rickAndMortyData,
+			previousData: rickAndMortyPreviousData,
 			refetch,
 			fetchMore,
 			networkStatus 
@@ -31,11 +32,11 @@ const GraphQLExample = () => {
 	);
 
 	useEffect(() => {
-			if (data) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > useEffect() > DATA: ', data.character);
+			if (rickAndMortyData) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > useEffect() > DATA: ', rickAndMortyData.character);
 			}
 		},
-		[data,]
+		[rickAndMortyData,]
 	);
 
 	return (
@@ -70,6 +71,19 @@ const GraphQLExample = () => {
 							<p>
 								Query Error!
 							</p>
+						)}
+
+						{rickAndMortyData && (
+							<div>
+								<div className="mb-3">
+									<h5>getRickAndMortyCharacter Data:</h5>
+								</div>
+								{/* ----------------------------------------------------------------------- */}
+								<div key={rickAndMortyData.character.id} className="mb-3 container-padding-border-radius-2">
+									<RickAndMortyCharacter character={ rickAndMortyData.character } />
+								</div>
+								{/* ----------------------------------------------------------------------- */}
+							</div>
 						)}
 
 						{clientExtract !== null && (

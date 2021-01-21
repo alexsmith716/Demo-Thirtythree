@@ -4,15 +4,8 @@
 
 * Using Babel CLI for Server compile.
 
-* Addressing the `require`ing of static assets server/Node side via babel with `css-modules-require-hook`.
-* Only enabling usage of `css-modules-require-hook` for testing with `graphiql`.
 * Tried several approaches using babel & LC for server side rendering static assets but none really worked so going with this.
 * Pretty sure this usage of LC for SSR is correct but must say not 100% positive! 
-
-https://github.com/node-fetch/node-fetch
-https://github.com/matthew-andrews/isomorphic-fetch
-https://github.com/lquixada/cross-fetch
-https://github.com/developit/unfetch
 
 * GraphQL, REST, AWS/cloud
 * TS
@@ -31,5 +24,19 @@ https://github.com/developit/unfetch
 
 ### TODO:
 
-* complete Rick And Morty graphql API
-* test on Heroku
+* GoogleBooks API:
+* ------------------------------------------
+* User can query for any books
+* Two objects returned per query and are paginated
+* User can discard/remove a queried book
+* User can 'favorite/star' a book (book is saved to dB) (cache in place of dB)
+* The 'favorite/star' book is placed in chosen dB 'favorite' container
+* User can view all favorites from selected 'favorite' container
+* User can discard/remove a saved dB book
+
+* Rick And Morty API:
+* ------------------------------------------
+* User can query for any character
+* 'next' button will query for next character ID until all ID's are cached/queried
+* User can query for all characters
+* User can query for a list of characters (2, 8, 1, 11)
