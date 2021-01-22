@@ -37,6 +37,6 @@
 * Rick And Morty API:
 * ------------------------------------------
 * User can query for any character
-* 'next' button will query for next character ID until all ID's are cached/queried
+* 'next' button will paginate for next character ID until all ID's are cached/queried
 * User can query for all characters
 * User can query for a list of characters (2, 8, 1, 11)

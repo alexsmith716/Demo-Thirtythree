@@ -155,14 +155,15 @@ const RESTfulExample = () => {
 						/>
 					</div>
 
-					<div className="mb-3">
+					
+					{/* <div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success btn-md"
 							onClick={ () => getGoogleBook({ variables: { id: 'uW_zzQEACAAJ' }}) }
 							buttonText="Get Book ID: uW_zzQEACAAJ"
 						/>
-					</div>
+					</div> */}
 
 					<div className="mb-3">
 						<Button
@@ -218,21 +219,23 @@ const RESTfulExample = () => {
 						/>
 					</div>
 
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-primary btn-md"
-							onClick={ async () => {
-								await fetchMore({
-									variables: {
-										after: googleBooksData.googleBooks.cursor,
-									},
-									// fetchPolicy: 'cache-and-network',
-								});
-							}}
-							buttonText="fetchMore Google Books"
-						/>
-					</div>
+					{googleBooksData && (
+						<div className="mb-3">
+							<Button
+								type="button"
+								className="btn-primary btn-md"
+								onClick={ async () => {
+									await fetchMore({
+										variables: {
+											after: googleBooksData.googleBooks.cursor,
+										},
+										// fetchPolicy: 'cache-and-network',
+									});
+								}}
+								buttonText="fetchMore Google Books"
+							/>
+						</div>
+					)}
 
 				</div>
 			</div>

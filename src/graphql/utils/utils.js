@@ -1,21 +1,22 @@
 export const paginateResults = ({ after: cursor, pageSize, results, getCursor = () => null }) => {
 
-	// console.log('>>>>>>>>>>>>> graphql > UTILS > cursor: ', cursor)
+	console.log('>>>>>>>>>>>>> graphql > UTILS > cursor: ', cursor)
+  console.log('>>>>>>>>>>>>> graphql > UTILS > results: ', results)
 
 	if (pageSize < 1) return [];
 
 	if (!cursor) return results.slice(0, pageSize);
 
-	// console.log('>>>>>>>>>>>>> graphql > UTILS > cursor: ', cursor)
+	console.log('>>>>>>>>>>>>> graphql > UTILS > cursor: ', cursor)
 
 	const cursorIndex = results.findIndex(item => {
 		let itemCursor = item.cursor ? item.cursor : getCursor(item);
 		return itemCursor ? cursor === itemCursor : false;
 	});
 
-	// console.log('>>>>>>>>>>>>> graphql > UTILS > cursorIndex: ', cursorIndex)
+	console.log('>>>>>>>>>>>>> graphql > UTILS > cursorIndex: ', cursorIndex)
 
-	const cursorIndexXXX = cursorIndex >= 0
+	const theCursorIndex = cursorIndex >= 0
 		? cursorIndex === results.length - 1
 			? []
 			: results.slice(
@@ -24,7 +25,7 @@ export const paginateResults = ({ after: cursor, pageSize, results, getCursor = 
 				)
 		: results.slice(0, pageSize);
 
-	// console.log('>>>>>>>>>>>>> graphql > UTILS > cursorIndexXXX: ', cursorIndexXXX)
+	// console.log('>>>>>>>>>>>>> graphql > UTILS > theCursorIndex: ', theCursorIndex)
 
-	return cursorIndexXXX;
+	return theCursorIndex;
 };

@@ -4,11 +4,12 @@ import {
 	useLazyQuery,
 	useApolloClient,
 	NetworkStatus,
+	gql,
 } from '@apollo/client';
 
 import { Button } from '../../components/Button';
 import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
-import { GET_RICK_AND_MORTY_CHARACTER } from '../../graphql/queries/queries.js';
+import { GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_AND_MORTY_CHARACTER } from '../../graphql/queries/queries.js';
 
 
 const GraphQLExample = () => {
@@ -22,21 +23,34 @@ const GraphQLExample = () => {
 			data: rickAndMortyData,
 			previousData: rickAndMortyPreviousData,
 			refetch,
-			fetchMore,
 			networkStatus 
 		}] = useLazyQuery(
-			GET_RICK_AND_MORTY_CHARACTER,
+			gql`${GET_RICK_AND_MORTY_CHARACTER}`,
 			{
 				notifyOnNetworkStatusChange: true,
 			}
 	);
 
+	const [getRickAndMortyCharacters, {
+			loading: rickAndMortyCharactersLoading, 
+			error: rickAndMortyCharactersError,
+			data: rickAndMortyCharactersData,
+			previousData: rickAndMortyCharactersPreviousData,
+			fetchMore,
+		}] = useLazyQuery(
+			gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
+	);
+
 	useEffect(() => {
 			if (rickAndMortyData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > useEffect() > DATA: ', rickAndMortyData.character);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyData: ', rickAndMortyData.character);
+			}
+			if (rickAndMortyCharactersData) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData.characters);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > rickAndMortyCharactersData > cursor: ', rickAndMortyCharactersData.characters.cursor);
 			}
 		},
-		[rickAndMortyData,]
+		[rickAndMortyData, rickAndMortyCharactersData,]
 	);
 
 	return (
@@ -61,13 +75,13 @@ const GraphQLExample = () => {
 							</p>
 						)}
 
-						{loading && (
+						{loading || rickAndMortyCharactersLoading && (
 							<p>
 								Loading...
 							</p>
 						)}
 
-						{error && (
+						{error || rickAndMortyCharactersError && (
 							<p>
 								Query Error!
 							</p>
@@ -118,19 +132,27 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({ variables: { id: 3 }, fetchPolicy: 'network-only'})}
-							buttonText="Get character 3"
+							onClick={() => getRickAndMortyCharacters({ variables: { id: 4 }, fetchPolicy: 'network-only'})}
+							buttonText="Get character 4"
 						/>
 					</div>
 
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({ variables: { id: 9 }, fetchPolicy: 'network-only'})}
-							buttonText="Get character 9"
-						/>
-					</div>
+					{rickAndMortyCharactersData && (
+						<div className="mb-3">
+							<Button
+								type="button"
+								className="btn-primary btn-md"
+								onClick={ async () => {
+									await fetchMore({
+										variables: {
+											after: rickAndMortyCharactersData.characters.cursor,
+										},
+									});
+								}}
+								buttonText="fetch next R&M character"
+							/>
+						</div>
+					)}
 
 				</div>
 			</div>
