@@ -17,7 +17,7 @@ export const typeDefs = gql`
 
 		characters(
 			after: String,
-			searchString: String!
+			id: ID!
 			pageSize: Int,
 		): RickAndMortyCharacterConnection
 
@@ -63,7 +63,7 @@ export const typeDefs = gql`
 	}
 
 	type Character {
-		id: ID
+		id: ID!
 		name: String
 		status: String
 		species: String

@@ -7,7 +7,7 @@ export const GET_HELLO = gql`
 	}
 `;
 
-export const GET_RICK_AND_MORTY_CHARACTER_X = `
+export const GET_RICK_AND_MORTY_CHARACTER = `
 	query GetRickAndMortyCharacter($id: ID!) {
 		character(id: $id) {
 			id
@@ -35,43 +35,34 @@ export const GET_RICK_AND_MORTY_CHARACTER_X = `
 	}
 `;
 
-export const GET_RICK_AND_MORTY_CHARACTER = gql`
-	query GetRickAndMortyCharacter($id: ID!) {
-		character(id: $id) {
-			id
-			name
-			status
-			species
-			type
-			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
-		}
-	}
-`;
-
+// charactersByIds(ids: [1,4]) {
 export const GET_RICK_AND_MORTY_CHARACTERS = `
-	query GetRickAndMortyCharacters($after: String, $searchString: String!) {
-		characters(after: $after, searchString: $searchString) {
+	query GetRickAndMortyCharacters($ids: Array) {
+		charactersByIds(ids: $ids) {
 			cursor
 			hasMore
 			characters {
 				id
 				name
-			}
+				status
+				species
+				type
+				gender
+				origin {
+					name
+					type
+					dimension
+				}
+				location {
+					name
+					type
+					dimension
+				}
+				image
+				episode {
+					name
+					episode
+				}
 		}
 	}
 `;
