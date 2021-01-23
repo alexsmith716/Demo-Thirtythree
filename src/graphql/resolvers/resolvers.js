@@ -48,21 +48,15 @@ export const resolvers = {
 			return book;
 		},
 
-    // No Datasource
-    characters: async (obj, { after, id, pageSize = 1 }) => {
-      const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {id: id}});
-      const characters = paginateResults({ after, pageSize, results: response });
-      const { data: { character }} = response;
-      console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', character);
-      return {
-        characters,
-        cursor: characters.length ? characters[characters.length - 1].cursor : null,
-        hasMore: characters.length
-          ? characters[characters.length - 1].cursor !==
-            response[response.length - 1].cursor
-          : false,
-      }
-    },
+		// returned resolver value must match return type in schema
+
+		// No Datasource
+		charactersByIds: async (obj, { after, ids, pageSize = 1 }) => {
+			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {ids: ids}});
+			const { data: { charactersByIds }} = response;
+			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', charactersByIds);
+			return charactersByIds;
+		},
 
 		// No Datasource
 		character: async (obj, { id }) => {

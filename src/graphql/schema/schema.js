@@ -15,13 +15,11 @@ export const typeDefs = gql`
 
 		googleBook(id: ID!): Book
 
-		characters(
-			after: String,
-			id: ID!
-			pageSize: Int,
-		): RickAndMortyCharacterConnection
-
 		character(id: ID!): Character
+
+		characters(page: Int, filter: FilterCharacter): Characters
+
+		charactersByIds(ids: [ID!]!): [Character]
 	}
 
 	type Mutation {
@@ -62,8 +60,23 @@ export const typeDefs = gql`
 		favorite: Boolean
 	}
 
+	type Characters {
+		info: Info
+		results: [Character]
+	}
+
+	type Locations {
+		info: Info
+		results: [Location]
+	}
+
+	type Episodes {
+		info: Info
+		results: [Episode]
+	}
+
 	type Character {
-		id: ID!
+		id: ID
 		name: String
 		status: String
 		species: String
@@ -92,5 +105,31 @@ export const typeDefs = gql`
 		episode: String
 		characters: [Character]
 		created: String
+	}
+
+	type Info {
+		count: Int
+		pages: Int
+		next: Int
+		prev: Int
+	}
+
+	input FilterCharacter {
+		name: String
+		status: String
+		species: String
+		type: String
+		gender: String
+	}
+
+	input FilterLocation {
+		name: String
+		type: String
+		dimension: String
+	}
+
+	input FilterEpisode {
+		name: String
+		episode: String
 	}
 `;
