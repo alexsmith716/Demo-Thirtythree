@@ -35,34 +35,30 @@ export const GET_RICK_AND_MORTY_CHARACTER = `
 	}
 `;
 
-// charactersByIds(ids: [1,4]) {
 export const GET_RICK_AND_MORTY_CHARACTERS = `
-	query GetRickAndMortyCharacters($ids: Array) {
+	query GetRickAndMortyCharacters($ids: [ID!]!) {
 		charactersByIds(ids: $ids) {
-			cursor
-			hasMore
-			characters {
-				id
+			id
+			name
+			status
+			species
+			type
+			gender
+			origin {
 				name
-				status
-				species
 				type
-				gender
-				origin {
-					name
-					type
-					dimension
-				}
-				location {
-					name
-					type
-					dimension
-				}
-				image
-				episode {
-					name
-					episode
-				}
+				dimension
+			}
+			location {
+				name
+				type
+				dimension
+			}
+			image
+			episode {
+				name
+				episode
+			}
 		}
 	}
 `;

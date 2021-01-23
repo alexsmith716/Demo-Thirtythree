@@ -46,11 +46,13 @@ const GraphQLExample = () => {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyData: ', rickAndMortyData.character);
 			}
 			if (rickAndMortyCharactersData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData.characters);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > rickAndMortyCharactersData > cursor: ', rickAndMortyCharactersData.characters.cursor);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
+			}
+			if (rickAndMortyCharactersPreviousData) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersPreviousData: ', rickAndMortyCharactersPreviousData);
 			}
 		},
-		[rickAndMortyData, rickAndMortyCharactersData,]
+		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersPreviousData]
 	);
 
 	return (
@@ -85,6 +87,21 @@ const GraphQLExample = () => {
 							<p>
 								Query Error!
 							</p>
+						)}
+
+						{rickAndMortyCharactersData && (
+							<div>
+								<div className="mb-3">
+									<h5>getRickAndMortyCharacters Data:</h5>
+								</div>
+								{/* ----------------------------------------------------------------------- */}
+								{rickAndMortyCharactersData.charactersByIds.map((character, index) => (
+									<div key={index} className="mb-3 container-padding-border-radius-2">
+										<RickAndMortyCharacter character={ character } />
+									</div>
+								))}
+								{/* ----------------------------------------------------------------------- */}
+							</div>
 						)}
 
 						{rickAndMortyData && (
@@ -132,8 +149,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacters({ variables: { id: 4 }, fetchPolicy: 'network-only'})}
-							buttonText="Get character 4"
+							onClick={() => getRickAndMortyCharacters({ variables: { ids: [4,9] }, fetchPolicy: 'network-only'})}
+							buttonText="Get characters 4 & 9"
 						/>
 					</div>
 

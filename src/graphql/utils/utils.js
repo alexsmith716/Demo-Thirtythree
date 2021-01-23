@@ -1,7 +1,7 @@
 export const paginateResults = ({ after: cursor, pageSize, results, getCursor = () => null }) => {
 
 	console.log('>>>>>>>>>>>>> graphql > UTILS > cursor: ', cursor)
-  console.log('>>>>>>>>>>>>> graphql > UTILS > results: ', results)
+	console.log('>>>>>>>>>>>>> graphql > UTILS > results: ', results)
 
 	if (pageSize < 1) return [];
 
