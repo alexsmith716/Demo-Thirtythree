@@ -15,6 +15,7 @@ import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_A
 const GraphQLExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
+	const [rickAndMortyCharactersInfo, setRickAndMortyCharactersInfo] = useState(null);
 	const client = useApolloClient();
 
 	const [getRickAndMortyCharacter, {
@@ -54,6 +55,10 @@ const GraphQLExample = () => {
 			}
 			if (rickAndMortyCharactersData) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData.characters.results: ', rickAndMortyCharactersData.characters.results);
+				const { characters: { info }} = rickAndMortyCharactersData;
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData.info: ', info);
+				setRickAndMortyCharactersInfo(info);
 			}
 			if (rickAndMortyCharactersByIdsData) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
@@ -94,6 +99,21 @@ const GraphQLExample = () => {
 							<p>
 								Query Error!
 							</p>
+						)}
+
+						{rickAndMortyCharactersData && (
+							<div>
+								<div className="mb-3">
+									<h5>rickAndMortyCharactersData Data:</h5>
+								</div>
+								{/* ----------------------------------------------------------------------- */}
+								{rickAndMortyCharactersData.characters.results.map((character, index) => (
+									<div key={index} className="mb-3 container-padding-border-radius-2">
+										<RickAndMortyCharacter character={ character } />
+									</div>
+								))}
+								{/* ----------------------------------------------------------------------- */}
+							</div>
 						)}
 
 						{rickAndMortyCharactersByIdsData && (
@@ -156,8 +176,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacters({variables: {page: 1, query: ''}})}
-							buttonText="get RandMChars page 1"
+							onClick={() => getRickAndMortyCharacter({variables: {id: 2}, fetchPolicy: 'network-only'})}
+							buttonText="Get character 2"
 						/>
 					</div>
 
@@ -165,8 +185,17 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacters({variables: {page: 2, query: ''}})}
-							buttonText="get RandMChars page 2"
+							onClick={() => getRickAndMortyCharacter({variables: {id: 3}, fetchPolicy: 'network-only'})}
+							buttonText="Get character 3"
+						/>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success btn-md"
+							onClick={() => getRickAndMortyCharacters({variables: {page: 1, filter: { name: '' }}, fetchPolicy: 'network-only'})}
+							buttonText="get RandMChars page 1"
 						/>
 					</div>
 
@@ -179,6 +208,15 @@ const GraphQLExample = () => {
 						/>
 					</div>
 
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-success btn-md"
+							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [10,11]}, fetchPolicy: 'network-only'})}
+							buttonText="Get RandMCharsByIds 10,11"
+						/>
+					</div>
+
 					{rickAndMortyCharactersData && (
 						<div className="mb-3">
 							<Button
@@ -186,12 +224,10 @@ const GraphQLExample = () => {
 								className="btn-primary btn-md"
 								onClick={ async () => {
 									await rickAndMortyCharactersFetchMore({
-										variables: {
-											after: rickAndMortyCharactersData.characters.cursor,
-										},
+										variables: {page: 2, filter: { name: '' }},
 									});
 								}}
-								buttonText="fetch next R&M character"
+								buttonText="fetch next RandMChars page"
 							/>
 						</div>
 					)}

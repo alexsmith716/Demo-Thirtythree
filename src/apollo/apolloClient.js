@@ -63,28 +63,36 @@ export default function apolloClient({ uri, ssrMode = false }) {
 						}
 					},
 					// --------------------------------------
-					//	characters: {
-					//		keyArgs: false,
-					//		merge(existing = {}, incoming, { args }) {
-					//			let results = [];
-					//		},
-					//	},
+					characters: {
+						keyArgs: false,
+						merge(existing = {}, incoming, { args }) {
+
+							const page = args && args['page'];
+
+							if (page === 1) {
+								return incoming;
+							}
+
+							let results = [];
+
+							// =======================================
+
+							if (existing && existing.results) {
+								results = results.concat(existing.results);
+							}
+
+							if (incoming && incoming.results) {
+								results = results.concat(incoming.results);
+							}
+							return {
+								...incoming,
+								results,
+							};
+						},
+					},
 					// --------------------------------------
 					//	charactersByIds: {
 					//		keyArgs: false,
-					//		merge(existing, incoming, option) {
-					//			let characters = [];
-					//			if (existing) {
-					//				characters = characters.concat(existing);
-					//			}
-					//			if (incoming) {
-					//				characters = characters.concat(incoming);
-					//			}
-					//			return {
-					//				...incoming,
-					//				characters,
-					//			};
-					//		}
 					//	}
 					// --------------------------------------
 				}

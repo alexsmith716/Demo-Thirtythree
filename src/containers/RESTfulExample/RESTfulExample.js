@@ -52,8 +52,8 @@ const RESTfulExample = () => {
 	// result.data ?? result.previousData to obtain the most recent useful data
 	useEffect(() => {
 			if (googleBooksData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooks: ', googleBooksData.googleBooks);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooks.cursor: ', googleBooksData.googleBooks.cursor);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData: ', googleBooksData);
+				//console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBooksData.googleBooks.cursor: ', googleBooksData.googleBooks.cursor);
 			}
 			if (googleBookSearch) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> RESTfulExample > useEffect() > googleBookSearch: ', googleBookSearch);
