@@ -36,7 +36,25 @@ export const GET_RICK_AND_MORTY_CHARACTER = `
 `;
 
 export const GET_RICK_AND_MORTY_CHARACTERS = `
-	query GetRickAndMortyCharacters($ids: [ID!]!) {
+	query GetRickAndMortyCharacters($page: Int, $query: String){
+		characters(page: $page, filter: { name: $query }) {
+			info {
+				next
+				prev
+				pages
+				count
+			}
+			results {
+				id
+				name
+				image
+			}
+		}
+	}
+`;
+
+export const GET_RICK_AND_MORTY_CHARACTERS_BY_IDS = `
+	query GetRickAndMortyCharactersByIds($ids: [ID!]!) {
 		charactersByIds(ids: $ids) {
 			id
 			name
@@ -132,34 +150,6 @@ export const GET_A_DROID_ALIAS = gql`
 		}
 	}
 	${fragmentTypeDroid}
-`;
-
-export const GET_CHARACTER_REST = gql`
-	query Character($id: ID!){
-		character(id: "1") @rest(type: "Post", path: "character/1/") {
-			id
-			name
-			status
-			species
-			type
-			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
-		}
-	}
 `;
 
 export const ADD_REVIEW = gql`

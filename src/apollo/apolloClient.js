@@ -63,6 +63,13 @@ export default function apolloClient({ uri, ssrMode = false }) {
 						}
 					},
 					// --------------------------------------
+					//	characters: {
+					//		keyArgs: false,
+					//		merge(existing = {}, incoming, { args }) {
+					//			let results = [];
+					//		},
+					//	},
+					// --------------------------------------
 					//	charactersByIds: {
 					//		keyArgs: false,
 					//		merge(existing, incoming, option) {
