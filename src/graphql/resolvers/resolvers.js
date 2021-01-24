@@ -31,6 +31,8 @@ export const resolvers = {
 			// const c = books.length ? books[books.length - 1].cursor : null;
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > cursor: ', c);
 
+			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books!!!: ', books);
+
 			return {
 				books,
 				cursor: books.length ? books[books.length - 1].cursor : null,
@@ -41,18 +43,14 @@ export const resolvers = {
 			};
 		},
 
-		// RESTDatasource
 		googleBook: async (obj, { id }, { dataSources }) => {
 			const book = await dataSources.googleBooks.getBook({ id });
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > book: ', book);
 			return book;
 		},
 
 		// returned resolver value must match return type in schema
 
-		// No Datasource
 		character: async (obj, { id }) => {
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > ID: ', id);
 			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
 			const { data: { character }} = response;
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
@@ -61,18 +59,15 @@ export const resolvers = {
 			}
 		},
 
-		// No Datasource
 		characters: async (obj, { page, filter }) => {
 			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > response: ', response);
-			//	const { data: { characters }} = response;
-			//	console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', characters);
-			const { data: { characters: {results} } } = response;
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > results: ', results);
-			return results;
+			// =====================
+			const { data: { characters }} = response;
+			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', characters);
+			return characters;
 		},
 
-		// No Datasource
 		charactersByIds: async (obj, { ids }) => {
 			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
 			const { data: { charactersByIds }} = response;
