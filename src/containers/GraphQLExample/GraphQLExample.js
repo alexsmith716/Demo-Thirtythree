@@ -62,10 +62,9 @@ const GraphQLExample = () => {
 			}
 			if (rickAndMortyCharactersData) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData.characters.results: ', rickAndMortyCharactersData.characters.results);
 				const { characters: { info }} = rickAndMortyCharactersData;
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData.info: ', info);
 				setRickAndMortyCharactersPage(info.next);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersPage: ', rickAndMortyCharactersPage);
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersFilterName: ', rickAndMortyCharactersFilterName);
 			}
 			if (rickAndMortyCharactersByIdsData) {
@@ -175,24 +174,6 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({variables: {id: 1}, fetchPolicy: 'network-only'})}
-							buttonText="Get character 1"
-						/>
-					</div>
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({variables: {id: 2}, fetchPolicy: 'network-only'})}
-							buttonText="Get character 2"
-						/>
-					</div>
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
 							onClick={() => getRickAndMortyCharacter({variables: {id: 3}, fetchPolicy: 'network-only'})}
 							buttonText="Get character 3"
 						/>
@@ -211,8 +192,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [4,9]}, fetchPolicy: 'network-only'})}
-							buttonText="Get RandMCharsByIds 4,9"
+							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [10,2]}, fetchPolicy: 'network-only'})}
+							buttonText="Get RandMCharsByIds 10,2"
 						/>
 					</div>
 
@@ -220,8 +201,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [10,11]}, fetchPolicy: 'network-only'})}
-							buttonText="Get RandMCharsByIds 10,11"
+							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [1,9]}, fetchPolicy: 'network-only'})}
+							buttonText="Get RandMCharsByIds 1,9"
 						/>
 					</div>
 
