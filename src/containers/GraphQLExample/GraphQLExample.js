@@ -15,8 +15,8 @@ import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_A
 const GraphQLExample = () => {
 
 	const [clientExtract, setClientExtract] = useState(null);
-	const [rickAndMortyCharactersPageNext, setRickAndMortyCharactersPageNext] = useState(null);
-  const [rickAndMortyCharactersFilterName, setRickAndMortyCharactersFilterName] = useState('Rick');
+	const [rickAndMortyCharactersPage, setRickAndMortyCharactersPage] = useState(1);
+	const [rickAndMortyCharactersFilterName, setRickAndMortyCharactersFilterName] = useState('Rick');
 
 	const client = useApolloClient();
 
@@ -40,11 +40,11 @@ const GraphQLExample = () => {
 			fetchMore: rickAndMortyCharactersFetchMore,
 		}] = useLazyQuery(
 			gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
-      {
-        variables: {
-          filter: { name: `${rickAndMortyCharactersFilterName}`},
-        },
-      }
+			{
+				variables: {
+					filter: { name: `${rickAndMortyCharactersFilterName}`},
+				},
+			}
 	);
 
 	const [getRickAndMortyCharactersByIds, {
@@ -65,8 +65,8 @@ const GraphQLExample = () => {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData.characters.results: ', rickAndMortyCharactersData.characters.results);
 				const { characters: { info }} = rickAndMortyCharactersData;
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData.info: ', info);
-				setRickAndMortyCharactersPageNext(info.next);
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersFilterName: ', rickAndMortyCharactersFilterName);
+				setRickAndMortyCharactersPage(info.next);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersFilterName: ', rickAndMortyCharactersFilterName);
 			}
 			if (rickAndMortyCharactersByIdsData) {
 				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
@@ -202,8 +202,8 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacters({variables: {page: 1, filter: { name: rickAndMortyCharactersFilterName }}, fetchPolicy: 'network-only'})}
-							buttonText="get RandMChars page 1"
+							onClick={() => getRickAndMortyCharacters({variables: {page: rickAndMortyCharactersPage, filter: { name: rickAndMortyCharactersFilterName }}, fetchPolicy: 'network-only'})}
+							buttonText="getRickAndMortyCharacters"
 						/>
 					</div>
 
@@ -232,10 +232,10 @@ const GraphQLExample = () => {
 								className="btn-primary btn-md"
 								onClick={ async () => {
 									await rickAndMortyCharactersFetchMore({
-										variables: {page: rickAndMortyCharactersPageNext, filter: { name: rickAndMortyCharactersFilterName }},
+										variables: {page: rickAndMortyCharactersPage, filter: { name: rickAndMortyCharactersFilterName }},
 									});
 								}}
-								buttonText="fetch next RandMChars page!"
+								buttonText="fetchMore RickAndMortyCharacters"
 							/>
 						</div>
 					)}
