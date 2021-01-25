@@ -75,8 +75,6 @@ export default function apolloClient({ uri, ssrMode = false }) {
 
 							let results = [];
 
-							// =======================================
-
 							if (existing && existing.results) {
 								results = results.concat(existing.results);
 							}

@@ -13,11 +13,6 @@ export const resolvers = {
 	Query: {
 		hello: () => 'Hello world!',
 
-		//  character: async (obj, { id }, { dataSources }) => (
-		//  	dataSources.rickAndMortyAPICharacter.character({ id })
-		//  ),
-
-		// RESTDatasource
 		googleBooks: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > after: ', after);
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > searchString: ', searchString);
@@ -47,8 +42,6 @@ export const resolvers = {
 			const book = await dataSources.googleBooks.getBook({ id });
 			return book;
 		},
-
-		// returned resolver value must match return type in schema
 
 		character: async (obj, { id }) => {
 			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
