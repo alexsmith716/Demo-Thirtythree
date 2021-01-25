@@ -48,7 +48,7 @@ export default function apolloClient({ uri, ssrMode = false }) {
 						//	read(existing, options) {
 						//		return existing ? existing : undefined;
 						//	},
-						merge(existing, incoming, option) {
+						merge(existing, incoming) {
 							let books = [];
 							if (existing && existing.books) {
 								books = books.concat(existing.books);

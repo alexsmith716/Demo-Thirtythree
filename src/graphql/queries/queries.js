@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { fragmentTypeDroid } from '../fragments/fragments';
+import { fragmentTypeRickAndMortyCharacter, fragmentTypeBook, fragmentTypeDroid } from '../fragments/fragments';
 
 export const GET_HELLO = gql`
 	{
@@ -10,57 +10,19 @@ export const GET_HELLO = gql`
 export const GET_RICK_AND_MORTY_CHARACTER = `
 	query GetRickAndMortyCharacter($id: ID!) {
 		character(id: $id) {
-			id
-			name
-			status
-			species
-			type
-			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
+			...fragmentTypeRickAndMortyCharacter
 		}
 	}
+	${fragmentTypeRickAndMortyCharacter}
 `;
 
 export const GET_RICK_AND_MORTY_CHARACTERS_BY_IDS = `
 	query GetRickAndMortyCharactersByIds($ids: [ID!]!) {
 		charactersByIds(ids: $ids) {
-			id
-			name
-			status
-			species
-			type
-			gender
-			origin {
-				name
-				type
-				dimension
-			}
-			location {
-				name
-				type
-				dimension
-			}
-			image
-			episode {
-				name
-				episode
-			}
+			...fragmentTypeRickAndMortyCharacter
 		}
 	}
+	${fragmentTypeRickAndMortyCharacter}
 `;
 
 export const GET_RICK_AND_MORTY_CHARACTERS = `
@@ -73,30 +35,11 @@ export const GET_RICK_AND_MORTY_CHARACTERS = `
 				count
 			}
 			results {
-				id
-				name
-				status
-				species
-				type
-				gender
-				origin {
-					name
-					type
-					dimension
-				}
-				location {
-					name
-					type
-					dimension
-				}
-				image
-				episode {
-					name
-					episode
-				}
+				...fragmentTypeRickAndMortyCharacter
 			}
 		}
 	}
+	${fragmentTypeRickAndMortyCharacter}
 `;
 
 export const GET_GOOGLE_BOOKS = gql`
@@ -105,32 +48,20 @@ export const GET_GOOGLE_BOOKS = gql`
 			cursor
 			hasMore
 			books {
-				id
-				title
-				authors
-				publisher
-				publishedDate
-				description
-				smallThumbnail
-				favorite
+				...fragmentTypeBook
 			}
 		}
 	}
+	${fragmentTypeBook}
 `;
 
 export const GET_GOOGLE_BOOK = gql`
 	query GetGoogleBook($id: ID!) {
 		googleBook(id: $id) {
-			id
-			title
-			authors
-			publisher
-			publishedDate
-			description
-			smallThumbnail
-			favorite
+			...fragmentTypeBook
 		}
 	}
+	${fragmentTypeBook}
 `;
 
 export const GET_REVIEWS = gql`

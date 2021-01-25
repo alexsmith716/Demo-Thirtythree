@@ -229,7 +229,6 @@ const RESTfulExample = () => {
 										variables: {
 											after: googleBooksData.googleBooks.cursor,
 										},
-										// fetchPolicy: 'cache-and-network',
 									});
 								}}
 								buttonText="fetchMore Google Books"
