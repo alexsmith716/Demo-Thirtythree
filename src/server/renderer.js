@@ -95,21 +95,21 @@ export async function get(req, res) {
 	//  	});
 	//  	console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', JSON.stringify(gbram));
 	//  } catch (error) {
-	//  	console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
+	//  	console.error('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
 	//  }
 
 	//	try {
 	//		const characterTen = await clientApollo.query({ query: GetRickAndMortyCharacter, variables: { id: 10 }});
 	//		console.log('>>>> RENDERER > GetRickAndMortyCharacter: ', characterTwo);
 	//	} catch (error) {
-	//		console.log('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
+	//		console.error('>>>> RENDERER > GetRickAndMortyCharacter > ERROR: ', error);
 	//	}
 
 	//	try {
 	//		const characterNine = await clientApollo.query({ query: graphqlQueries.GET_A_RICK_AND_MORTY_CHARACTER, variables: { id: 9 }});
 	//		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL: ', characterNine);
 	//	} catch (error) {
-	//		console.log('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL > ERROR: ', error);
+	//		console.error('>>>> RENDERER > GET_A_RICK_AND_MORTY_CHARACTER_FULL > ERROR: ', error);
 	//	}
 
 	clientApollo.writeQuery({

@@ -8,7 +8,10 @@ export const dataSources = () => ({
 	googleBooks: new GoogleBooksAPI(),
 });
 
+// https://github.com/apollographql/apollo-client/blob/docs/source/data/error-handling.mdx
 
+// Resolver functions take the following positional arguments, in order:
+// parent, args, context, info
 export const resolvers = {
 	Query: {
 		hello: () => 'Hello world!',
@@ -17,16 +20,15 @@ export const resolvers = {
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > after: ', after);
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > searchString: ', searchString);
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > orderBy: ', orderBy);
-			const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
+			try {
+				const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
+			} catch (error) {
+				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > ERROR: ', error);
+			}
 
-			// destructured argument -destructure an object into individual variables ({cursor: after})
 			const books = paginateResults({ after, pageSize, results: allGoogleBooks });
+
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books: ', books);
-
-			// const c = books.length ? books[books.length - 1].cursor : null;
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > cursor: ', c);
-
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books!!!: ', books);
 
 			return {
 				books,
@@ -39,12 +41,20 @@ export const resolvers = {
 		},
 
 		googleBook: async (obj, { id }, { dataSources }) => {
-			const book = await dataSources.googleBooks.getBook({ id });
+			try {
+				const book = await dataSources.googleBooks.getBook({ id });
+			} catch (error) {
+				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > ERROR: ', error);
+			}
 			return book;
 		},
 
 		character: async (obj, { id }) => {
-			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
+			try {
+				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
+			} catch (error) {
+				console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > ERROR: ', error);
+			}
 			const { data: { character }} = response;
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
 			return {
@@ -53,7 +63,11 @@ export const resolvers = {
 		},
 
 		characters: async (obj, { page, filter }) => {
-			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
+			try {
+				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
+			} catch (error) {
+				console.error('>>>>>>>>>>>>> RESOLVERS > Query > characters > ERROR: ', error);
+			}
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > response: ', response);
 			// =====================
 			const { data: { characters }} = response;
@@ -62,7 +76,11 @@ export const resolvers = {
 		},
 
 		charactersByIds: async (obj, { ids }) => {
-			const response = await graphqlClient({ endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
+			try {
+				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
+			} catch (error) {
+				console.error('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > ERROR: ', error);
+			}
 			const { data: { charactersByIds }} = response;
 			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > charactersByIds: ', charactersByIds);
 			return charactersByIds;
@@ -73,9 +91,12 @@ export const resolvers = {
 	// if mutation updates a single entity, AC automatically updates that value in cache when the mutation returns
 	Mutation: {
 		googleBookModifyFavorite: async (obj, { id, favorite }, { dataSources }) => {
-			const book = await dataSources.googleBooks.getBook({ id });
+			try {
+				const book = await dataSources.googleBooks.getBook({ id });
+			} catch (error) {
+				console.error('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > ERROR: ', error);
+			}
 			book.favorite = favorite;
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > book: ', book);
 			return {
 				success: true,
 				message: 'added to favorites',
