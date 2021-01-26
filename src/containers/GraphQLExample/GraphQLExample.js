@@ -11,6 +11,7 @@ import { Button } from '../../components/Button';
 import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
 import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_AND_MORTY_CHARACTERS_BY_IDS } from '../../graphql/queries/queries.js';
 
+// ******* basic handling needed for all false 'info && info.next' ***********
 
 const GraphQLExample = () => {
 

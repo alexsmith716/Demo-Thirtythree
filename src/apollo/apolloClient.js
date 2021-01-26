@@ -118,17 +118,17 @@ export default function apolloClient({ uri, ssrMode = false }) {
 		cache,
 		ssrMode,
 		defaultOptions: {
-			//	watchQuery: {
-			//		fetchPolicy: 'cache-and-network',
-			//		errorPolicy: 'all',
-			//	},
-			//	query: {
-			//		fetchPolicy: 'network-only',
-			//		errorPolicy: 'all',
-			//	},
-			//	mutate: {
-			//		errorPolicy: 'all',
-			//	},
+      watchQuery: {
+      	// fetchPolicy: 'cache-and-network',
+      	errorPolicy: 'all',
+      },
+      query: {
+      	// fetchPolicy: 'network-only',
+      	errorPolicy: 'all',
+      },
+      mutate: {
+      	errorPolicy: 'all',
+      },
 		},
 	});
 }
