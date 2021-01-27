@@ -80,6 +80,11 @@ export default function apolloClient({ uri, ssrMode = false }) {
 							}
 
 							if (incoming && incoming.results) {
+								//	const newItems = incoming.results.filter(
+								//		(i) => !results.map((r) => r['__ref']).includes(i['__ref']),
+								//	);
+								//	results = results.concat(newItems);
+
 								results = results.concat(incoming.results);
 							}
 							return {
@@ -118,17 +123,17 @@ export default function apolloClient({ uri, ssrMode = false }) {
 		cache,
 		ssrMode,
 		defaultOptions: {
-      watchQuery: {
-      	// fetchPolicy: 'cache-and-network',
-      	errorPolicy: 'all',
-      },
-      query: {
-      	// fetchPolicy: 'network-only',
-      	errorPolicy: 'all',
-      },
-      mutate: {
-      	errorPolicy: 'all',
-      },
+			watchQuery: {
+				// fetchPolicy: 'cache-and-network',
+				errorPolicy: 'all',
+			},
+			query: {
+				// fetchPolicy: 'network-only',
+				errorPolicy: 'all',
+			},
+			mutate: {
+				errorPolicy: 'all',
+			},
 		},
 	});
 }
