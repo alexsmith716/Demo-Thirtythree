@@ -616,6 +616,11 @@ export const GlobalStyle = createGlobalStyle`
 		border-color: #dbdbdb;
 	}
 
+	.disabled {
+		pointer-events: none;
+		opacity: .45;
+	}
+
 	// ========================================
 
 	.text-break {

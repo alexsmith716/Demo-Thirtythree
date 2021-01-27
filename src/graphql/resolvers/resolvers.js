@@ -22,68 +22,66 @@ export const resolvers = {
 			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > orderBy: ', orderBy);
 			try {
 				const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
+				const books = paginateResults({ after, pageSize, results: allGoogleBooks });
+
+				// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books: ', books);
+
+				return {
+					books,
+					cursor: books.length ? books[books.length - 1].cursor : null,
+					hasMore: books.length
+						? books[books.length - 1].cursor !==
+							allGoogleBooks[allGoogleBooks.length - 1].cursor
+						: false,
+				};
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > ERROR: ', error);
 			}
-
-			const books = paginateResults({ after, pageSize, results: allGoogleBooks });
-
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books: ', books);
-
-			return {
-				books,
-				cursor: books.length ? books[books.length - 1].cursor : null,
-				hasMore: books.length
-					? books[books.length - 1].cursor !==
-						allGoogleBooks[allGoogleBooks.length - 1].cursor
-					: false,
-			};
 		},
 
 		googleBook: async (obj, { id }, { dataSources }) => {
 			try {
 				const book = await dataSources.googleBooks.getBook({ id });
+				return book;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > ERROR: ', error);
 			}
-			return book;
 		},
 
 		character: async (obj, { id }) => {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
+				const { data: { character }} = response;
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
+				return {
+					...character
+				}
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > ERROR: ', error);
-			}
-			const { data: { character }} = response;
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
-			return {
-				...character
 			}
 		},
 
 		characters: async (obj, { page, filter }) => {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > response: ', response);
+				const { data: { characters }} = response;
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', characters);
+				return characters;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > characters > ERROR: ', error);
 			}
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > response: ', response);
-			// =====================
-			const { data: { characters }} = response;
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', characters);
-			return characters;
 		},
 
 		charactersByIds: async (obj, { ids }) => {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
+				const { data: { charactersByIds }} = response;
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > charactersByIds: ', charactersByIds);
+				return charactersByIds;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > ERROR: ', error);
 			}
-			const { data: { charactersByIds }} = response;
-			console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > charactersByIds: ', charactersByIds);
-			return charactersByIds;
 		},
 	},
 
@@ -93,15 +91,15 @@ export const resolvers = {
 		googleBookModifyFavorite: async (obj, { id, favorite }, { dataSources }) => {
 			try {
 				const book = await dataSources.googleBooks.getBook({ id });
+				book.favorite = favorite;
+				return {
+					success: true,
+					message: 'added to favorites',
+					books: [book],
+				};
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > ERROR: ', error);
 			}
-			book.favorite = favorite;
-			return {
-				success: true,
-				message: 'added to favorites',
-				books: [book],
-			};
 		},
 	},
 };

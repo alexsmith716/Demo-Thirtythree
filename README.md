@@ -24,6 +24,7 @@
 
 ### TODO:
 
+* solid error handling
 * handling needed for all `false` `info && info.next` (UI/UX needed for all query data responses)
 * set-up jest tests
 * lint as much as possible
