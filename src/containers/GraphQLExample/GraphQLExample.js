@@ -7,17 +7,18 @@ import {
 	gql,
 } from '@apollo/client';
 
+import { Loading } from '../../components/Loading';
 import { Button } from '../../components/Button';
 import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
 import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_AND_MORTY_CHARACTERS_BY_IDS } from '../../graphql/queries/queries.js';
 
-// ******* basic handling needed for all false 'info && info.next' ***********
-
 const GraphQLExample = () => {
 
+	//	const [errorMessage, setErrorMessage] = useState(null);
 	const [clientExtract, setClientExtract] = useState(null);
-	const [rickAndMortyCharactersPage, setRickAndMortyCharactersPage] = useState(1);
-	const [rickAndMortyCharactersFilterName, setRickAndMortyCharactersFilterName] = useState('Rick');
+	const [rickAndMortyCharactersInfo, setRickAndMortyCharactersInfo] = useState(null);
+	const [rickAndMortyCharactersFilterName, setRickAndMortyCharactersFilterName] = useState('');
+	const [rickAndMortyCharactersCurrentPage, setRickAndMortyCharactersCurrentPage] = useState(null);
 
 	const client = useApolloClient();
 
@@ -59,17 +60,22 @@ const GraphQLExample = () => {
 
 	useEffect(() => {
 			if (rickAndMortyData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyData: ', rickAndMortyData.character);
+				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyData: ', rickAndMortyData.character);
 			}
 			if (rickAndMortyCharactersData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
+				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
 				const { characters: { info }} = rickAndMortyCharactersData;
-				setRickAndMortyCharactersPage(info.next);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersPage: ', rickAndMortyCharactersPage);
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersFilterName: ', rickAndMortyCharactersFilterName);
+				setRickAndMortyCharactersInfo(info);
+				if (!info.prev && info.next) {
+					setRickAndMortyCharactersCurrentPage(1);
+				} else if (info.next && info.prev) {
+					setRickAndMortyCharactersCurrentPage(info.next - 1);
+				} else {
+					setRickAndMortyCharactersCurrentPage(info.pages);
+				}
 			}
 			if (rickAndMortyCharactersByIdsData) {
-				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
+				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
 			}
 		},
 		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersByIdsData,]
@@ -91,23 +97,19 @@ const GraphQLExample = () => {
 				<div className="bg-color-ivory container-padding-border-radius-1 text-break mb-5">
 					<div className="mb-3">
 
-						{networkStatus === NetworkStatus.refetch && (
-							<p>
-								Refetching...
-							</p>
-						)}
+						<div className="mb-3">
+							{networkStatus === NetworkStatus.refetch && (
+								<b>Refetching...</b>
+							)}
 
-						{loading || rickAndMortyCharactersLoading || rickAndMortyCharactersByIdsLoading && (
-							<p>
-								Loading...
-							</p>
-						)}
+							{rickAndMortyCharactersLoading && (
+								<b><Loading text="Loading" /></b>
+							)}
 
-						{error || rickAndMortyCharactersError || rickAndMortyCharactersByIdsError && (
-							<p>
-								Query Error!
-							</p>
-						)}
+							{rickAndMortyCharactersError && (
+								<b>Query Error!</b>
+							)}
+						</div>
 
 						{rickAndMortyCharactersData && (
 							<div>
@@ -171,6 +173,7 @@ const GraphQLExample = () => {
 						/>
 					</div>
 
+					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
@@ -179,16 +182,20 @@ const GraphQLExample = () => {
 							buttonText="Get character 3"
 						/>
 					</div>
+					*/}
 
+					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacters({variables: {page: rickAndMortyCharactersPage, filter: { name: rickAndMortyCharactersFilterName }}, fetchPolicy: 'network-only'})}
+							onClick={() => getRickAndMortyCharacters({variables: {page: rickAndMortyCharactersInfo.next, filter: { name: rickAndMortyCharactersFilterName }}, fetchPolicy: 'network-only'})}
 							buttonText="getRickAndMortyCharacters"
 						/>
 					</div>
+					*/}
 
+					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
@@ -197,7 +204,9 @@ const GraphQLExample = () => {
 							buttonText="Get RandMCharsByIds 10,2"
 						/>
 					</div>
+					*/}
 
+					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
@@ -206,15 +215,46 @@ const GraphQLExample = () => {
 							buttonText="Get RandMCharsByIds 1,9"
 						/>
 					</div>
+					*/}
+
+					<div className="mb-3">
+						<div className="row-flex">
+							<div className="col-four">
+								<input
+									type="text"
+									className="form-control"
+									name="rickAndMortyCharactersFilterName"
+									value={rickAndMortyCharactersFilterName}
+									onChange={e => setRickAndMortyCharactersFilterName(e.target.value)}
+									placeholder="Rick, Morty, Beth..."
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className="mb-3">
+						{rickAndMortyCharactersCurrentPage && (
+							<b>Page {rickAndMortyCharactersCurrentPage} of {rickAndMortyCharactersInfo.pages}</b>
+						)}
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className={`btn-success btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
+							onClick={() => getRickAndMortyCharacters()}
+							buttonText="Get Characters"
+						/>
+					</div>
 
 					{rickAndMortyCharactersData && (
 						<div className="mb-3">
 							<Button
 								type="button"
-								className="btn-primary btn-md"
-								onClick={ async () => {
-									await rickAndMortyCharactersFetchMore({
-										variables: {page: rickAndMortyCharactersPage, filter: { name: rickAndMortyCharactersFilterName }},
+								className={`btn-primary btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
+								onClick={ () => {
+									rickAndMortyCharactersFetchMore({
+										variables: {page: rickAndMortyCharactersInfo.next, filter: { name: rickAndMortyCharactersFilterName }},
 									});
 								}}
 								buttonText="fetchMore RickAndMortyCharacters"
