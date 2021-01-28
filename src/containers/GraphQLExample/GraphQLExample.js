@@ -43,9 +43,10 @@ const GraphQLExample = () => {
 		}] = useLazyQuery(
 			gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
 			{
-				variables: {
-					filter: { name: `${rickAndMortyCharactersFilterName}`},
-				},
+				//	variables: {
+				//		filter: { name: `${rickAndMortyCharactersFilterName}`},
+				//	},
+				fetchPolicy: 'cache-and-network',
 			}
 	);
 
@@ -78,7 +79,7 @@ const GraphQLExample = () => {
 				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
 			}
 		},
-		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersByIdsData,]
+		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersByIdsData, rickAndMortyCharactersFilterName]
 	);
 
 	return (
@@ -232,17 +233,18 @@ const GraphQLExample = () => {
 						</div>
 					</div>
 
-					<div className="mb-3">
-						{rickAndMortyCharactersCurrentPage && (
+					{rickAndMortyCharactersCurrentPage && (
+						<div className="mb-3">
 							<b>Page {rickAndMortyCharactersCurrentPage} of {rickAndMortyCharactersInfo.pages}</b>
-						)}
-					</div>
-
+						</div>
+					)}
+					
 					<div className="mb-3">
 						<Button
 							type="button"
 							className={`btn-success btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
-							onClick={() => getRickAndMortyCharacters()}
+							// onClick={() => getRickAndMortyCharacters()}
+							onClick={() => getRickAndMortyCharacters({ variables: {filter: { name: `${rickAndMortyCharactersFilterName}` }} }) }
 							buttonText="Get Characters"
 						/>
 					</div>
