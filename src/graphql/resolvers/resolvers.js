@@ -52,24 +52,26 @@ export const resolvers = {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
 				const { data: { character }} = response;
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > character: ', character);
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > character > character: ', character);
 				return {
 					...character
 				}
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > ERROR: ', error);
+				return null;
 			}
 		},
 
 		characters: async (obj, { page, filter }) => {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > response: ', response);
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > characters > response: ', response);
 				const { data: { characters }} = response;
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > characters: ', characters);
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > characters > characters: ', characters);
 				return characters;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > characters > ERROR: ', error);
+				return null;
 			}
 		},
 
@@ -77,10 +79,11 @@ export const resolvers = {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
 				const { data: { charactersByIds }} = response;
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > rickAndMortyCharacter > charactersByIds: ', charactersByIds);
+				console.log('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > charactersByIds: ', charactersByIds);
 				return charactersByIds;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > ERROR: ', error);
+				return null;
 			}
 		},
 	},
@@ -99,6 +102,7 @@ export const resolvers = {
 				};
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > ERROR: ', error);
+				return null;
 			}
 		},
 	},

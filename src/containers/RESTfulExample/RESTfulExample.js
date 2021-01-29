@@ -87,15 +87,27 @@ const RESTfulExample = () => {
 							</p>
 						)}
 
-						{loading || googleBookLoading && (
+						{loading && (
 							<p>
 								Loading...
 							</p>
 						)}
 
-						{error || googleBookError && (
+						{googleBookLoading && (
 							<p>
-								Query Error!
+								Loading...
+							</p>
+						)}
+
+						{error && (
+							<p>
+								Query Error: {error.message}
+							</p>
+						)}
+
+						{googleBookError && (
+							<p>
+								Query Error: {googleBookError.message}
 							</p>
 						)}
 
@@ -155,15 +167,14 @@ const RESTfulExample = () => {
 						/>
 					</div>
 
-					
-					{/* <div className="mb-3">
+					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success btn-md"
 							onClick={ () => getGoogleBook({ variables: { id: 'uW_zzQEACAAJ' }}) }
 							buttonText="Get Book ID: uW_zzQEACAAJ"
 						/>
-					</div> */}
+					</div>
 
 					<div className="mb-3">
 						<Button

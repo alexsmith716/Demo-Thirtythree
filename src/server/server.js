@@ -7,8 +7,8 @@ import { getUserAgent } from '../utils/device';
 import { isBot } from '../utils/device';
 
 export function startServer() {
-
 	const app = express();
+	const port = process.env.PORT || 8080;
 
 	app.use((req, res, next) => {
 		console.log(`>>>>>>>>>>>>>>>>> SERVER > REQUEST IN <<<<<<<<<<<<<<<<<<<<<<<`);
@@ -43,8 +43,27 @@ export function startServer() {
 
 	const server = createServer(app);
 
-	server.listen(8080, () => {
-		console.log(`Listening on 8080 ++++++++++++++++++`);
+	server.listen(port, () => {
+	  console.log(`Listening on ${port}`);
+	});
+
+	server.on('error', err => {
+	  if (err.syscall !== 'listen') throw err;
+
+	  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+
+	  switch (err.code) {
+	    case 'EACCES':
+	      console.error(`${bind} requires elevated privileges`);
+	      process.exit(1);
+	      break;
+	    case 'EADDRINUSE':
+	      console.error(`${bind} is already in use`);
+	      process.exit(1);
+	      break;
+	    default:
+	      throw err;
+	  }
 	});
 
 	return app;

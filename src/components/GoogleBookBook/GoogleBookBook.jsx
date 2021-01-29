@@ -10,6 +10,7 @@ export const GoogleBookBook = ({ book }) => {
 
 	const [toggleDescriptionView, setToggleDescriptionView] = useState(false);
 
+	// Mutations only support a 'no-cache' fetchPolicy
 	const [googleBookModifyFavorite, { error: googleBookModifyFavoriteERROR, data: googleBookModifyFavoriteDATA }] = useMutation(
 		GOOGLE_BOOK_MODIFY_FAVORITE,
 	);
@@ -45,7 +46,7 @@ export const GoogleBookBook = ({ book }) => {
 						<div>
 							<Button
 								className="btn-light btn-tiny"
-								onClick={() => googleBookModifyFavorite({ variables: { id: book.id, favorite: book.favorite && book.favorite ? false : true }})}
+								onClick={() => googleBookModifyFavorite({ variables: { id: book.id, favorite: book.favorite && book.favorite ? false : true }, fetchPolicy: 'no-cache'})}
 								buttonText={`${book.favorite && book.favorite ? "Remove from" : "Add to"} Favorites`}
 							/>
 						</div>
