@@ -31,7 +31,7 @@ export class GoogleBooksAPI extends RESTDataSource {
 		const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=0&orderBy=${orderBy}&projection=lite&maxResults=40`;
 		// console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > route: ', route);
 		const response = await this.get(route);
-		// console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > response: ', response);
+		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > response: ', response);
 		const reducedResponse = Array.isArray(response.items) ? response.items.map(book => this.bookReducer(book)) : [];
 		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > reducedResponse: ', reducedResponse);
 		return reducedResponse;

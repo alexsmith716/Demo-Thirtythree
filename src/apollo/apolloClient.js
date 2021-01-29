@@ -81,10 +81,9 @@ export default function apolloClient({ uri, ssrMode = false }) {
 
 							if (incoming && incoming.results) {
 								//	const newItems = incoming.results.filter(
-								//		(i) => !results.map((r) => r['__ref']).includes(i['__ref']),
+								//		i => !results.map(r => r['__ref']).includes(i['__ref']),
 								//	);
 								//	results = results.concat(newItems);
-
 								results = results.concat(incoming.results);
 							}
 							return {

@@ -46,7 +46,7 @@ const GraphQLExample = () => {
 				//	variables: {
 				//		filter: { name: `${rickAndMortyCharactersFilterName}`},
 				//	},
-				fetchPolicy: 'cache-and-network',
+				//	fetchPolicy: 'cache-and-network',
 			}
 	);
 
@@ -79,7 +79,7 @@ const GraphQLExample = () => {
 				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
 			}
 		},
-		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersByIdsData, rickAndMortyCharactersFilterName]
+		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersByIdsData,]
 	);
 
 	return (
@@ -100,7 +100,7 @@ const GraphQLExample = () => {
 
 						<div className="mb-3">
 							{networkStatus === NetworkStatus.refetch && (
-								<b>Refetching...</b>
+								<b><Loading text="Refetching" /></b>
 							)}
 
 							{rickAndMortyCharactersLoading && (
@@ -108,7 +108,7 @@ const GraphQLExample = () => {
 							)}
 
 							{rickAndMortyCharactersError && (
-								<b>Query Error!</b>
+								<b>Query Error: {rickAndMortyCharactersError.message}</b>
 							)}
 						</div>
 
@@ -243,8 +243,7 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className={`btn-success btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
-							// onClick={() => getRickAndMortyCharacters()}
-							onClick={() => getRickAndMortyCharacters({ variables: {filter: { name: `${rickAndMortyCharactersFilterName}` }} }) }
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: `${rickAndMortyCharactersFilterName}` }}, fetchPolicy: 'cache-and-network'})}
 							buttonText="Get Characters"
 						/>
 					</div>

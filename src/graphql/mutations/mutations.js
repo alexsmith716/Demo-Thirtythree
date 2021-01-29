@@ -12,3 +12,5 @@ export const GOOGLE_BOOK_MODIFY_FAVORITE = gql`
 		}
 	}
 `;
+
+// Mutations only support a 'no-cache' fetchPolicy. 
