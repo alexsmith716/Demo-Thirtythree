@@ -40,6 +40,7 @@ export class GoogleBooksAPI extends RESTDataSource {
 	async getBook({id}) {
 		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > IDDDDDDDDD: ', id);
 		const route = `volumes/${id}`;
+		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > route: ', route);
 		const response = await this.get(route);
 		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > response: ', response);
 		const reducedResponse = this.bookReducer(response);

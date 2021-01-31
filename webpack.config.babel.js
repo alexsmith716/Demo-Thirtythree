@@ -189,14 +189,16 @@ const getConfig = (target) => ({
 		new webpack.ProvidePlugin({
 			process: 'process/browser',
 		}),
-		//	new webpack.DefinePlugin({}),
+		new webpack.DefinePlugin({
+			'process.env.IS_BROWSER': JSON.stringify(target !== 'node'),
+		}),
 		new LoadablePlugin(),
-    //  new BundleAnalyzerPlugin({
-    //  	analyzerMode: 'static',
-    //  	reportFilename: './bundleAnalyzer/webpack.config.babel.html',
-    //  	openAnalyzer: false,
-    //  	generateStatsFile: false
-    //  }),
+		//  new BundleAnalyzerPlugin({
+		//  	analyzerMode: 'static',
+		//  	reportFilename: './bundleAnalyzer/webpack.config.babel.html',
+		//  	openAnalyzer: false,
+		//  	generateStatsFile: false
+		//  }),
 	],
 })
 

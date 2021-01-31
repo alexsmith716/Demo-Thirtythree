@@ -1,4 +1,3 @@
-import * as express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 //	import { getComplexity, simpleEstimator, fieldExtensionsEstimator } from 'graphql-query-complexity';
 
@@ -13,7 +12,6 @@ export function apolloServer(app) {
 		typeDefs,
 		resolvers,
 		dataSources,
-		//	plugins: [],
 	});
 
 	apollo.applyMiddleware({ app, path: '/graphql' });

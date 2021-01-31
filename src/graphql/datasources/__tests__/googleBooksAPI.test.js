@@ -1,7 +1,5 @@
 import { GoogleBooksAPI } from '../googleBooksAPI';
 
-// "test": "IS_CLIENT=false jest src",
-
 const mocks = {
 	get: jest.fn(),
 };
