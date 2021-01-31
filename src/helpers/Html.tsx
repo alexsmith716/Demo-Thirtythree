@@ -31,8 +31,7 @@ const Html: React.FC<Props> = ({
 					name="viewport"
 					content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
 				/>
-				{/* <link rel="shortcut icon" href="/favicon.ico" /> */}
-				{/* <link rel="icon" href="/favicon.ico" type="image/x-icon" /> */}
+				<link rel="icon" href="/dist/favicon.ico" type="image/x-icon" />
 				<meta name="mobile-web-app-capable" content="yes" />
 				<meta name="apple-mobile-web-app-capable" content="yes" />
 				<meta name="application-name" content="Election App 2020!" />

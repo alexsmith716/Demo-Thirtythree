@@ -42,7 +42,8 @@ export const resolvers = {
 		googleBook: async (obj, { id }, { dataSources }) => {
 			try {
 				const book = await dataSources.googleBooks.getBook({ id });
-				return book;
+				// return {...book};
+        return book;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > ERROR: ', error);
 			}

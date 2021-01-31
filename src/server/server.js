@@ -41,30 +41,32 @@ export function startServer() {
 
 	// =====================================================
 
-	const server = createServer(app);
+	if (process.env.NODE_ENV !== 'test') {
+		const server = createServer(app);
 
-	server.listen(port, () => {
-	  console.log(`Listening on ${port}`);
-	});
+		server.listen(port, () => {
+			console.log(`Listening on ${port}`);
+		});
 
-	server.on('error', err => {
-	  if (err.syscall !== 'listen') throw err;
+		server.on('error', err => {
+			if (err.syscall !== 'listen') throw err;
 
-	  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+			const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
-	  switch (err.code) {
-	    case 'EACCES':
-	      console.error(`${bind} requires elevated privileges`);
-	      process.exit(1);
-	      break;
-	    case 'EADDRINUSE':
-	      console.error(`${bind} is already in use`);
-	      process.exit(1);
-	      break;
-	    default:
-	      throw err;
-	  }
-	});
+			switch (err.code) {
+				case 'EACCES':
+					console.error(`${bind} requires elevated privileges`);
+					process.exit(1);
+					break;
+				case 'EADDRINUSE':
+					console.error(`${bind} is already in use`);
+					process.exit(1);
+					break;
+				default:
+					throw err;
+			}
+		});
+	}
 
 	return app;
 }
