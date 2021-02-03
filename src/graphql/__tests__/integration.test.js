@@ -14,7 +14,7 @@ import { GoogleBooksAPI } from '../datasources/googleBooksAPI';
 import { constructTestServer, startTestServer } from './__utils';
 
 // the mocked REST API data
-import { mockBookResponse, mockBook } from '../datasources/__tests__/googleBooksAPI.test.js';
+import { mockBookResponse } from '../datasources/__tests__/googleBooksAPI.test.js';
 
 const GET_GOOGLE_BOOK = gql`
 	query GetGoogleBook($id: ID!) {
