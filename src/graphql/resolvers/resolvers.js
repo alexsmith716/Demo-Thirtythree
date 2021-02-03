@@ -42,8 +42,7 @@ export const resolvers = {
 
 		googleBook: (obj, { id }, { dataSources }) => {
 			const book = dataSources.googleBooks.getBook({ id });
-			return {...book};
-			// return book;
+			return book;
 		},
 
 		character: async (obj, { id }) => {
