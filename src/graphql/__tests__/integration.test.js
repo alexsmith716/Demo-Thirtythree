@@ -45,20 +45,20 @@ describe('Queries', () => {
 	});
 });
 
-describe('Server', () => {
-	let stop, graphql;
-
-	beforeEach(async () => {
-		const testServer = await startTestServer();
-		stop = testServer.stop;
-		graphql = testServer.graphql;
-	});
-
-	afterEach(() => stop());
-
-	it('gets a single book', async () => {
-		const res = await toPromise(graphql({ query: GET_GOOGLE_BOOK, variables: { id: 'uW_zzQEACAAJ' } }));
-
-		expect(res).toMatchSnapshot();
-	});
-});
+//	describe('Server', () => {
+//		let stop, graphql;
+//	
+//		beforeEach(async () => {
+//			const testServer = await startTestServer();
+//			stop = testServer.stop;
+//			graphql = testServer.graphql;
+//		});
+//	
+//		afterEach(() => stop());
+//	
+//		it('gets a single book', async () => {
+//			const res = await toPromise(graphql({ query: GET_GOOGLE_BOOK, variables: { id: 'uW_zzQEACAAJ' } }));
+//	
+//			expect(res).toMatchSnapshot();
+//		});
+//	});
