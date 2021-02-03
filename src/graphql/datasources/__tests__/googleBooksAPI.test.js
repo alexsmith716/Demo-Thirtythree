@@ -13,13 +13,24 @@ describe('[GoogleBooksAPI.bookReducer]', () => {
 	});
 });
 
+//	describe('[GoogleBooksAPI.getBook]', () => {
+//		it('should look up single book from api', async () => {
+//			// if api response is list of raw launches,
+//			// res should be single transformed launch
+//			mocks.get.mockReturnValueOnce([mockBookResponse]);
+//			const res = await ds.getBook({ id: 'uW_zzQEACAAJ' });
+//	
+//			expect(res).toEqual(mockBook);
+//			expect(mocks.get).toBeCalledWith('launches', { id: 'uW_zzQEACAAJ' });
+//		});
+//	});
 
 /**
  * MOCK DATA BELOW
  */
 
 // properly transformed book
-const mockBook = {
+export const mockBook = {
 	id: 'uW_zzQEACAAJ',
 	cursor: 'uW_zzQEACAAJ',
 	title: 'MCAT Physics and Math Review 2022-2023',
@@ -32,7 +43,7 @@ const mockBook = {
 	favorite: false
 };
 
-const mockBookResponse = {
+export const mockBookResponse = {
 	kind: 'books#volume',
 	id: 'uW_zzQEACAAJ',
 	etag: 'H/uB2Ah/6zw',
@@ -82,5 +93,3 @@ const mockBookResponse = {
 		quoteSharingAllowed: false
 	}
 };
-
-export default mockBookResponse;

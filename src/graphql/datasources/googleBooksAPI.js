@@ -27,24 +27,32 @@ export class GoogleBooksAPI extends RESTDataSource {
 	// https://www.googleapis.com/books/v1/volumes/XDTlxgEACAAJ
 
 	async getBooks(searchString, orderBy) {
-		// const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=${startIndex}&orderBy=${orderBy}&projection=lite&maxResults=${maxResults}`;
-		const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=0&orderBy=${orderBy}&projection=lite&maxResults=40`;
-		// console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > route: ', route);
-		const response = await this.get(route);
-		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > response: ', response);
-		const reducedResponse = Array.isArray(response.items) ? response.items.map(book => this.bookReducer(book)) : [];
-		console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > reducedResponse: ', reducedResponse);
-		return reducedResponse;
+		try {
+			// const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=${startIndex}&orderBy=${orderBy}&projection=lite&maxResults=${maxResults}`;
+			const route = `volumes?q=${searchString.split(' ').join('+')}&startIndex=0&orderBy=${orderBy}&projection=lite&maxResults=40`;
+			// console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > route: ', route);
+			const response = await this.get(route);
+			console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > response: ', response);
+			const reducedResponse = Array.isArray(response.items) ? response.items.map(book => this.bookReducer(book)) : [];
+			console.log('>>>>>>>>>>>>> googleBooksAPI > getBooks > reducedResponse: ', reducedResponse);
+			return reducedResponse;
+		} catch (error) {
+			console.error('>>>>>>>>>>>>> googleBooksAPI > getBooks > response > ERROR: ', error);
+			return false;
+		}
 	}
 
 	async getBook({id}) {
-		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > IDDDDDDDDD: ', id);
-		const route = `volumes/${id}`;
-		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > route: ', route);
-		const response = await this.get(route);
-		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > response: ', response);
-		const reducedResponse = this.bookReducer(response);
-		console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > reducedResponse: ', reducedResponse);
-		return reducedResponse;
+		try {
+			const route = `volumes/${id}`;
+			const response = await this.get(route);
+			console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > response: ', response);
+			const reducedResponse = this.bookReducer(response);
+			console.log('>>>>>>>>>>>>> googleBooksAPI > getBook > reducedResponse: ', reducedResponse);
+			return reducedResponse;
+		} catch (error) {
+			console.error('>>>>>>>>>>>>> googleBooksAPI > getBook > response > ERROR: ', error);
+			return false;
+		}
 	}
 };
