@@ -63,8 +63,8 @@ export const startTestServer = async () => {
 		execute(link, { query, variables });
 
 	return {
-		// link,
-		// stop: () => httpServer.app.close(),
+		link,
+		stop: () => httpServer.close(),
 		graphql: executeOperation,
 	};
 };
