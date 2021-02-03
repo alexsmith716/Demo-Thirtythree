@@ -36,17 +36,14 @@ export const resolvers = {
 				};
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > ERROR: ', error);
+				return false;
 			}
 		},
 
-		googleBook: async (obj, { id }, { dataSources }) => {
-			try {
-				const book = await dataSources.googleBooks.getBook({ id });
-				// return {...book};
-        return book;
-			} catch (error) {
-				console.error('>>>>>>>>>>>>> RESOLVERS > Query > googleBook > ERROR: ', error);
-			}
+		googleBook: (obj, { id }, { dataSources }) => {
+			const book = dataSources.googleBooks.getBook({ id });
+			return {...book};
+			// return book;
 		},
 
 		character: async (obj, { id }) => {
@@ -59,7 +56,7 @@ export const resolvers = {
 				}
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > ERROR: ', error);
-				return null;
+				return false;
 			}
 		},
 
@@ -72,7 +69,7 @@ export const resolvers = {
 				return characters;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > characters > ERROR: ', error);
-				return null;
+				return false;
 			}
 		},
 
@@ -84,7 +81,7 @@ export const resolvers = {
 				return charactersByIds;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > ERROR: ', error);
-				return null;
+				return false;
 			}
 		},
 	},
@@ -103,7 +100,7 @@ export const resolvers = {
 				};
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Mutation > googleBookModifyFavorite > ERROR: ', error);
-				return null;
+				return false;
 			}
 		},
 	},

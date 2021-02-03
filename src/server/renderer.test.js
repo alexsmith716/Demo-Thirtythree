@@ -1,13 +1,13 @@
 import { Response } from 'express';
 import httpMocks, { MockResponse } from 'node-mocks-http';
-import * as renderer from './renderer';
+import { get } from './renderer';
 
 
 test('should return the get of renderer response', async () => {
 
 	const req = httpMocks.createRequest({url: '/graphqlexample',});
 	const res = httpMocks.createResponse();
-	const data = await renderer.get(req, res);
+	const data = await get(req, res);
 
 	console.log(data._getData());
 });
