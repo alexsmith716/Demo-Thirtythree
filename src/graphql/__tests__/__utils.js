@@ -42,13 +42,9 @@ export const startTestServer = async () => {
 
 	apollo.applyMiddleware({ app, path: '/graphql' });
 
-	const httpServer = createServer(app);
+	const server = createServer(app);
 
-	httpServer.listen('8080', () => {
-		console.log('Listening on 8080');
-	});
-
-	// const httpServer = await app.listen({ port: 8080 });
+	const httpServer = await server.listen({ port: 8080 });
 
 	const httpLink = createHttpLink({
 		uri: 'http://localhost:8080/graphql/',
