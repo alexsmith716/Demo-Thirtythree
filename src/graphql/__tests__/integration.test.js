@@ -1,6 +1,5 @@
 import { createTestClient } from 'apollo-server-testing';
 import nock from'nock';
-import { gql } from '@apollo/client';
 
 // integration test being run against a test instance of apollo-server
 
@@ -8,28 +7,13 @@ import { gql } from '@apollo/client';
 import { toPromise } from '@apollo/client';
 // =========================
 
-// import { GET_GOOGLE_BOOK } from '../queries/queries.js';
+import { GET_GOOGLE_BOOK } from '../queries/queries.js';
 import { GoogleBooksAPI } from '../datasources/googleBooksAPI';
 
 import { constructTestServer, startTestServer } from './__utils';
 
 // the mocked REST API data
 import { mockBookResponse } from '../datasources/__tests__/googleBooksAPI.test.js';
-
-const GET_GOOGLE_BOOK = gql`
-	query GetGoogleBook($id: ID!) {
-		googleBook(id: $id) {
-			id
-			title
-			authors
-			publisher
-			publishedDate
-			description
-			smallThumbnail
-			favorite
-		}
-	}
-`;
 
 describe('Queries', () => {
 	it('fetches single book', async () => {
