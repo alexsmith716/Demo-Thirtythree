@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GraphqlClient graphqlClient checks endpoint fetch attempted 1`] = `
+Object {
+  "episode": Array [
+    Object {
+      "episode": "S02E01",
+      "name": "A Rickle in Time",
+    },
+  ],
+  "gender": "Male",
+  "id": "11",
+  "image": "https://rickandmortyapi.com/api/character/avatar/11.jpeg",
+  "location": Object {
+    "dimension": "Replacement Dimension",
+    "name": "Earth (Replacement Dimension)",
+    "type": "Planet",
+  },
+  "name": "Albert Einstein",
+  "origin": Object {
+    "dimension": "Dimension C-137",
+    "name": "Earth (C-137)",
+    "type": "Planet",
+  },
+  "species": "Human",
+  "status": "Dead",
+  "type": "",
+}
+`;

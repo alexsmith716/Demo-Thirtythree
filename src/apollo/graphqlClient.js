@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-export default function graphqlClient({ endpoint, query, variables={}, method='POST' }) {
+const graphqlClient = ({ endpoint, query, variables={}, method='POST' }) => {
 
 	//	console.log('>>>> graphqlClient > endpoint: ', endpoint);
 	//	console.log('>>>> graphqlClient > query: ', query);
@@ -30,3 +30,5 @@ export default function graphqlClient({ endpoint, query, variables={}, method='P
 			return null;
 		});
 };
+
+export default graphqlClient;
