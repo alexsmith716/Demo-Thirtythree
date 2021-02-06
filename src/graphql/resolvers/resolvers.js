@@ -31,14 +31,9 @@ export const resolvers = {
 		hello: () => 'Hello world!',
 
 		googleBooks: async (obj, { after, searchString, orderBy, pageSize = 2, }, { dataSources }) => {
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > after: ', after);
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > searchString: ', searchString);
-			// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > orderBy: ', orderBy);
 			try {
 				const allGoogleBooks = await dataSources.googleBooks.getBooks(searchString, orderBy);
 				const books = paginateResults({ after, pageSize, results: allGoogleBooks });
-
-				// console.log('>>>>>>>>>>>>> RESOLVERS > Query > googleBooks > books: ', books);
 
 				return {
 					books,
@@ -63,7 +58,6 @@ export const resolvers = {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
 				const { data: { character }} = response;
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > character > character: ', character);
 				return {
 					...character
 				}
@@ -76,9 +70,7 @@ export const resolvers = {
 		characters: async (obj, { page, filter }) => {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > characters > response: ', response);
 				const { data: { characters }} = response;
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > characters > characters: ', characters);
 				return characters;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > characters > ERROR: ', error);
@@ -90,7 +82,6 @@ export const resolvers = {
 			try {
 				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
 				const { data: { charactersByIds }} = response;
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > charactersByIds: ', charactersByIds);
 				return charactersByIds;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > ERROR: ', error);

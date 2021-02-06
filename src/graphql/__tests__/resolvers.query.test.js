@@ -1,20 +1,23 @@
-import { graphql } from 'graphql';
-import { resolvers } from '../resolvers/resolvers';
+//	import { graphql } from 'graphql';
+//	import { gql } from '@apollo/client';
+//	import { createTestClient } from 'apollo-server-testing';
 
-import { constructTestServer } from './__utils';
+//	import { constructTestServer, executableSchema } from '../executableSchema';
+//	import { GET_RICK_AND_MORTY_CHARACTER, } from '../queries/queries.js';
+import { resolvers } from '../resolvers/resolvers';
 
 // =====================================================
 
 // https://api.spacexdata.com/v2/launches?flight_number=99
 
-//		graphql(
-//		  schema: GraphQLSchema,
-//		  requestString: string,
-//		  rootValue?: ?any,
-//		  contextValue?: ?any,
-//		  variableValues?: ?{[key: string]: any},
-//		  operationName?: ?string
-//		): Promise<GraphQLResult>
+//	graphql(
+//		schema: GraphQLSchema,
+//		requestString: string,
+//		rootValue?: ?any,
+//		contextValue?: ?any,
+//		variableValues?: ?{[key: string]: any},
+//		operationName?: ?string
+//	): Promise<GraphQLResult>
 
 // The graphql function lexes, parses, validates and executes a GraphQL request.
 // It requires a schema and a requestString.
@@ -26,52 +29,12 @@ import { constructTestServer } from './__utils';
 
 // =====================================================
 
-test('should return result from character resolver', async () => {
-
-	const GET_RICK_AND_MORTY_CHARACTER = `
-		query GetRickAndMortyCharacter($id: ID!) {
-			character(id: $id) {
-				id
-				name
-			}
-		}
-	`;
-
-	const res = await graphql(
-		executableSchema,
-		GET_RICK_AND_MORTY_CHARACTER,
-		null,
-		{
-			character: MOCK_type_Query_character,
-		},
-		{
-			id: 3,
-		}
-	);
-
-	expect(res).toMatchSnapshot();
-});
+//	describe('[Query.character]', () => {
+//			expect(res).toMatchSnapshot();
+//		});
+//	});
 
 // =====================================================
-
-//		exports[`[Query.googleBook] calls lookup from googleBook api 1`] = `
-//		Object {
-//		  "id": "uW_zzQEACAAJ",
-//		}
-//		`;
-//		
-//		exports[`[Query.googleBooks] calls lookup from googleBooks api 1`] = `
-//		Object {
-//		  "books": Array [
-//		    Object {
-//		      "cursor": "foo",
-//		      "id": "uW_zzQEACAAJ",
-//		    },
-//		  ],
-//		  "cursor": "foo",
-//		  "hasMore": false,
-//		}
-//		`;
 
 describe('[Query.googleBooks]', () => {
 	const mockContext = {
@@ -118,9 +81,3 @@ describe('[Query.googleBook]', () => {
 		expect(res).toMatchSnapshot();
 	});
 });
-
-// =====================================================
-
-//	// GET_RICK_AND_MORTY_CHARACTER
-//	describe('[Query.character]', () => {
-//	});

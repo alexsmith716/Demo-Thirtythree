@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Query.googleBook] calls lookup from googleBook api 1`] = `
+Object {
+  "id": "uW_zzQEACAAJ",
+}
+`;
+
+exports[`[Query.googleBooks] calls lookup from googleBooks api 1`] = `
+Object {
+  "books": Array [
+    Object {
+      "cursor": "foo",
+      "id": "uW_zzQEACAAJ",
+    },
+  ],
+  "cursor": "foo",
+  "hasMore": false,
+}
+`;

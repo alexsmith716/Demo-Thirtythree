@@ -155,7 +155,7 @@ const GraphQLExample = () => {
 							</div>
 						)}
 
-						{clientExtract !== null && (
+						{clientExtract && (
 							<div>
 								<h5>ApolloClient Cache:</h5>
 								<div>----------------------------------</div>
@@ -174,16 +174,14 @@ const GraphQLExample = () => {
 						/>
 					</div>
 
-					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({variables: {id: 3}, fetchPolicy: 'network-only'})}
-							buttonText="Get character 3"
+							onClick={() => getRickAndMortyCharacter({variables: {id: 11}, fetchPolicy: 'network-only'})}
+							buttonText="Get character 11"
 						/>
 					</div>
-					*/}
 
 					{/*
 					<div className="mb-3">
