@@ -15,10 +15,17 @@ describe('[GoogleBooksAPI.bookReducer]', () => {
 	});
 });
 
+describe('[GoogleBooksAPI.getBook]', () => {
+	it('should look up single book from api', async () => {
+		mocks.get.mockReturnValueOnce(mockBookResponse);
+		const res = await ds.getBook({ id: 'uW_zzQEACAAJ' });
+
+		expect(res).toEqual(mockBookBook);
+	});
+});
+
 describe('[GoogleBooksAPI.getBooks]', () => {
 	it('looks up books from api', async () => {
-		// if api response is list of raw books,
-		// res should be list of transformed books
 		mocks.get.mockReturnValueOnce(mockBooksResponse);
 		const searchString = 'kaplan test prep';
 		const orderBy = 'newest';
@@ -28,84 +35,9 @@ describe('[GoogleBooksAPI.getBooks]', () => {
 	});
 });
 
-describe('[GoogleBooksAPI.getBook]', () => {
-	it('should look up single book from api', async () => {
-		// if api response is list of raw books,
-		// res should be single transformed book
-		mocks.get.mockReturnValueOnce(mockBookResponse);
-		const res = await ds.getBook({ id: 'uW_zzQEACAAJ' });
-
-		expect(res).toEqual(mockBookBook);
-	});
-});
-
 /**
  * MOCK DATA BELOW
  */
-
-export const mockBooksBook = {
-	id: 'uW_zzQEACAAJ',
-	cursor: 'uW_zzQEACAAJ',
-	title: 'MCAT Physics and Math Review 2022-2023',
-	authors: [ 'Kaplan Test Prep' ],
-	publisher: 'Kaplan Publishing',
-	publishedDate: '2021-07-06',
-	description: 'Kaplan’s MCAT Physics and Math Review 2022–2023 offers an expert study plan, detailed subject review, and hundreds of online and in-book practice questions—all authored by the experts behind the MCAT prep course that has helped more people get into medical school than all other major courses combined. Prepping for the MCAT is a true challenge. Kaplan can be your partner along the way—offering guidance on where to focus your efforts and how to organize your review. This book has been updated to match the AAMC’s guidelines precisely—no more worrying about whether your MCAT review is comprehensive! The Most Practice More than 350 questions in the book and access to even more online—more practice than any other MCAT physics and math book on the market. The Best Practice Comprehensive physics and math subject review is written by top-rated, award-winning Kaplan instructors. Full-color, 3-D illustrations from Scientific American, charts, graphs and diagrams help turn even the most complex science into easy-to-visualize concepts. All material is vetted by editors with advanced science degrees and by a medical doctor. Online resources, including a full-length practice test, help you practice in the same computer-based format you’ll see on Test Day. Expert Guidance High-yield badges throughout the book identify the top 100 topics most tested by the AAMC. We know the test: The Kaplan MCAT team has spent years studying every MCAT-related document available. Kaplan’s expert psychometricians ensure our practice questions and study materials are true to the test.',
-	previewLink: 'http://books.google.com/books?id=uW_zzQEACAAJ&dq=kaplan+test+prep&hl=&cd=1&source=gbs_api',
-	smallThumbnail: 'http://books.google.com/books/content?id=uW_zzQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api',
-	favorite: false
-};
-
-export const mockBooksResponse = {
-	items: [{
-		kind: "books#volume",
-		id: "uW_zzQEACAAJ",
-		etag: "rwAYjbkgZyA",
-		selfLink: "https://www.googleapis.com/books/v1/volumes/uW_zzQEACAAJ",
-		volumeInfo: {
-			title: "MCAT Physics and Math Review 2022-2023",
-			subtitle: "Online + Book",
-			authors: ["Kaplan Test Prep"],
-			publisher: "Kaplan Publishing",
-			publishedDate: "2021-07-06",
-			description: "Kaplan’s MCAT Physics and Math Review 2022–2023 offers an expert study plan, detailed subject review, and hundreds of online and in-book practice questions—all authored by the experts behind the MCAT prep course that has helped more people get into medical school than all other major courses combined. Prepping for the MCAT is a true challenge. Kaplan can be your partner along the way—offering guidance on where to focus your efforts and how to organize your review. This book has been updated to match the AAMC’s guidelines precisely—no more worrying about whether your MCAT review is comprehensive! The Most Practice More than 350 questions in the book and access to even more online—more practice than any other MCAT physics and math book on the market. The Best Practice Comprehensive physics and math subject review is written by top-rated, award-winning Kaplan instructors. Full-color, 3-D illustrations from Scientific American, charts, graphs and diagrams help turn even the most complex science into easy-to-visualize concepts. All material is vetted by editors with advanced science degrees and by a medical doctor. Online resources, including a full-length practice test, help you practice in the same computer-based format you’ll see on Test Day. Expert Guidance High-yield badges throughout the book identify the top 100 topics most tested by the AAMC. We know the test: The Kaplan MCAT team has spent years studying every MCAT-related document available. Kaplan’s expert psychometricians ensure our practice questions and study materials are true to the test.",
-			readingModes: {
-				text: false,
-				image: false
-			},
-			maturityRating: "NOT_MATURE",
-			allowAnonLogging: false,
-			contentVersion: "preview-1.0.0",
-			panelizationSummary: {
-				containsEpubBubbles: false,
-				containsImageBubbles: false
-			},
-			imageLinks: {
-				smallThumbnail: "http://books.google.com/books/content?id=uW_zzQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-				thumbnail: "http://books.google.com/books/content?id=uW_zzQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-			},
-			previewLink: "http://books.google.com/books?id=uW_zzQEACAAJ&dq=kaplan+test+prep&hl=&cd=1&source=gbs_api",
-			infoLink: "http://books.google.com/books?id=uW_zzQEACAAJ&dq=kaplan+test+prep&hl=&source=gbs_api",
-			canonicalVolumeLink: "https://books.google.com/books/about/MCAT_Physics_and_Math_Review_2022_2023.html?hl=&id=uW_zzQEACAAJ"
-		},
-		saleInfo: {
-			country: "US"
-		},
-		accessInfo: {
-			country: "US",
-			epub: {
-				isAvailable: false
-			},
-			pdf: {
-				isAvailable: false
-			},
-			accessViewStatus: "NONE"
-		},
-		searchInfo: {
-			textSnippet: "This book has been updated to match the AAMC’s guidelines precisely—no more worrying about whether your MCAT review is comprehensive!"
-		}
-	}]
-};
 
 export const mockBookBook = {
 	id: 'uW_zzQEACAAJ',
@@ -169,4 +101,68 @@ export const mockBookResponse = {
 		accessViewStatus: 'NONE',
 		quoteSharingAllowed: false
 	}
+};
+
+export const mockBooksBook = {
+	id: 'uW_zzQEACAAJ',
+	cursor: 'uW_zzQEACAAJ',
+	title: 'MCAT Physics and Math Review 2022-2023',
+	authors: [ 'Kaplan Test Prep' ],
+	publisher: 'Kaplan Publishing',
+	publishedDate: '2021-07-06',
+	description: 'Kaplan’s MCAT Physics and Math Review 2022–2023 offers an expert study plan, detailed subject review, and hundreds of online and in-book practice questions—all authored by the experts behind the MCAT prep course that has helped more people get into medical school than all other major courses combined. Prepping for the MCAT is a true challenge. Kaplan can be your partner along the way—offering guidance on where to focus your efforts and how to organize your review. This book has been updated to match the AAMC’s guidelines precisely—no more worrying about whether your MCAT review is comprehensive! The Most Practice More than 350 questions in the book and access to even more online—more practice than any other MCAT physics and math book on the market. The Best Practice Comprehensive physics and math subject review is written by top-rated, award-winning Kaplan instructors. Full-color, 3-D illustrations from Scientific American, charts, graphs and diagrams help turn even the most complex science into easy-to-visualize concepts. All material is vetted by editors with advanced science degrees and by a medical doctor. Online resources, including a full-length practice test, help you practice in the same computer-based format you’ll see on Test Day. Expert Guidance High-yield badges throughout the book identify the top 100 topics most tested by the AAMC. We know the test: The Kaplan MCAT team has spent years studying every MCAT-related document available. Kaplan’s expert psychometricians ensure our practice questions and study materials are true to the test.',
+	previewLink: 'http://books.google.com/books?id=uW_zzQEACAAJ&dq=kaplan+test+prep&hl=&cd=1&source=gbs_api',
+	smallThumbnail: 'http://books.google.com/books/content?id=uW_zzQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api',
+	favorite: false
+};
+
+export const mockBooksResponse = {
+	items: [{
+		kind: "books#volume",
+		id: "uW_zzQEACAAJ",
+		etag: "rwAYjbkgZyA",
+		selfLink: "https://www.googleapis.com/books/v1/volumes/uW_zzQEACAAJ",
+		volumeInfo: {
+			title: "MCAT Physics and Math Review 2022-2023",
+			subtitle: "Online + Book",
+			authors: ["Kaplan Test Prep"],
+			publisher: "Kaplan Publishing",
+			publishedDate: "2021-07-06",
+			description: "Kaplan’s MCAT Physics and Math Review 2022–2023 offers an expert study plan, detailed subject review, and hundreds of online and in-book practice questions—all authored by the experts behind the MCAT prep course that has helped more people get into medical school than all other major courses combined. Prepping for the MCAT is a true challenge. Kaplan can be your partner along the way—offering guidance on where to focus your efforts and how to organize your review. This book has been updated to match the AAMC’s guidelines precisely—no more worrying about whether your MCAT review is comprehensive! The Most Practice More than 350 questions in the book and access to even more online—more practice than any other MCAT physics and math book on the market. The Best Practice Comprehensive physics and math subject review is written by top-rated, award-winning Kaplan instructors. Full-color, 3-D illustrations from Scientific American, charts, graphs and diagrams help turn even the most complex science into easy-to-visualize concepts. All material is vetted by editors with advanced science degrees and by a medical doctor. Online resources, including a full-length practice test, help you practice in the same computer-based format you’ll see on Test Day. Expert Guidance High-yield badges throughout the book identify the top 100 topics most tested by the AAMC. We know the test: The Kaplan MCAT team has spent years studying every MCAT-related document available. Kaplan’s expert psychometricians ensure our practice questions and study materials are true to the test.",
+			readingModes: {
+				text: false,
+				image: false
+			},
+			maturityRating: "NOT_MATURE",
+			allowAnonLogging: false,
+			contentVersion: "preview-1.0.0",
+			panelizationSummary: {
+				containsEpubBubbles: false,
+				containsImageBubbles: false
+			},
+			imageLinks: {
+				smallThumbnail: "http://books.google.com/books/content?id=uW_zzQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+				thumbnail: "http://books.google.com/books/content?id=uW_zzQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			},
+			previewLink: "http://books.google.com/books?id=uW_zzQEACAAJ&dq=kaplan+test+prep&hl=&cd=1&source=gbs_api",
+			infoLink: "http://books.google.com/books?id=uW_zzQEACAAJ&dq=kaplan+test+prep&hl=&source=gbs_api",
+			canonicalVolumeLink: "https://books.google.com/books/about/MCAT_Physics_and_Math_Review_2022_2023.html?hl=&id=uW_zzQEACAAJ"
+		},
+		saleInfo: {
+			country: "US"
+		},
+		accessInfo: {
+			country: "US",
+			epub: {
+				isAvailable: false
+			},
+			pdf: {
+				isAvailable: false
+			},
+			accessViewStatus: "NONE"
+		},
+		searchInfo: {
+			textSnippet: "This book has been updated to match the AAMC’s guidelines precisely—no more worrying about whether your MCAT review is comprehensive!"
+		}
+	}]
 };

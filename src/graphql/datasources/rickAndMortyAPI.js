@@ -2,7 +2,7 @@ import { DataSource } from 'apollo-datasource';
 import fetch from 'isomorphic-fetch';
 
 // import graphqlClient from '../../apollo/graphqlClient';
-import { GET_RICK_AND_MORTY_CHARACTER, } from '../queries/queries.js';
+import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_AND_MORTY_CHARACTERS_BY_IDS } from '../queries/queries.js';
 
 export class RickAndMortyAPI extends DataSource {
 	constructor() {
@@ -39,11 +39,31 @@ export class RickAndMortyAPI extends DataSource {
 		try {
 			const response = await this.graphqlClient({query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
 			const { data: { character }} = response;
-			return {
-				...character
-			}
+			return character;
 		} catch (error) {
 			console.error('>>>>>>>>>>>>> RickAndMortyAPI > Query > getCharacter > ERROR: ', error);
+			return false;
+		}
+	}
+
+	async getCharacters({page, filter}) {
+		try {
+			const response = await this.graphqlClient({query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
+			const { data: { characters }} = response;
+			return characters;
+		} catch (error) {
+			console.error('>>>>>>>>>>>>> RickAndMortyAPI > Query > getCharacters > ERROR: ', error);
+			return false;
+		}
+	}
+
+	async getCharactersByIds({ids}) {
+		try {
+			const response = await this.graphqlClient({query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
+			const { data: { charactersByIds }} = response;
+			return charactersByIds;
+		} catch (error) {
+			console.error('>>>>>>>>>>>>> RickAndMortyAPI > Query > getCharacters > ERROR: ', error);
 			return false;
 		}
 	}
