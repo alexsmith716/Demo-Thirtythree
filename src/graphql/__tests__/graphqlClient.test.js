@@ -3,24 +3,24 @@ import nock from 'nock'
 import graphqlClient from '../../apollo/graphqlClient';
 
 const mockRickAndMortyCharacter = {
-	'id': '11',
-	'name': 'Albert Einstein',
-	'status': 'Dead',
-	'species': 'Human',
-	'type': '',
-	'gender': 'Male',
-	'origin': {
-		'name': 'Earth (C-137)',
-		'type': 'Planet',
-		'dimension': 'Dimension C-137'
+	id: '11',
+	name: 'Albert Einstein',
+	status: 'Dead',
+	species: 'Human',
+	type: '',
+	gender: 'Male',
+	origin: {
+		name: 'Earth (C-137)',
+		type: 'Planet',
+		dimension: 'Dimension C-137'
 	},
-	'location': {
-		'name': 'Earth (Replacement Dimension)',
-		'type': 'Planet',
-		'dimension': 'Replacement Dimension'
+	location: {
+		name: 'Earth (Replacement Dimension)',
+		type: 'Planet',
+		dimension: 'Replacement Dimension'
 	},
-	'image': 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
-	'episode': [ { 'name': 'A Rickle in Time', 'episode': 'S02E01' } ]
+	image: 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
+	episode: [ { name: 'A Rickle in Time', episode: 'S02E01' } ]
 }
 
 const GET_RICK_AND_MORTY_CHARACTER = `

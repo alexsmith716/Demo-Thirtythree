@@ -38,7 +38,10 @@ export class RickAndMortyAPI extends DataSource {
 	async getCharacter({id}) {
 		try {
 			const response = await this.graphqlClient({query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
-			return response
+			const { data: { character }} = response;
+			return {
+				...character
+			}
 		} catch (error) {
 			console.error('>>>>>>>>>>>>> RickAndMortyAPI > Query > getCharacter > ERROR: ', error);
 			return false;
