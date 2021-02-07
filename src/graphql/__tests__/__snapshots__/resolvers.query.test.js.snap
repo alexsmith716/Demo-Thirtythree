@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`[Query.character] calls lookup from rickAndMorty api 1`] = `
+Object {
+  "id": 11,
+}
+`;
+
 exports[`[Query.googleBook] calls lookup from googleBook api 1`] = `
 Object {
   "id": "uW_zzQEACAAJ",

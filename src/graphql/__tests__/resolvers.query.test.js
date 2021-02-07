@@ -30,93 +30,22 @@ import graphqlClient from '../../apollo/graphqlClient';
 
 // =====================================================
 
-const mockRickAndMortyCharacterAA = {
-	'id': '11',
-	'name': 'Albert Einstein',
-	'status': 'Dead',
-	'species': 'Human',
-	'type': '',
-	'gender': 'Male',
-	'origin': {
-		'name': 'Earth (C-137)',
-		'type': 'Planet',
-		'dimension': 'Dimension C-137'
-	},
-	'location': {
-		'name': 'Earth (Replacement Dimension)',
-		'type': 'Planet',
-		'dimension': 'Replacement Dimension'
-	},
-	'image': 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
-	'episode': [ { 'name': 'A Rickle in Time', 'episode': 'S02E01' } ]
-}
-
-const mockRickAndMortyCharacterBB = {
-	id: '11',
-	name: 'Albert Einstein',
-	status: 'Dead',
-	species: 'Human',
-	type: '',
-	gender: 'Male',
-	origin: {
-		name: 'Earth (C-137)',
-		type: 'Planet',
-		dimension: 'Dimension C-137'
-	},
-	location: {
-		name: 'Earth (Replacement Dimension)',
-		type: 'Planet',
-		dimension: 'Replacement Dimension'
-	},
-	image: 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
-	episode: [ { name: 'A Rickle in Time', episode: 'S02E01' } ]
-}
-
-// =====================================================
-
-//	describe('[Query.character]', () => {
-//			expect(res).toMatchSnapshot();
-//		});
-//	});
-
 describe('[Query.character]', () => {
-
-	//	beforeEach(() => {
-	//	  jest.spyOn(graphqlClient, 'graphqlClient').mockReturnValue(mockRickAndMortyCharacterBB)
-	//	})
-
-	//	afterEach(() => {
-	//	  jest.clearAllMocks()
-	//	})
-
-  it('should return result from character resolver', async () => {
-  	const res = await resolvers.Query.character(null, { id: 11 }).mockReturnValue(mockRickAndMortyCharacterBB)
-    //	helpers.isOnDictionary.mockReturnValue(false)
-    expect(res).toMatchSnapshot();
-  })
-})
-
-// =====================================================
-
-describe('[Query.googleBooks]', () => {
 	const mockContext = {
 		dataSources: {
-			googleBooks: { getBooks: jest.fn() },
+			rickAndMorty: { getCharacter: jest.fn() },
 		},
 	};
 
-	const { getBooks } = mockContext.dataSources.googleBooks;
-
-	it('calls lookup from googleBooks api', async () => {
-		getBooks.mockReturnValueOnce([{ id: 'uW_zzQEACAAJ', cursor: 'foo' }]);
+	it('calls lookup from rickAndMorty api', async () => {
+		const getCharacter = mockContext.dataSources.rickAndMorty.getCharacter;
+		getCharacter.mockReturnValueOnce({id: 11});
 
 		// check the resolver response
-		const res = await resolvers.Query.googleBooks(null, {}, mockContext);
-		expect(res).toEqual({
-			books: [{ id: 'uW_zzQEACAAJ', cursor: 'foo' }],
-			cursor: 'foo',
-			hasMore: false,
-		});
+		const res = await resolvers.Query.character(null, { id: 11 }, mockContext);
+		expect(res).toEqual({id: 11});
+
+		expect(getCharacter).toBeCalledWith({ id: 11 });
 		expect(res).toMatchSnapshot();
 	});
 });
@@ -140,6 +69,31 @@ describe('[Query.googleBook]', () => {
 
 		// make sure the dataSources were called properly
 		expect(getBook).toBeCalledWith({ id: 'uW_zzQEACAAJ' });
+		expect(res).toMatchSnapshot();
+	});
+});
+
+// =====================================================
+
+describe('[Query.googleBooks]', () => {
+	const mockContext = {
+		dataSources: {
+			googleBooks: { getBooks: jest.fn() },
+		},
+	};
+
+	const { getBooks } = mockContext.dataSources.googleBooks;
+
+	it('calls lookup from googleBooks api', async () => {
+		getBooks.mockReturnValueOnce([{ id: 'uW_zzQEACAAJ', cursor: 'foo' }]);
+
+		// check the resolver response
+		const res = await resolvers.Query.googleBooks(null, {}, mockContext);
+		expect(res).toEqual({
+			books: [{ id: 'uW_zzQEACAAJ', cursor: 'foo' }],
+			cursor: 'foo',
+			hasMore: false,
+		});
 		expect(res).toMatchSnapshot();
 	});
 });
