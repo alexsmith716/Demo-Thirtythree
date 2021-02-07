@@ -194,18 +194,15 @@ const GraphQLExample = () => {
 					</div>
 					*/}
 
-					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
 							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [10,2]}, fetchPolicy: 'network-only'})}
-							buttonText="Get RandMCharsByIds 10,2"
+							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [10,12]}, fetchPolicy: 'network-only'})}
+							buttonText="Get RandMCharsByIds 10,12"
 						/>
 					</div>
-					*/}
 
-					{/*
 					<div className="mb-3">
 						<Button
 							type="button"
@@ -214,7 +211,6 @@ const GraphQLExample = () => {
 							buttonText="Get RandMCharsByIds 1,9"
 						/>
 					</div>
-					*/}
 
 					<div className="mb-3">
 						<div className="row-flex">

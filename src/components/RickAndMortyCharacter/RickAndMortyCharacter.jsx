@@ -3,7 +3,7 @@ import {
 	useMutation,
 } from '@apollo/client';
 //	import { Button } from '../Button';
-import { Thumbnail, ThumbnailImage } from '../../Styles';
+import { Thumbnail, ThumbnailImage } from '../../styles';
 
 
 export const RickAndMortyCharacter = ({ character }) => {

@@ -59,22 +59,16 @@ export const resolvers = {
 		character: async (obj, { id }, { dataSources }) => {
 			try {
 				const character = await dataSources.rickAndMorty.getCharacter({ id });
-				console.log('>>>>>>>>>>>>> RESOLVERS > Query > character > response: ', character);
 				return character;
-				//	const { data: { character }} = response;
-				//	return {
-				//		...character
-				//	}
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > ERROR: ', error);
 				return false;
 			}
 		},
 
-		characters: async (obj, { page, filter }) => {
+		characters: async (obj, { page, filter }, { dataSources }) => {
 			try {
-				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
-				const { data: { characters }} = response;
+				const characters = await dataSources.rickAndMorty.getCharacters({ page, filter });
 				return characters;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > characters > ERROR: ', error);
@@ -82,10 +76,9 @@ export const resolvers = {
 			}
 		},
 
-		charactersByIds: async (obj, { ids }) => {
+		charactersByIds: async (obj, { ids }, { dataSources }) => {
 			try {
-				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTERS_BY_IDS, variables: {ids: ids}});
-				const { data: { charactersByIds }} = response;
+				const charactersByIds = await dataSources.rickAndMorty.getCharactersByIds({ ids });
 				return charactersByIds;
 			} catch (error) {
 				console.error('>>>>>>>>>>>>> RESOLVERS > Query > charactersByIds > ERROR: ', error);
