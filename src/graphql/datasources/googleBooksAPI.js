@@ -1,4 +1,4 @@
-const { RESTDataSource } = require('apollo-datasource-rest');
+import { RESTDataSource } from 'apollo-datasource-rest';
 
 const baseUrl = 'https://www.googleapis.com/books';
 

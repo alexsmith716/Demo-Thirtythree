@@ -1,5 +1,6 @@
 import { paginateResults } from '../utils/utils';
 import { GoogleBooksAPI } from '../datasources/googleBooksAPI';
+import { RickAndMortyAPI } from '../datasources/rickAndMortyAPI';
 import graphqlClient from '../../apollo/graphqlClient';
 
 // https://github.com/ardatan/graphql-tools
@@ -20,6 +21,7 @@ import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_A
 
 export const dataSources = () => ({
 	googleBooks: new GoogleBooksAPI(),
+	rickAndMorty: new RickAndMortyAPI(),
 });
 
 // https://github.com/apollographql/apollo-client/blob/docs/source/data/error-handling.mdx
@@ -54,9 +56,10 @@ export const resolvers = {
 			return book;
 		},
 
-		character: async (obj, { id }) => {
+		character: async (obj, { id }, { dataSources }) => {
 			try {
-				const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
+				const response = await dataSources.rickAndMorty.getCharacter({ id });
+				console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > response: ', response);
 				const { data: { character }} = response;
 				return {
 					...character
@@ -66,6 +69,19 @@ export const resolvers = {
 				return false;
 			}
 		},
+
+		//	character: async (obj, { id }) => {
+		//		try {
+		//			const response = await graphqlClient({endpoint: 'https://rickandmortyapi.com/graphql', query: GET_RICK_AND_MORTY_CHARACTER, variables: {id: id}});
+		//			const { data: { character }} = response;
+		//			return {
+		//				...character
+		//			}
+		//		} catch (error) {
+		//			console.error('>>>>>>>>>>>>> RESOLVERS > Query > character > ERROR: ', error);
+		//			return false;
+		//		}
+		//	},
 
 		characters: async (obj, { page, filter }) => {
 			try {

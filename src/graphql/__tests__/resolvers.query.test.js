@@ -5,6 +5,7 @@
 //	import { constructTestServer, executableSchema } from '../executableSchema';
 //	import { GET_RICK_AND_MORTY_CHARACTER, } from '../queries/queries.js';
 import { resolvers } from '../resolvers/resolvers';
+import graphqlClient from '../../apollo/graphqlClient';
 
 // =====================================================
 
@@ -29,10 +30,71 @@ import { resolvers } from '../resolvers/resolvers';
 
 // =====================================================
 
+const mockRickAndMortyCharacterAA = {
+	'id': '11',
+	'name': 'Albert Einstein',
+	'status': 'Dead',
+	'species': 'Human',
+	'type': '',
+	'gender': 'Male',
+	'origin': {
+		'name': 'Earth (C-137)',
+		'type': 'Planet',
+		'dimension': 'Dimension C-137'
+	},
+	'location': {
+		'name': 'Earth (Replacement Dimension)',
+		'type': 'Planet',
+		'dimension': 'Replacement Dimension'
+	},
+	'image': 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
+	'episode': [ { 'name': 'A Rickle in Time', 'episode': 'S02E01' } ]
+}
+
+const mockRickAndMortyCharacterBB = {
+	id: '11',
+	name: 'Albert Einstein',
+	status: 'Dead',
+	species: 'Human',
+	type: '',
+	gender: 'Male',
+	origin: {
+		name: 'Earth (C-137)',
+		type: 'Planet',
+		dimension: 'Dimension C-137'
+	},
+	location: {
+		name: 'Earth (Replacement Dimension)',
+		type: 'Planet',
+		dimension: 'Replacement Dimension'
+	},
+	image: 'https://rickandmortyapi.com/api/character/avatar/11.jpeg',
+	episode: [ { name: 'A Rickle in Time', episode: 'S02E01' } ]
+}
+
+// =====================================================
+
 //	describe('[Query.character]', () => {
 //			expect(res).toMatchSnapshot();
 //		});
 //	});
+
+describe('[Query.character]', () => {
+
+	//	beforeEach(() => {
+	//	  jest.spyOn(graphqlClient, 'graphqlClient').mockReturnValue(mockRickAndMortyCharacterBB)
+	//	})
+
+	//	afterEach(() => {
+	//	  jest.clearAllMocks()
+	//	})
+
+  it('should return result from character resolver', async () => {
+  	const res = await resolvers.Query.character(null, { id: 11 }).mockReturnValue(mockRickAndMortyCharacterBB)
+    //	helpers.isOnDictionary.mockReturnValue(false)
+    expect(res).toMatchSnapshot();
+  })
+})
 
 // =====================================================
 
