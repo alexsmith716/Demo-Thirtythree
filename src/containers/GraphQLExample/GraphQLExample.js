@@ -221,7 +221,7 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className={`btn-success btn-md`}
-							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Rick' }}, fetchPolicy: 'cache-and-network'})}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Rick' }},})}
 							buttonText="get rick chars"
 						/>
 					</div>
@@ -230,7 +230,7 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className={`btn-success btn-md`}
-							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Beth' }}, fetchPolicy: 'cache-and-network'})}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Beth' }},})}
 							buttonText="get beth chars"
 						/>
 					</div>
@@ -239,7 +239,7 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className={`btn-success btn-md`}
-							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Morty' }}, fetchPolicy: 'cache-and-network'})}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Morty' }},})}
 							buttonText="get morty chars"
 						/>
 					</div>
