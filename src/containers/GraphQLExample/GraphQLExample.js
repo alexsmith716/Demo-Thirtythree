@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { 
 	useLazyQuery,
@@ -8,13 +8,14 @@ import {
 } from '@apollo/client';
 
 import { Loading } from '../../components/Loading';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import { RickAndMortyCharacter } from '../../components/RickAndMortyCharacter';
-import { GET_RICK_AND_MORTY_CHARACTER, GET_RICK_AND_MORTY_CHARACTERS, GET_RICK_AND_MORTY_CHARACTERS_BY_IDS } from '../../graphql/queries/queries.js';
+import { GET_RICK_AND_MORTY_CHARACTERS, } from '../../graphql/queries/queries.js';
 
 const GraphQLExample = () => {
 
 	//	const [errorMessage, setErrorMessage] = useState(null);
+	const inputElement = useRef(null);
 	const [clientExtract, setClientExtract] = useState(null);
 	const [rickAndMortyCharactersInfo, setRickAndMortyCharactersInfo] = useState(null);
 	const [rickAndMortyCharactersFilterName, setRickAndMortyCharactersFilterName] = useState('');
@@ -22,49 +23,54 @@ const GraphQLExample = () => {
 
 	const client = useApolloClient();
 
-	const [getRickAndMortyCharacter, {
-			loading, 
-			error,
-			data: rickAndMortyData,
-			refetch,
-			networkStatus,
-		}] = useLazyQuery(
-			gql`${GET_RICK_AND_MORTY_CHARACTER}`,
-			{
-				notifyOnNetworkStatusChange: true,
-			}
-	);
+	//	=====================================================================
+
+	const variables = {
+		filter: { name: `${rickAndMortyCharactersFilterName}`},
+	};
+
+	//	1 = loading, 2 = setVariables, 3 = fetchMore, 4 = refetch, 6 = poll, 7 = ready, 8 = error
+	//	2 = setVariables ?????
 
 	const [getRickAndMortyCharacters, {
 			loading: rickAndMortyCharactersLoading, 
 			error: rickAndMortyCharactersError,
 			data: rickAndMortyCharactersData,
-			fetchMore: rickAndMortyCharactersFetchMore,
+			previousData,
+			fetchMore,
+			networkStatus,
 		}] = useLazyQuery(
 			gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
 			{
-				//	variables: {
-				//		filter: { name: `${rickAndMortyCharactersFilterName}`},
-				//	},
-				//	fetchPolicy: 'cache-and-network',
+				variables,
+				fetchPolicy: 'network-only',
+				notifyOnNetworkStatusChange: true,
 			}
 	);
 
-	const [getRickAndMortyCharactersByIds, {
-			loading: rickAndMortyCharactersByIdsLoading, 
-			error: rickAndMortyCharactersByIdsError,
-			data: rickAndMortyCharactersByIdsData,
-			fetchMore: rickAndMortyCharactersByIdsFetchMore,
-		}] = useLazyQuery(
-			gql`${GET_RICK_AND_MORTY_CHARACTERS_BY_IDS}`,
-	);
+	const isSetVariables = networkStatus === 2;
+
+	const characters = !isSetVariables ? rickAndMortyCharactersData?.characters : undefined;
+	const next = characters?.info?.next;
+
+	const hasNextPage = Boolean(next);
+	const results = characters?.results || [];
+
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > networkStatus: ', networkStatus);
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > isSetVariables: ', isSetVariables);
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > characters: ', characters);
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > next: ', next);
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > hasNextPage: ', hasNextPage);
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > results: ', results);
+
+	//	=====================================================================
 
 	useEffect(() => {
-			if (rickAndMortyData) {
-				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyData: ', rickAndMortyData.character);
+			if (previousData) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > previousData: ', previousData);
 			}
 			if (rickAndMortyCharactersData) {
-				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersData: ', rickAndMortyCharactersData);
 				const { characters: { info }} = rickAndMortyCharactersData;
 				setRickAndMortyCharactersInfo(info);
 				if (!info.prev && info.next) {
@@ -74,13 +80,23 @@ const GraphQLExample = () => {
 				} else {
 					setRickAndMortyCharactersCurrentPage(info.pages);
 				}
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersCurrentPage: ', rickAndMortyCharactersCurrentPage);
 			}
-			if (rickAndMortyCharactersByIdsData) {
-				//	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersByIdsData: ', rickAndMortyCharactersByIdsData);
+			if (rickAndMortyCharactersFilterName) {
+				console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > rickAndMortyCharactersFilterName: ', rickAndMortyCharactersFilterName);
 			}
 		},
-		[rickAndMortyData, rickAndMortyCharactersData, rickAndMortyCharactersByIdsData,]
+		[rickAndMortyCharactersData, rickAndMortyCharactersFilterName, previousData]
 	);
+
+	const inputSubmit = e => {
+		setRickAndMortyInputFilterName('rick');
+		//  const newValue = e.target.value || '';
+		//  setValue(newValue);
+		//  if (onChange) {
+		//  	onChange(newValue);
+		//  }
+	};
 
 	return (
 		<>
@@ -112,48 +128,32 @@ const GraphQLExample = () => {
 							)}
 						</div>
 
+						<div>
+							<div className="mb-3">
+								<h5>rickAndMortyCharactersData Data:</h5>
+							</div>
+							{/* ----------------------------------------------------------------------- */}
+							{results.map((character, index) => (
+								<div key={index} className="mb-3 container-padding-border-radius-2">
+									<RickAndMortyCharacter character={ character } />
+								</div>
+							))}
+						</div>
+
+						{/* 
 						{rickAndMortyCharactersData && (
 							<div>
 								<div className="mb-3">
 									<h5>rickAndMortyCharactersData Data:</h5>
 								</div>
-								{/* ----------------------------------------------------------------------- */}
 								{rickAndMortyCharactersData.characters.results.map((character, index) => (
 									<div key={index} className="mb-3 container-padding-border-radius-2">
 										<RickAndMortyCharacter character={ character } />
 									</div>
 								))}
-								{/* ----------------------------------------------------------------------- */}
 							</div>
 						)}
-
-						{rickAndMortyCharactersByIdsData && (
-							<div>
-								<div className="mb-3">
-									<h5>getRickAndMortyCharactersByIds Data:</h5>
-								</div>
-								{/* ----------------------------------------------------------------------- */}
-								{rickAndMortyCharactersByIdsData.charactersByIds.map((character, index) => (
-									<div key={index} className="mb-3 container-padding-border-radius-2">
-										<RickAndMortyCharacter character={ character } />
-									</div>
-								))}
-								{/* ----------------------------------------------------------------------- */}
-							</div>
-						)}
-
-						{rickAndMortyData && (
-							<div>
-								<div className="mb-3">
-									<h5>getRickAndMortyCharacter Data:</h5>
-								</div>
-								{/* ----------------------------------------------------------------------- */}
-								<div key={rickAndMortyData.character.id} className="mb-3 container-padding-border-radius-2">
-									<RickAndMortyCharacter character={ rickAndMortyData.character } />
-								</div>
-								{/* ----------------------------------------------------------------------- */}
-							</div>
-						)}
+						*/}
 
 						{clientExtract && (
 							<div>
@@ -174,52 +174,18 @@ const GraphQLExample = () => {
 						/>
 					</div>
 
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacter({variables: {id: 11}, fetchPolicy: 'network-only'})}
-							buttonText="Get character 11"
-						/>
-					</div>
-
-					{/*
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharacters({variables: {page: rickAndMortyCharactersInfo.next, filter: { name: rickAndMortyCharactersFilterName }}, fetchPolicy: 'network-only'})}
-							buttonText="getRickAndMortyCharacters"
-						/>
-					</div>
-					*/}
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [10,12]}, fetchPolicy: 'network-only'})}
-							buttonText="Get RandMCharsByIds 10,12"
-						/>
-					</div>
-
-					<div className="mb-3">
-						<Button
-							type="button"
-							className="btn-success btn-md"
-							onClick={() => getRickAndMortyCharactersByIds({variables: {ids: [1,9]}, fetchPolicy: 'network-only'})}
-							buttonText="Get RandMCharsByIds 1,9"
-						/>
-					</div>
+					{/* ======================================================================= */}
+					{/* ======================================================================= */}
 
 					<div className="mb-3">
 						<div className="row-flex">
 							<div className="col-four">
 								<input
+									ref={inputElement}
 									type="text"
 									className="form-control"
 									name="rickAndMortyCharactersFilterName"
-									value={rickAndMortyCharactersFilterName}
+									defaultValue={rickAndMortyCharactersFilterName}
 									onChange={e => setRickAndMortyCharactersFilterName(e.target.value)}
 									placeholder="Rick, Morty, Beth..."
 								/>
@@ -232,13 +198,43 @@ const GraphQLExample = () => {
 							<b>Page {rickAndMortyCharactersCurrentPage} of {rickAndMortyCharactersInfo.pages}</b>
 						</div>
 					)}
-					
+
 					<div className="mb-3">
 						<Button
 							type="button"
-							className={`btn-success btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
-							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: `${rickAndMortyCharactersFilterName}` }}, fetchPolicy: 'cache-and-network'})}
+							className={`btn-success btn-md`}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: `${rickAndMortyCharactersFilterName}` }}, fetchPolicy: 'network-only'})}
 							buttonText="Get Characters"
+						/>
+					</div>
+
+					{/* ======================================================================= */}
+					{/* ======================================================================= */}
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className={`btn-success btn-md`}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Rick' }}, fetchPolicy: 'cache-and-network'})}
+							buttonText="get rick chars"
+						/>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className={`btn-success btn-md`}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Beth' }}, fetchPolicy: 'cache-and-network'})}
+							buttonText="get beth chars"
+						/>
+					</div>
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className={`btn-success btn-md`}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: 'Morty' }}, fetchPolicy: 'cache-and-network'})}
+							buttonText="get morty chars"
 						/>
 					</div>
 
@@ -248,7 +244,25 @@ const GraphQLExample = () => {
 								type="button"
 								className={`btn-primary btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
 								onClick={ () => {
-									rickAndMortyCharactersFetchMore({
+									fetchMore({
+										query: gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
+										variables: {page: next, filter: { name: rickAndMortyCharactersFilterName }},
+										fetchPolicy: 'network-only',
+									});
+								}}
+								buttonText="Fetch More"
+							/>
+						</div>
+					)}
+
+					{/* 
+					{rickAndMortyCharactersData && (
+						<div className="mb-3">
+							<Button
+								type="button"
+								className={`btn-primary btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
+								onClick={ () => {
+									fetchMore({
 										variables: {page: rickAndMortyCharactersInfo.next, filter: { name: rickAndMortyCharactersFilterName }},
 									});
 								}}
@@ -256,6 +270,7 @@ const GraphQLExample = () => {
 							/>
 						</div>
 					)}
+					*/}
 
 				</div>
 			</div>

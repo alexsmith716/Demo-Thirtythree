@@ -68,6 +68,7 @@ export const resolvers = {
 
 		characters: async (obj, { page, filter }, { dataSources }) => {
 			try {
+        console.log('#################### RESOLVERS/characters ####################')
 				const characters = await dataSources.rickAndMorty.getCharacters({ page, filter });
 				return characters;
 			} catch (error) {

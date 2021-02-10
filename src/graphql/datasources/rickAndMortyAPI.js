@@ -11,6 +11,7 @@ export class RickAndMortyAPI extends DataSource {
 	}
 
 	graphqlClient({ query, variables={}, method='POST' }) {
+    console.log('#################### RickAndMortyAPI/graphqlClient/characters ####################')
 		return fetch('https://rickandmortyapi.com/graphql', {
 			method: method,
 			headers: {
@@ -26,7 +27,7 @@ export class RickAndMortyAPI extends DataSource {
 				if (data.error) {
 					throw new Error(data.error);
 				}
-				console.log('>>>> RickAndMortyAPI > DATA:', JSON.stringify(data));
+				// console.log('>>>> RickAndMortyAPI > DATA:', JSON.stringify(data));
 				return data;
 			})
 			.catch(err => {
@@ -47,6 +48,7 @@ export class RickAndMortyAPI extends DataSource {
 	}
 
 	async getCharacters({page, filter}) {
+    console.log('#################### RickAndMortyAPI/characters ####################')
 		try {
 			const response = await this.graphqlClient({query: GET_RICK_AND_MORTY_CHARACTERS, variables: {page: page, filter: filter}});
 			const { data: { characters }} = response;

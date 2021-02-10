@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
 	useMutation,
 } from '@apollo/client';
-import { Button } from '../Button';
+import Button from '../Button';
 import { Thumbnail, ThumbnailImage } from '../../styles';
 import { GOOGLE_BOOK_MODIFY_FAVORITE } from '../../graphql/mutations/mutations.js';
 

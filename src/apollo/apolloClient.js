@@ -67,11 +67,13 @@ export default function apolloClient({ uri, ssrMode = false }) {
 						keyArgs: false,
 						merge(existing = {}, incoming, { args }) {
 
+							console.log('#################### apolloClient ####################')
+
 							const page = args && args['page'];
 
-							if (page === 1) {
-								return incoming;
-							}
+							//  if (page === 1) {
+							//  	return incoming;
+							//  }
 
 							let results = [];
 
@@ -81,7 +83,7 @@ export default function apolloClient({ uri, ssrMode = false }) {
 
 							if (incoming && incoming.results) {
 								//	const newItems = incoming.results.filter(
-								//		i => !results.map(r => r['__ref']).includes(i['__ref']),
+								//		(i) => !results.map((r) => r['__ref']).includes(i['__ref']),
 								//	);
 								//	results = results.concat(newItems);
 								results = results.concat(incoming.results);
