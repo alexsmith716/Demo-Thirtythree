@@ -54,20 +54,20 @@ const GraphQLExample = () => {
 			}
 	);
 
-	const isSetVariables = networkStatus === 2;
+  //  const isSetVariables = networkStatus === 2;
 
-	const characters = !isSetVariables ? rickAndMortyCharactersData?.characters : undefined;
-	const next = characters?.info?.next;
+  //  const characters = !isSetVariables ? rickAndMortyCharactersData?.characters : undefined;
+  //  const next = characters?.info?.next;
 
-	const hasNextPage = Boolean(next);
-	const results = characters?.results || [];
+  //  const hasNextPage = Boolean(next);
+  //  const results = characters?.results || [];
 
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > networkStatus: ', networkStatus);
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > isSetVariables: ', isSetVariables);
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > characters: ', characters);
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > next: ', next);
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > hasNextPage: ', hasNextPage);
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > results: ', results);
+  //  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > networkStatus: ', networkStatus);
+  //  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > isSetVariables: ', isSetVariables);
+  //  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > characters: ', characters);
+  //  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > next: ', next);
+  //  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > hasNextPage: ', hasNextPage);
+  //  console.log('>>>>>>>>>>>>>>>>>>>>>>>> GraphQLExample > results: ', results);
 
 	//	=====================================================================
 
@@ -94,15 +94,6 @@ const GraphQLExample = () => {
 		},
 		[rickAndMortyCharactersData, rickAndMortyCharactersFilterName, previousData]
 	);
-
-	const inputSubmit = e => {
-		setRickAndMortyInputFilterName('rick');
-		//  const newValue = e.target.value || '';
-		//  setValue(newValue);
-		//  if (onChange) {
-		//  	onChange(newValue);
-		//  }
-	};
 
 	return (
 		<>
@@ -134,19 +125,19 @@ const GraphQLExample = () => {
 							)}
 						</div>
 
+            {/* 
 						<div>
 							<div className="mb-3">
 								<h5>rickAndMortyCharactersData Data:</h5>
 							</div>
-							{/* ----------------------------------------------------------------------- */}
 							{results.map((character, index) => (
 								<div key={index} className="mb-3 container-padding-border-radius-2">
 									<RickAndMortyCharacter character={ character } />
 								</div>
 							))}
 						</div>
+            */}
 
-						{/* 
 						{rickAndMortyCharactersData && (
 							<div>
 								<div className="mb-3">
@@ -159,7 +150,6 @@ const GraphQLExample = () => {
 								))}
 							</div>
 						)}
-						*/}
 
 						{clientExtract && (
 							<div>
@@ -210,7 +200,7 @@ const GraphQLExample = () => {
 							type="button"
 							className={`btn-success btn-md`}
 							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: rickAndMortyCharactersFilterName }},})}
-							buttonText="Get Characters"
+							buttonText="Get Characters!!"
 						/>
 					</div>
 
@@ -244,6 +234,22 @@ const GraphQLExample = () => {
 						/>
 					</div>
 
+          {rickAndMortyCharactersData && (
+            <div className="mb-3">
+              <Button
+                type="button"
+                className={`btn-primary btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
+                onClick={ () => {
+                  fetchMore({
+                    variables: {page: rickAndMortyCharactersInfo.next,},
+                  });
+                }}
+                buttonText="Fetch More"
+              />
+            </div>
+          )}
+
+          {/* 
 					{rickAndMortyCharactersData && (
 						<div className="mb-3">
 							<Button
@@ -258,6 +264,7 @@ const GraphQLExample = () => {
 							/>
 						</div>
 					)}
+          */}
 
 				</div>
 			</div>
