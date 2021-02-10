@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadInfo } from '../../redux/modules/info';
 import { State as InfoState } from '../../redux/modules/info';
 import { Loading } from '../Loading';
-import { Button } from '../Button';
+import Button from '../Button';
 import * as Styles from './styles';
 
 export type State = {

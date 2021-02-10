@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 
 export const Masthead = styled.div`
 	padding-bottom: 78px;

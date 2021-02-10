@@ -6,7 +6,7 @@ import {
 	NetworkStatus,
 } from '@apollo/client';
 
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import { GoogleBookBook, } from '../../components/GoogleBookBook';
 import { GET_GOOGLE_BOOKS, GET_GOOGLE_BOOK } from '../../graphql/queries/queries.js';
 
