@@ -24,6 +24,10 @@
 
 ### TODO:
 
+* Deploy app to Heroku
+* Re-start linting
+* Add/expand testing
+
 * solid error handling
 * handling needed for all `false` `info && info.next` (UI/UX needed for all query data responses)
 * set-up jest tests
