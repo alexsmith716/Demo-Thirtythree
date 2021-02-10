@@ -32,6 +32,11 @@ const GraphQLExample = () => {
 	//	1 = loading, 2 = setVariables, 3 = fetchMore, 4 = refetch, 6 = poll, 7 = ready, 8 = error
 	//	2 = setVariables ?????
 
+	//	the very first query will read from the cache and make a network request, 
+	//		but subsequent queries will make a network request only if the cache data has become incomplete
+
+	//	https://github.com/apollographql/apollo-client/issues/6907
+
 	const [getRickAndMortyCharacters, {
 			loading: rickAndMortyCharactersLoading, 
 			error: rickAndMortyCharactersError,
@@ -42,8 +47,9 @@ const GraphQLExample = () => {
 		}] = useLazyQuery(
 			gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
 			{
-				variables,
-				fetchPolicy: 'network-only',
+				fetchPolicy: 'cache-and-network',
+				nextFetchPolicy: 'cache-first',
+				//	variables,
 				notifyOnNetworkStatusChange: true,
 			}
 	);
@@ -203,7 +209,7 @@ const GraphQLExample = () => {
 						<Button
 							type="button"
 							className={`btn-success btn-md`}
-							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: `${rickAndMortyCharactersFilterName}` }}, fetchPolicy: 'network-only'})}
+							onClick={() => getRickAndMortyCharacters({variables: {filter: {name: rickAndMortyCharactersFilterName }},})}
 							buttonText="Get Characters"
 						/>
 					</div>
@@ -245,32 +251,13 @@ const GraphQLExample = () => {
 								className={`btn-primary btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
 								onClick={ () => {
 									fetchMore({
-										query: gql`${GET_RICK_AND_MORTY_CHARACTERS}`,
-										variables: {page: next, filter: { name: rickAndMortyCharactersFilterName }},
-										fetchPolicy: 'network-only',
+										variables: {page: next,},
 									});
 								}}
-								buttonText="Fetch More"
+								buttonText="Fetch More!"
 							/>
 						</div>
 					)}
-
-					{/* 
-					{rickAndMortyCharactersData && (
-						<div className="mb-3">
-							<Button
-								type="button"
-								className={`btn-primary btn-md ${rickAndMortyCharactersInfo ? rickAndMortyCharactersInfo.next ? '' : 'disabled' : null}`}
-								onClick={ () => {
-									fetchMore({
-										variables: {page: rickAndMortyCharactersInfo.next, filter: { name: rickAndMortyCharactersFilterName }},
-									});
-								}}
-								buttonText="fetchMore RickAndMortyCharacters"
-							/>
-						</div>
-					)}
-					*/}
 
 				</div>
 			</div>
